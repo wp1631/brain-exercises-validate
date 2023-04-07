@@ -9,8 +9,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<LandingPage />}> */}
-          <Route path="/" element={<SSLanding />}>
+        <Route path="/" element={<LandingPage />}>
           <Route path="/spatial-span" element={<SSLanding />}>
             <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
             <Route path="/spatial-span/trial" element={<SSGame />}></Route>
