@@ -14,20 +14,10 @@ function generateRandomIntegerSequence(length: number, min: number, max: number)
 }
 
 function randomSequenceFromList<T>(list: Array<T>): Array<T> {
-    /* 
-    * 1. Create a copy of the list  (list.slice())
-    * 2. Create an empty array to hold the result (result = [])
-    * 3. While the copy of the list is not empty
-    * 4.     Generate a random index (Math.floor(Math.random() * list.length))
-    * 5.     Push the element at the random index to the result array (result.push(list[index]))
-    * 6.     Remove the element at the random index from the copy of the list (list.splice(index, 1))
-    * 7. Return the result array
-     */
-    const result = [];
-    while (list.length > 0) {
-        const index = Math.floor(Math.random() * list.length);
-        result.push(list[index]);
-        list.splice(index, 1);
+    const result = list.slice();
+    for (let i = result.length - 1; i > 0; --i) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
     }
     return result;
 }
