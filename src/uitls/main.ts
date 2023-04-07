@@ -1,6 +1,6 @@
 type integer = number;
 
-function generateRandomSequence(length: number): string {
+function generateRandomString(length: number): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
@@ -40,4 +40,9 @@ function samplingFromList<T>(list: Array<T>,num: integer, replace:boolean) {
     }
 }
 
-export {}
+export {
+    generateRandomString,
+    generateRandomIntegerSequence,
+    randomSequenceFromList,
+    samplingFromList
+}
