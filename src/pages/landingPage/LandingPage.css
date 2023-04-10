@@ -1,7 +1,9 @@
-#header-banner {
+#LandingPageHeader {
     height: 14.22vh;
 }
 
-#body-window {
+#LandingPageBody {
     height: 85.78vh;
+    padding: 12px;
+    padding-top: unset;
 }
