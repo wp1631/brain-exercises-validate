@@ -1,0 +1,13 @@
+.appHeaderContainer {
+    background: radial-gradient(194.38% 163.33% at 100% 114.17%, #514A9D 0%, #24C6DC 100%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerText {
+    color: white;
+    font-size: 6vmin;
+    font-weight: 600;
+}
