@@ -2,8 +2,11 @@ import React from 'react'
 
 function LandingPage() {
   return (
-    <div className="container-fluid !direction !spacing" style={{background : 'red'}}>
-        b5-row
+    <div className='container-fluid'>
+        <div className='row'>
+            <div id='header-banner' className='col'></div>
+            <div id='body-window' className='col'></div>
+        </div>
     </div>
   )
 }

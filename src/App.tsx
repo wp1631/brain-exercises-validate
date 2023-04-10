@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
+import LandingPage from './pages/landingPage/LandingPage';
+import SSLanding from './pages/gameLanding/ssLanding/SSLanding';
+import SSInstruction from './pages/gameInstruction/ssInstruction/SSInstruction';
+import SSGame from './pages/game/ssGame/SSGame';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />}>
+          <Route path="/spatial-span" element={<SSLanding />}>
+            <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
+            <Route path="/spatial-span/trial" element={<SSGame />}></Route>
+          </Route>
+          {/* <Route path="/conjunction-search" element={<></>}>
+            <Route path="/instruction" element={<></>}></Route>
+            <Route path="/trial" element={<></>}></Route>
+          </Route>
+          <Route path="/go-nogo" element={<></>}>
+            <Route path="/instruction" element={<></>}></Route>
+            <Route path="/trial" element={<></>}></Route>
+          </Route> */}
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
