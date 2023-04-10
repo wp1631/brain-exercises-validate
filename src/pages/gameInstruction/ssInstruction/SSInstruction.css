@@ -1,7 +1,22 @@
-#header-banner {
+#SSInstructionHeader {
     height: 14.22vh;
 }
 
-#body-window {
+#SSInstructionBody {
     height: 85.78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.SSInstructionBodyProgressBar {
+    height: 10%;
+}
+
+.SSInstructionWindow {
+    height: 60%;
+}
+.SSInstructionEnterButton {
+    height: 20%;
 }
