@@ -9,20 +9,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />}>
-          <Route path="/spatial-span" element={<SSLanding />}>
-            <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
-            <Route path="/spatial-span/trial" element={<SSGame />}></Route>
-          </Route>
-          {/* <Route path="/conjunction-search" element={<></>}>
-            <Route path="/instruction" element={<></>}></Route>
-            <Route path="/trial" element={<></>}></Route>
-          </Route>
-          <Route path="/go-nogo" element={<></>}>
-            <Route path="/instruction" element={<></>}></Route>
-            <Route path="/trial" element={<></>}></Route>
-          </Route> */}
-        </Route>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/spatial-span" element={<SSLanding />}></Route>
+        <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
+        <Route path="/spatial-span/trial" element={<SSGame />}></Route>
       </Routes>
     </Router>
   );
