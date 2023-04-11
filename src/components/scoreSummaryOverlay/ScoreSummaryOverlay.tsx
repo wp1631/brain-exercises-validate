@@ -1,9 +1,26 @@
-import React from 'react'
+import React from 'react';
+import './ScoreSummaryOverlay.scss';
+import scorePageBadge from '../../assets/svg/scorepage-badge.svg';
 
-function ScoreSummaryOverlay() {
+function ScoreSummaryOverlay(props) {
   return (
-    <div>ScoreSummaryOverlay</div>
+    <div className="summary">
+      <div className="summaryContainer">
+          <div className="summaryHeader">
+              <p className='thisScore'>คะแนนครั้งนี้</p>
+              <p className='bigScore'>{Math.max(10000, Math.round(props.sumScores)).toLocaleString()}</p>
+          </div>
+          <div className="summaryBadge">
+              <img src={scorePageBadge} alt='badge' className={'medalBadge'}></img>
+              {/* <p className='highestScore'>คะแนนสูงสุด: 67,445</p> */}
+          </div>
+          <div className="btnContainerSummary">
+              <button className='summaryBtnPlayAgain' onClick={props.refreshPage}>{`เล่นอีกครั้ง`}</button>
+              <button className='summaryBtnHome' onClick={props.backToLandingPage}>{`กลับหน้าหลัก`}</button>
+          </div>
+      </div>
+  </div>
   )
 }
 
-export default ScoreSummaryOverlay
+export default ScoreSummaryOverlay;
