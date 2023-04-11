@@ -3,6 +3,8 @@
     --cir-span-radius: min(calc(0.2 * 145vw), calc(0.2 * 145vh));
     --cos30: 0.86602540378;
     --sin30: 0.5;
+    --inner-button: 194.25px;
+    --outer-button: 259px;
     --cue-color: #26A445;
     --cue-border-color: #26A445;
     --rest-color: #E5E5E5;
@@ -13,7 +15,7 @@
     width: var(--cir-base-unit);
     height: var(--cir-base-unit);
     line-height: var(--cir-base-unit);
-    background: white;
+    background: var(--rest-color);
     border-radius: 50%;
     border: 3px solid var(--rest-border-color);
     position: absolute;
