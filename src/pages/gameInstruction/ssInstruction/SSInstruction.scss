@@ -1,0 +1,495 @@
+#SSInstructionHeader {
+    height: 14.22vh;
+}
+
+#SSInstructionBody {
+    height: 85.78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.SSInstructionBodyProgressBar {
+    height: 10%;
+}
+
+.SSInstructionWindow {
+    height: 60%;
+}
+.SSInstructionEnterButton {
+    height: 20%;
+}
+
+.cirButtonInstruction {
+    position: absolute;
+    display: block;
+    width: var(--cir-base-unit);
+    line-height: var(--cir-base-unit);
+    height: var(--cir-base-unit);
+    border-radius: 50%;
+    text-align: center;
+    background: var(--rest-color);
+    border: 3px solid var(--rest-border-color);
+    padding: 0;
+    transition: 0.05s ease;
+    cursor: pointer;
+}
+
+.cirButtonInstruction:hover {
+    border-color: white;
+}
+
+.cirButtonInstruction:focus {
+    outline: 0;
+}
+
+.cirButtonInstruction.hoverDisabled {
+    pointer-events: none;
+    background: var(--rest-color);
+    border: 3px solid var(--rest-border-color);
+    transition: 0.05s ease;
+}
+
+.cirButtonInstruction.pop {
+    background-color: var(--cue-color);
+    border-color: var(--cue-border-color);
+}
+
+.cirButtonInstruction.readyToClick, .signal.readyToClick {
+    background-color: white;
+    border-color: var(--cue-border-color);
+}
+
+.cirButtonInstruction.clicked {
+    background-color: var(--cue-color);
+    box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.1), 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#cirButton1Instruction {
+    left: calc(50% - var(--cir-base-unit)/2.0);
+    top: calc(50% - var(--cir-span-radius) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton2Instruction {
+    left: calc(50% + var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% - var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton3Instruction {
+    left: calc(50% + var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% + var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton4Instruction {
+    left: calc(50% - var(--cir-base-unit)/2.0);
+    top: calc(50% + var(--cir-span-radius) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton5Instruction {
+    left: calc(50% - var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% + var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton6Instruction {
+    left: calc(50% - var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% - var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+.signalInstruction {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    height: var(--cir-base-unit);
+    width: 86px;
+}
+
+#goSignalInstruction {
+    border-radius: 50%;
+    left: calc(50% - 86px /2.0);
+    top: calc(50% - max(0px, calc(var(--cir-span-radius)/2.6)));
+    line-height: 36px;
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.cirBtnContainerInstruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    height: calc(var(--outer-button) + 50px);
+    min-width: 338px;
+    padding: 16px 12px 16px 12px;
+    left: 0px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    bottom: 16px;
+}
+
+.exampleText {
+    color: red;
+    text-decoration-line: underline;
+    position: absolute;
+    font-size: 22px;
+    top: 10px;
+    left: 10px;
+}
+
+.pointingHand {
+    top: 247px;
+    left: 226px;
+    position: absolute;
+    z-index: 1;
+    height: 110px;
+    width: 66px;
+    opacity: 0;
+}
+
+.clickTheButton {
+    animation: clickTheButton 4s linear normal;
+    opacity: 1;
+}
+
+@keyframes clickTheButton {
+    0% {
+        top: 247px;
+        left: 226px;
+        transform: rotate(0deg)
+    }
+    16% {
+        top: 90px;
+        left: 253px;
+        transform: rotate(0deg)
+    }
+    32% {
+        top: 90px;
+        left: 253px;
+        transform: rotate(-10deg);
+    }
+    48% {
+        top: 90px;
+        left: 253px;
+        transform: rotate(0deg);
+    }
+    64% {
+        top: 201px;
+        left: 96px;
+        transform: rotate(0deg);
+    }
+    80% {
+        top: 201px;
+        left: 96px;
+        transform: rotate(-10deg);
+    }
+    96% {
+        top: 201px;
+        left: 96px;
+        transform: rotate(0deg);
+    }
+}
+
+.cir2Pop {
+    animation: cir2Pop 4s linear normal;
+}
+
+@keyframes cir2Pop {
+    0% {
+        background: #FFFFFF;
+    }
+    16% {
+        background: #FFFFFF;
+    }
+    32% {
+        background: var(--cue-color);
+    }
+    48% {
+        background: #FFFFFF;
+    }
+    64% {
+        background: #FFFFFF;
+    }
+    80% {
+        background: #FFFFFF;
+    }
+    96% {
+        background: #FFFFFF;
+    }
+}
+
+.cir5Pop {
+    animation: cir5Pop 4s linear normal;
+}
+
+@keyframes cir5Pop {
+    0% {
+        background: #FFFFFF;
+    }
+    16% {
+        background: #FFFFFF;
+    }
+    32% {
+        background: #FFFFFF;
+    }
+    48% {
+        background: #FFFFFF;
+    }
+    64% {
+        background: #FFFFFF;
+    }
+    80% {
+        background: var(--cue-color);
+    }
+    96% {
+        background: #FFFFFF;
+    }
+}
+
+.onHide {
+    display: none;
+}
+
+.onDisable {
+    color: #959595;
+}
+
+.tutorial {
+    background: rgba(0, 0, 0, 0.65);
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    z-index: 11;
+    display: flex;
+    justify-content: center;
+}
+
+.instructionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+    position: absolute;
+    width: fit-content;
+    height: fit-content; 
+    bottom: 14px;
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+.centered {
+    align-items: center;
+    min-width: 360px;
+}
+
+.instructionBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px;
+    gap: 32px;
+    min-width: 330px;
+    width: fit-content;
+    height: fit-content;
+    background: #FFFFFF;
+    border-radius: 8px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.instructionPerson {
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+
+    .personStart {
+        width: 143px;
+    }
+    
+    .personEnd {
+        width: 263px;
+    }
+}
+
+.canvasContainerInstruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    min-width: 360px;
+    padding: 12px;
+    left: 0px;
+    bottom: 175px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.instructionSearchInstruction {
+    font-family: 'Sarabun';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+}
+
+#instructionCanvas { 
+    width: 331.5px;
+    height: 331.5px;
+}
+
+.btnContainerInstruction {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    min-width: 360px;
+    padding: 16px 12px 16px 12px;
+    left: 0px;
+    bottom: 340px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.progressBarContainerInstruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    min-width: 360px;
+    padding: 24px 0 24px 0;
+    top: 132px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+
+#instructionProgressbar {
+    width: 324px;
+}
+
+.instructionText {
+    width: fit-content;
+    height: fit-content;
+    font-family: 'Sarabun';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 34px;
+    letter-spacing: 0.18px;
+    color: #393939;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.instructionControl {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.instructionBtnNext, .instructionBtnBack {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.nextInstruction, .backInstruction {
+    background: #FFFFFF;
+    border: 0px;
+    font-family: 'Sarabun';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 34px;
+    text-align: center;
+    letter-spacing: 0.18px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.onHide {
+    display: none;
+}
+
+.nextInstruction {
+    color: #297AF4;
+}
+
+.backInstruction {
+    color: #6C6C6C;
+}
+
+@media (orientation: landscape) {
+    .card {
+        position: unset;
+    }
+
+    .progressBarContainer {
+        position: absolute;
+        top: 120px;
+    }
+
+    .progressBarContainerInstruction {
+        position: absolute;
+        top: 135px;
+    }
+
+    .canvasContainerInstruction {
+        z-index: -1;
+    }
+
+    .searchInstruction {
+        position: absolute;
+        left: 75px;
+        top: 265px;
+    }
+    
+    #myCanvas {
+        position: absolute;
+        top: 300px;
+    }
+
+    .canvasContainer {
+        height: 75%;
+    }
+}
+
