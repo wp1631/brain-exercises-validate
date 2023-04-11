@@ -4,6 +4,7 @@ import './SSGame.css';
 import AppHeader from '../../../components/appHeader/AppHeader';
 import SSWindow from '../../../components/gameWindow/ssWindow/SSWindow';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
+import ScoreSummaryOverlay from '../../../components/scoreSummaryOverlay/ScoreSummaryOverlay';
 import useSound from 'use-sound';
 import clickSoundSrc from '../../../assets/sound/click.mp3'
 import combo2SoundSrc from '../../../assets/sound/combo2.mp3';
@@ -709,8 +710,8 @@ function SSGame(this: any) {
       window.location.reload();
   } 
 
-  function changeGame() {
-      navigate('/games');
+  function backToLandingPage() {
+    navigate('/');
   }
 
   return (
@@ -729,6 +730,11 @@ function SSGame(this: any) {
               <div className="SSGameEnterButton"></div>
             </div>
         </div>
+        {isItDone ? 
+        <div>
+            {<ScoreSummaryOverlay sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+        </div>
+        : null}
     </div>
   )
 }
