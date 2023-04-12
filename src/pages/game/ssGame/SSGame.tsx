@@ -90,9 +90,9 @@ function SSGame(this: any) {
       seqGenerator();
       
       return () => {
-          timeoutList.forEach(tm => {
-              clearTimeout(tm);
-          })
+        timeoutList.forEach(tm => {
+            clearTimeout(tm);
+        })
       };
   }, [])
 
@@ -248,7 +248,7 @@ function SSGame(this: any) {
           }
           
           allReactionTime.push(reactionTime.toString());
-          let lastReaction = reactionTime[reactionTime.length-1]
+          let lastReaction = reactionTime[reactionTime.length-1];
           allReactionTrial.push(lastReaction);
           reactionTime = [];
       }
@@ -712,6 +712,7 @@ function SSGame(this: any) {
 
   function backToLandingPage() {
     navigate('/');
+    refreshPage();
   }
 
   return (
