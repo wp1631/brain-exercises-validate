@@ -12,6 +12,7 @@ import instructionPerson from '../../../assets/png/instructionPerson.png';
 import instructionFinished from '../../../assets/png/instructionFinished.png';
 import handClick from '../../../assets/png/handClick.png';
 import $ from 'jquery';
+import { useNavigate } from 'react-router-dom';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -31,6 +32,7 @@ let timeoutList: any[] = [];
 
 function SSInstruction() {
   const inputRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
   const [tutorialStep, setTutorialStep] = useState(1);
   const [tutorialTest, setTutorialTest] = useState('');
   const [tutorialExample, setTutorialExample] = useState(false);
@@ -47,9 +49,9 @@ function SSInstruction() {
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
 
       return () => {
-          timeoutList.forEach(tm => {
-              clearTimeout(tm);
-          })
+        timeoutList.forEach(tm => {
+            clearTimeout(tm);
+        })
       };
   }, [])
 
@@ -407,6 +409,10 @@ function SSInstruction() {
       window.location.reload();
   }
 
+  function backToSSLanding() {
+    navigate('/spatial-span');
+  }
+
   return (
     <div className='container-fluid'>
         {tutorialHide === false ? 
@@ -464,7 +470,7 @@ function SSInstruction() {
                           {tutorialStep !== 2 && tutorialStep !== 4 && tutorialStep !== 6 ? `ถัดไป >` : null}
                           {tutorialStep === 4 ? `ลองเล่น >` : null}
                           {tutorialStep === 6 ? `เริ่มเลย >` : null}</button> :
-                      <button className="nextInstruction" onMouseDown={() => {refreshPage()}}>{`กลับเมนูเกม >`}</button> }    
+                      <button className="nextInstruction" onMouseDown={() => {backToSSLanding()}}>{`กลับเมนูเกม >`}</button> }    
                   </div>
                 </div>
               </div>
