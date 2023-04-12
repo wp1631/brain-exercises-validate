@@ -1,7 +1,8 @@
 import React from 'react';
 import './LandingPage.css';
-import AppHeader from '../.././components/appHeader/AppHeader'
-import GameCards from '../.././components/gameCards/GameCards'
+import AppHeader from '../.././components/appHeader/AppHeader';
+import GameCards from '../.././components/gameCards/GameCards';
+import RotateAlert from '../../components/rotateAlert/RotateAlert';
 
 function LandingPage() {
   return (
@@ -14,6 +15,7 @@ function LandingPage() {
               {<GameCards />}
             </div>
         </div>
+        {<RotateAlert />}
     </div>
   )
 }

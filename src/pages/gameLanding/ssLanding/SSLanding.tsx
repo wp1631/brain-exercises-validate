@@ -3,6 +3,7 @@ import './SSLanding.css'
 import AppHeader from '../../.././components/appHeader/AppHeader'
 import SSWindow from '../../.././components/gameWindow/ssWindow/SSWindow'
 import EnterButtons from '../../.././components/enterButtons/EnterButtons'
+import RotateAlert from '../../../components/rotateAlert/RotateAlert'
 
 function SSLanding() {
   return (
@@ -21,6 +22,7 @@ function SSLanding() {
               </div>
             </div>
         </div>
+        {<RotateAlert />}
     </div>
   )
 }

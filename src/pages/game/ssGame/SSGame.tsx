@@ -11,6 +11,7 @@ import combo2SoundSrc from '../../../assets/sound/combo2.mp3';
 import losingSoundSrc from '../../../assets/sound/losingStreak.mp3';
 import $ from 'jquery';
 import moment from 'moment';
+import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -736,6 +737,7 @@ function SSGame(this: any) {
             {<ScoreSummaryOverlay sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
+        {<RotateAlert />}
     </div>
   )
 }

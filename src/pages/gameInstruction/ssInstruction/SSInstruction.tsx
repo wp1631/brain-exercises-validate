@@ -13,6 +13,7 @@ import instructionFinished from '../../../assets/png/instructionFinished.png';
 import handClick from '../../../assets/png/handClick.png';
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
+import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -416,64 +417,66 @@ function SSInstruction() {
   return (
     <div className='container-fluid'>
         {tutorialHide === false ? 
-        <div className="tutorial">
-            <div className={'progressBarContainerInstruction' + (tutorialStep === 8 ? '' : ' onHide')}>
-              <img src={instructionProgressbar} alt="progressbar" id="instructionProgressbar"></img>       
-            </div>
-            <div className={'instructionContainer' + (tutorialStep === 9 ? ' centered': '')}>
-              <div className={'cirBtnContainerInstruction' + (tutorialStep === 2 ? '' : ' onHide')}>
-                  <div className="container">
-                      <p className='exampleText'>ตัวอย่าง</p>
-                      <img src={handClick} alt="a pointing hand" className={'pointingHand' + (tutorialStep === 2 ? '' : ' onHide')}></img>
-                      <div className="signalInstruction" id="goSignalInstruction"></div>
-                      <button ref={inputRef} className="cirButtonInstruction 1" id='cirButton1Instruction'></button>
-                      <button ref={inputRef} className="cirButtonInstruction 2" id='cirButton2Instruction'></button>
-                      <button ref={inputRef} className="cirButtonInstruction 3" id='cirButton3Instruction'></button>
-                      <button ref={inputRef} className="cirButtonInstruction 4" id='cirButton4Instruction'></button>
-                      <button ref={inputRef} className="cirButtonInstruction 5" id='cirButton5Instruction'></button>
-                      <button ref={inputRef} className="cirButtonInstruction 6" id='cirButton6Instruction'></button> 
-                  </div>
-              </div>
-              <div className="instructionPerson">
-                  <img src={instructionPerson} alt="an instruction guy" className={'personStart' + (tutorialStep !== 2 && tutorialStep < 9 ? '' : ' onHide')}></img>
-                  <img src={instructionFinished} alt="an instruction guy" className={'personEnd' + (tutorialStep === 9 ? '' : ' onHide')}></img>
-              </div>
-              <div className="instructionBox">
-                <div className= "instructionText">
-                    {tutorialStep === 1 ? <p>สวัสดีครับ วันนี้ผมจะมาสอนวิธี <br></br>เล่นเกม <b>'จำจด กดตาม'</b></p> : null}
-                    {tutorialStep === 2 ? <p>ในเกมนี้ คุณต้อง<br></br><b>1. จำลำดับของสัญญาณไฟ</b> <br></br>ที่กระพริบบนหน้าจอ <br></br><b>2. กดปุ่มตามให้ถูกต้อง</b></p> : null}
-                    {tutorialStep === 3 ? <p>ความเร็วไม่มีผลต่อคะแนนในเกมนี้<br></br>ดังนั้นไม่ต้องรีบกดครับ</p> : null}
-                    {tutorialStep === 4 ? <p>เรามาลองเล่นกันดูครับ </p> : null}
-                    {tutorialStep === 5 && tutorialTest === 'wrong' ? <p>ยังไม่ถูกต้อง ลองดูอีกทีนะครับ</p> : null}
-                    {tutorialStep === 5 && tutorialTest === 'right' ? <p>ถูกต้องครับ! <br></br><br></br> คราวนี้จะลองเพิ่มสัญญาณไฟ<br></br>เป็น 3 ครั้ง</p> : null}
-                    {tutorialStep === 6 ? <p>ไฟสามารถกระพริบซ้ำปุ่มเดิมได้ <br></br>เพราะฉะนั้น ดูดี ๆ นะครับ</p> : null}
-                    {tutorialStep === 7 && tutorialTest === 'wrong' ? <p>ยังไม่ถูกต้อง ลองดูอีกทีนะครับ</p> : null}
-                    {tutorialStep === 7 && tutorialTest === 'right' ? <p>สุดยอด! คุณเรียนรู้ไวมาก <br></br><br></br>เมื่อคุณเล่นไปเรื่อย ๆ เกมจะเพิ่ม <br></br>จำนวนสัญญาณไฟที่คุณต้องจำ </p> : null}
-                    {tutorialStep === 8 ? <p>ทุกข้อที่คุณตอบ แถบนี้จะเพิ่มขึ้น <br></br>เมื่อแถบนี้เต็ม เกมก็จะจบลง</p> : null}
-                    {tutorialStep === 9 ? <p>ยินดีด้วย! คุณได้ผ่านการฝึกเล่น <br></br>เกม <b>'จำจด กดตาม'</b> แล้ว</p> : null}
+        <div className="row">
+            <div className="tutorial">
+                <div className={'progressBarContainerInstruction' + (tutorialStep === 8 ? '' : ' onHide')}>
+                <img src={instructionProgressbar} alt="progressbar" id="instructionProgressbar"></img>       
                 </div>
-                <div className="instructionControl">
-                  <div className="instructionBtnBack">
-                      {tutorialStep === 1
-                      || tutorialStep === 5 
-                      || tutorialStep === 7 
-                      || tutorialExample === true 
-                      ? null : <button disabled={justWait === true} className="backInstruction" onMouseDown={() => {setTutorialStep(tutorialStep - 1)}}>{`< ย้อนกลับ`}</button>}
-                      {tutorialExample === true ? <button disabled={justWait === true} className="backInstruction" onMouseDown={() => {examplePopCircleButton()}}><span className="bi bi-arrow-clockwise"></span>{' ดูอีกครั้ง'}</button> : null}
-                  </div>
-                  <div className="instructionBtnNext">
-                  {tutorialStep === 5 && tutorialTest === 'wrong' || tutorialStep === 7 && tutorialTest === 'wrong' ? <button className="nextInstruction" onMouseDown={() => {instructionControl()}}>{`ลองอีกครั้ง >`}</button> : null}
-                  {tutorialStep < 9 ?  
-                      <button disabled={justWait === true} className={'nextInstruction' + (tutorialTest === 'wrong' ? ' onHide' : '')} onMouseDown={() => {instructionControl()}}>
-                          {tutorialStep === 2 && tutorialExample === false ? `ดูตัวอย่าง >` : null}
-                          {tutorialStep === 2 && tutorialExample === true ? `ฉันเข้าใจแล้ว >` : null}
-                          {tutorialStep !== 2 && tutorialStep !== 4 && tutorialStep !== 6 ? `ถัดไป >` : null}
-                          {tutorialStep === 4 ? `ลองเล่น >` : null}
-                          {tutorialStep === 6 ? `เริ่มเลย >` : null}</button> :
-                      <button className="nextInstruction" onMouseDown={() => {backToSSLanding()}}>{`กลับเมนูเกม >`}</button> }    
-                  </div>
+                <div className={'instructionContainer' + (tutorialStep === 9 ? ' centered': '')}>
+                <div className={'cirBtnContainerInstruction' + (tutorialStep === 2 ? '' : ' onHide')}>
+                    <div className="container">
+                        <p className='exampleText'>ตัวอย่าง</p>
+                        <img src={handClick} alt="a pointing hand" className={'pointingHand' + (tutorialStep === 2 ? '' : ' onHide')}></img>
+                        <div className="signalInstruction" id="goSignalInstruction"></div>
+                        <button ref={inputRef} className="cirButtonInstruction 1" id='cirButton1Instruction'></button>
+                        <button ref={inputRef} className="cirButtonInstruction 2" id='cirButton2Instruction'></button>
+                        <button ref={inputRef} className="cirButtonInstruction 3" id='cirButton3Instruction'></button>
+                        <button ref={inputRef} className="cirButtonInstruction 4" id='cirButton4Instruction'></button>
+                        <button ref={inputRef} className="cirButtonInstruction 5" id='cirButton5Instruction'></button>
+                        <button ref={inputRef} className="cirButtonInstruction 6" id='cirButton6Instruction'></button> 
+                    </div>
                 </div>
-              </div>
+                <div className="instructionPerson">
+                    <img src={instructionPerson} alt="an instruction guy" className={'personStart' + (tutorialStep !== 2 && tutorialStep < 9 ? '' : ' onHide')}></img>
+                    <img src={instructionFinished} alt="an instruction guy" className={'personEnd' + (tutorialStep === 9 ? '' : ' onHide')}></img>
+                </div>
+                <div className="instructionBox">
+                    <div className= "instructionText">
+                        {tutorialStep === 1 ? <p>สวัสดีครับ วันนี้ผมจะมาสอนวิธี <br></br>เล่นเกม <b>'จำจด กดตาม'</b></p> : null}
+                        {tutorialStep === 2 ? <p>ในเกมนี้ คุณต้อง<br></br><b>1. จำลำดับของสัญญาณไฟ</b> <br></br>ที่กระพริบบนหน้าจอ <br></br><b>2. กดปุ่มตามให้ถูกต้อง</b></p> : null}
+                        {tutorialStep === 3 ? <p>ความเร็วไม่มีผลต่อคะแนนในเกมนี้<br></br>ดังนั้นไม่ต้องรีบกดครับ</p> : null}
+                        {tutorialStep === 4 ? <p>เรามาลองเล่นกันดูครับ </p> : null}
+                        {tutorialStep === 5 && tutorialTest === 'wrong' ? <p>ยังไม่ถูกต้อง ลองดูอีกทีนะครับ</p> : null}
+                        {tutorialStep === 5 && tutorialTest === 'right' ? <p>ถูกต้องครับ! <br></br><br></br> คราวนี้จะลองเพิ่มสัญญาณไฟ<br></br>เป็น 3 ครั้ง</p> : null}
+                        {tutorialStep === 6 ? <p>ไฟสามารถกระพริบซ้ำปุ่มเดิมได้ <br></br>เพราะฉะนั้น ดูดี ๆ นะครับ</p> : null}
+                        {tutorialStep === 7 && tutorialTest === 'wrong' ? <p>ยังไม่ถูกต้อง ลองดูอีกทีนะครับ</p> : null}
+                        {tutorialStep === 7 && tutorialTest === 'right' ? <p>สุดยอด! คุณเรียนรู้ไวมาก <br></br><br></br>เมื่อคุณเล่นไปเรื่อย ๆ เกมจะเพิ่ม <br></br>จำนวนสัญญาณไฟที่คุณต้องจำ </p> : null}
+                        {tutorialStep === 8 ? <p>ทุกข้อที่คุณตอบ แถบนี้จะเพิ่มขึ้น <br></br>เมื่อแถบนี้เต็ม เกมก็จะจบลง</p> : null}
+                        {tutorialStep === 9 ? <p>ยินดีด้วย! คุณได้ผ่านการฝึกเล่น <br></br>เกม <b>'จำจด กดตาม'</b> แล้ว</p> : null}
+                    </div>
+                    <div className="instructionControl">
+                        <div className="instructionBtnBack">
+                            {tutorialStep === 1
+                            || tutorialStep === 5 
+                            || tutorialStep === 7 
+                            || tutorialExample === true 
+                            ? null : <button disabled={justWait === true} className="backInstruction" onMouseDown={() => {setTutorialStep(tutorialStep - 1)}}>{`< ย้อนกลับ`}</button>}
+                            {tutorialExample === true ? <button disabled={justWait === true} className="backInstruction" onMouseDown={() => {examplePopCircleButton()}}><span className="bi bi-arrow-clockwise"></span>{' ดูอีกครั้ง'}</button> : null}
+                        </div>
+                        <div className="instructionBtnNext">
+                        {tutorialStep === 5 && tutorialTest === 'wrong' || tutorialStep === 7 && tutorialTest === 'wrong' ? <button className="nextInstruction" onMouseDown={() => {instructionControl()}}>{`ลองอีกครั้ง >`}</button> : null}
+                        {tutorialStep < 9 ?  
+                            <button disabled={justWait === true} className={'nextInstruction' + (tutorialTest === 'wrong' ? ' onHide' : '')} onMouseDown={() => {instructionControl()}}>
+                                {tutorialStep === 2 && tutorialExample === false ? `ดูตัวอย่าง >` : null}
+                                {tutorialStep === 2 && tutorialExample === true ? `ฉันเข้าใจแล้ว >` : null}
+                                {tutorialStep !== 2 && tutorialStep !== 4 && tutorialStep !== 6 ? `ถัดไป >` : null}
+                                {tutorialStep === 4 ? `ลองเล่น >` : null}
+                                {tutorialStep === 6 ? `เริ่มเลย >` : null}</button> :
+                            <button className="nextInstruction" onMouseDown={() => {backToSSLanding()}}>{`กลับเมนูเกม >`}</button> }    
+                        </div>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
         : null}
@@ -491,6 +494,7 @@ function SSInstruction() {
               <div className="SSInstructionEnterButton"></div>
             </div>
         </div>
+        {<RotateAlert />}
     </div>
   )
 }
