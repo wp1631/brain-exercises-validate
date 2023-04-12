@@ -22,7 +22,7 @@ function AppHeader() {
       setIsHideHomeButton(true);
     }
   }, [])
-
+  
   function backToLandingPage() {
     navigate('/');
   }

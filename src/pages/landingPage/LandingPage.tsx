@@ -8,10 +8,10 @@ function LandingPage() {
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='LandingPageHeader' className='col'>
+            <div id='LandingPageHeader'>
               {<AppHeader />}
             </div>
-            <div id='LandingPageBody' className='col'>
+            <div id='LandingPageBody'>
               {<GameCards />}
             </div>
         </div>
