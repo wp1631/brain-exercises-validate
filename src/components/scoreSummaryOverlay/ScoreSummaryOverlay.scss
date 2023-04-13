@@ -15,21 +15,35 @@
     flex-direction: column;
     align-items: center;
     position: absolute;
-    width: 334px;
-    min-height: 554px;
-    top: 136px;
+    width: calc(var(--this-sum) / 3.69);
+    min-height: calc(var(--this-sum) / 2.23);
+    top: calc(var(--this-sum) / 9.07);
     background: #FFFFFF;
-    border-radius: 40px;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.14),
-                0 3px 14px rgba(0, 0, 0, 0.12),
-                0 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: calc(var(--this-sum) / 30.85);
+    box-shadow: 
+        0 
+        calc(var(--this-sum) / 154.25) 
+        calc(var(--this-sum) / 123.4) 
+        rgba(0, 0, 0, 0.14),
+        0 
+        calc(var(--this-sum) / 411.33) 
+        calc(var(--this-sum) / 88.14) 
+        rgba(0, 0, 0, 0.12),          
+        0 
+        calc(var(--this-sum) / 246.8) 
+        calc(var(--this-sum) / 246.8)  
+        rgba(0, 0, 0, 0.2);
 }
 
 .summaryHeader {
-    width: 334px;
-    height: 153px;
+    width: calc(var(--this-sum) / 3.69);
+    height: calc(var(--this-sum) / 8.06);
     background: radial-gradient(274.7% 230.83% at 49.87% 153.38%, #514A9D 0%, #24C6DC 100%);
-    border-radius: 40px 40px 0px 0px;
+    border-radius: 
+        calc(var(--this-sum) / 30.85)  
+        calc(var(--this-sum) / 30.85)
+        0 
+        0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,17 +52,17 @@
 
 .thisScore {
     font-weight: 600;
-    font-size: 22px;
-    line-height: 34px;
-    letter-spacing: 0.18px;
+    font-size: calc(var(--this-sum) / 56.09);
+    line-height: calc(var(--this-sum) / 36.29);
+    letter-spacing: calc(var(--this-sum) / 6855.56);
     color: #FFFFFF;
     margin: 0;
 }
 
 .bigScore {
     font-weight: 600;
-    font-size: 60px;
-    line-height: 56px;
+    font-size: calc(var(--this-sum) / 20.57);
+    line-height: calc(var(--this-sum) / 22.04);
     color: #FFFFFF;
     margin: 0;
 }
@@ -58,54 +72,54 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: calc(var(--this-sum) / 77.125);
 }
 
 .summaryBadge {
-    top: 183px;
+    top: calc(var(--this-sum) / 6.74);
 
     .medalBadge {
-        width: 140px;
-        height: 117px;
+        width: calc(var(--this-sum) / 8.81);
+        height: calc(var(--this-sum) / 10.55);
     }
 }
 
 .btnContainerSummary {
-    top: 398px;
+    top: calc(var(--this-sum) / 3.10);
 }
 
 .highestScore {
     opacity: 0.8;
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 34px;
-    letter-spacing: 0.18px;
+    font-size: calc(var(--this-sum) / 56.09);
+    line-height: calc(var(--this-sum) / 36.29);
+    letter-spacing: calc(var(--this-sum) / 6855.56);
     color: #393939;
 }
 
 .summaryBtnPlayAgain {
-    width: 302px;
-    height: 48px;
+    width: calc(var(--this-sum) / 4.09);
+    height: calc(var(--this-sum) / 25.70);
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.7);
-    border-radius: 40px;
+    border: calc(var(--this-sum) / 1234) solid rgba(0, 0, 0, 0.7);
+    border-radius: calc(var(--this-sum) / 30.85);
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 34px;
-    letter-spacing: 0.18px;
+    font-size: calc(var(--this-sum) / 56.09);
+    line-height: calc(var(--this-sum) / 36.29);
+    letter-spacing: calc(var(--this-sum) / 6855.56);
     color: #393939;
 }
 
 .summaryBtnHome {
-    height: 68px;
+    height: calc(var(--this-sum) / 18.15);
     background: #297AF4;
-    border-radius: 40px;
+    border-radius: calc(var(--this-sum) / 30.85);
     align-self: stretch;
     font-weight: 600;
-    font-size: 24px;
-    letter-spacing: 0.18px;
+    font-size: calc(var(--this-sum) / 51.42);
+    letter-spacing: calc(var(--this-sum) / 6855.56);
     color: #FFFFFF;
     border: 0;
 }
@@ -113,9 +127,3 @@
 .invisible {
     visibility: none;
 }
-
-// @media (orientation: landscape) {
-//     .summaryContainer {
-//         top: 200px;
-//     }
-// }

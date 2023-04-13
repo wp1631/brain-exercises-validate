@@ -1,6 +1,7 @@
 :root {
   --this-width : 0;
   --this-height : 0;
+  --this-sum : 0;
 }
 
 * {

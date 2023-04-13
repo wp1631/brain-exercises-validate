@@ -481,10 +481,10 @@ function SSInstruction() {
         </div>
         : null}
         <div className='row'>
-            <div id='SSInstructionHeader' className='col'>
+            <div id='SSInstructionHeader'>
               {<AppHeader />}
             </div>
-            <div id='SSInstructionBody' className='col'>
+            <div id='SSInstructionBody'>
             <div className="SSInstructionBodyProgressBar">
               {<ProgressBar progressValue={progressValue} trialNumber={100}/>}
             </div>

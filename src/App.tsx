@@ -25,10 +25,13 @@ function App() {
   function documentHeightWidth() {
     const calWidth = '' + document.documentElement.clientWidth;
     const calHeight = '' + document.documentElement.clientHeight;
+    const calSum = (+calWidth) + (+calHeight);
     getComputedStyle(document.documentElement).getPropertyValue('--this-width');
     getComputedStyle(document.documentElement).getPropertyValue('--this-height');
+    getComputedStyle(document.documentElement).getPropertyValue('--this-sum');
     document.documentElement.style.setProperty('--this-width', calWidth + 'px');
     document.documentElement.style.setProperty('--this-height', calHeight + 'px');
+    document.documentElement.style.setProperty('--this-sum', calSum + 'px');
   }
   
   return (

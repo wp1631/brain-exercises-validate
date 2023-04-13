@@ -30,7 +30,7 @@
     border-radius: 50%;
     text-align: center;
     background: var(--rest-color);
-    border: 3px solid var(--rest-border-color);
+    border: calc(var(--this-sum) / 411.33) solid var(--rest-border-color);
     padding: 0;
     transition: 0.05s ease;
     cursor: pointer;
@@ -47,7 +47,7 @@
 .cirButtonInstruction.hoverDisabled {
     pointer-events: none;
     background: var(--rest-color);
-    border: 3px solid var(--rest-border-color);
+    border: calc(var(--this-sum) / 411.33) solid var(--rest-border-color);
     transition: 0.05s ease;
 }
 
@@ -63,7 +63,15 @@
 
 .cirButtonInstruction.clicked {
     background-color: var(--cue-color);
-    box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.1), 1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+    calc(var(--this-sum) / -1234)
+    calc(var(--this-sum) / -1234)
+    calc(var(--this-sum) / 617)
+    rgba(255, 255, 255, 0.1), 
+    calc(var(--this-sum) / 1234)
+    calc(var(--this-sum) / 1234)
+    calc(var(--this-sum) / 617)
+    rgba(0, 0, 0, 0.1);
 }
 
 #cirButton1Instruction {
@@ -106,15 +114,15 @@
     color: rgb(0, 0, 0);
     text-align: center;
     height: var(--cir-base-unit);
-    width: 86px;
+    width: calc(var(--this-sum) / 14.35);
 }
 
 #goSignalInstruction {
     border-radius: 50%;
-    left: calc(50% - 86px /2.0);
+    left: calc(50% - calc(var(--this-sum) / 14.35) /2.0);
     top: calc(50% - max(0px, calc(var(--cir-span-radius)/2.6)));
-    line-height: 36px;
-    font-size: 34px;
+    line-height: calc(var(--this-sum) / 34.28);
+    font-size: calc(var(--this-sum) / 36.29);
     font-weight: 400;
 }
 
@@ -124,31 +132,35 @@
     justify-content: center;
     flex-direction: row;
     position: relative;
-    height: calc(var(--outer-button) + 50px);
-    min-width: 338px;
-    padding: 16px 12px 16px 12px;
-    left: 0px;
+    height: calc(var(--outer-button) + calc(var(--this-sum) / 24.68));
+    min-width: calc(var(--this-sum) / 3.65);
+    padding: 
+    calc(var(--this-sum) / 77.125)
+    calc(var(--this-sum) / 102.83)
+    calc(var(--this-sum) / 77.125)
+    calc(var(--this-sum) / 102.83);
+    left: 0;
     background-color: #FFFFFF;
-    border-radius: 8px;
-    bottom: 16px;
+    border-radius: calc(var(--this-sum) / 154.25);
+    bottom: calc(var(--this-sum) / 77.125);
 }
 
 .exampleText {
     color: red;
     text-decoration-line: underline;
     position: absolute;
-    font-size: 22px;
-    top: 10px;
-    left: 10px;
+    font-size: calc(var(--this-sum) / 56.09);
+    top: calc(var(--this-sum) / 123.4);
+    left: calc(var(--this-sum) / 123.4);
 }
 
 .pointingHand {
-    top: 247px;
-    left: 226px;
+    top: calc(var(--this-sum) / 5);
+    left: calc(var(--this-sum) / 5.46);
     position: absolute;
     z-index: 1;
-    height: 110px;
-    width: 66px;
+    height: calc(var(--this-sum) / 11.22);
+    width: calc(var(--this-sum) / 18.70);
     opacity: 0;
 }
 
@@ -159,38 +171,38 @@
 
 @keyframes clickTheButton {
     0% {
-        top: 247px;
-        left: 226px;
+        top: calc(var(--this-sum) / 5);
+        left: calc(var(--this-sum) / 5.46);
         transform: rotate(0deg)
     }
     16% {
-        top: 90px;
-        left: 253px;
+        top: calc(var(--this-sum) / 13.71);
+        left: calc(var(--this-sum) / 4.88);
         transform: rotate(0deg)
     }
     32% {
-        top: 90px;
-        left: 253px;
+        top: calc(var(--this-sum) / 13.71);
+        left: calc(var(--this-sum) / 4.88);
         transform: rotate(-10deg);
     }
     48% {
-        top: 90px;
-        left: 253px;
+        top: calc(var(--this-sum) / 13.71);
+        left: calc(var(--this-sum) / 4.88);
         transform: rotate(0deg);
     }
     64% {
-        top: 201px;
-        left: 96px;
+        top: calc(var(--this-sum) / 6.14);
+        left: calc(var(--this-sum) / 12.85);
         transform: rotate(0deg);
     }
     80% {
-        top: 201px;
-        left: 96px;
+        top: calc(var(--this-sum) / 6.14);
+        left: calc(var(--this-sum) / 12.85);
         transform: rotate(-10deg);
     }
     96% {
-        top: 201px;
-        left: 96px;
+        top: calc(var(--this-sum) / 6.14);
+        left: calc(var(--this-sum) / 12.85);
         transform: rotate(0deg);
     }
 }
@@ -275,11 +287,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    padding: 0px;
+    padding: 0;
     position: absolute;
     width: fit-content;
     height: fit-content; 
-    bottom: 14px;
+    bottom: calc(var(--this-sum) / 88.14);
 
     p {
         margin-top: 0;
@@ -289,7 +301,7 @@
 
 .centered {
     align-items: center;
-    min-width: 360px;
+    min-width: calc(var(--this-sum) / 3.43);
 }
 
 .instructionBox {
@@ -297,13 +309,13 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 16px;
-    gap: 32px;
-    min-width: 330px;
+    padding: calc(var(--this-sum) / 77.125);
+    gap: calc(var(--this-sum) / 38.56);
+    min-width: calc(var(--this-sum) / 3.74);
     width: fit-content;
     height: fit-content;
     background: #FFFFFF;
-    border-radius: 8px;
+    border-radius: calc(var(--this-sum) / 154.25);
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -319,11 +331,11 @@
     z-index: 10;
 
     .personStart {
-        width: 143px;
+        width: calc(var(--this-sum) / 8.63);
     }
     
     .personEnd {
-        width: 263px;
+        width: calc(var(--this-sum) / 4.69);
     }
 }
 
@@ -335,24 +347,24 @@
     position: absolute;
     width: fit-content;
     height: fit-content;
-    min-width: 360px;
-    padding: 12px;
-    left: 0px;
-    bottom: 175px;
+    min-width: calc(var(--this-sum) / 3.43);
+    padding: calc(var(--this-sum) / 102.83);
+    left: 0;
+    bottom: calc(var(--this-sum) / 7.05);
     background-color: #FFFFFF;
-    border-radius: 8px;
+    border-radius: calc(var(--this-sum) / 154.25);
 }
 
 .instructionSearchInstruction {
     font-family: 'Sarabun';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
+    font-size: calc(var(--this-sum) / 56.09);
 }
 
 #instructionCanvas { 
-    width: 331.5px;
-    height: 331.5px;
+    width: calc(var(--this-sum) / 3.72);
+    height: calc(var(--this-sum) / 3.72);
 }
 
 .btnContainerInstruction {
@@ -363,12 +375,16 @@
     position: absolute;
     width: fit-content;
     height: fit-content;
-    min-width: 360px;
-    padding: 16px 12px 16px 12px;
-    left: 0px;
-    bottom: 340px;
+    min-width: calc(var(--this-sum) / 3.43);
+    padding: 
+        calc(var(--this-sum) / 77.125)
+        calc(var(--this-sum) / 102.83)
+        calc(var(--this-sum) / 77.125)
+        calc(var(--this-sum) / 102.83);
+    left: 0;
+    bottom: calc(var(--this-sum) / 3.63);
     background-color: #FFFFFF;
-    border-radius: 8px;
+    border-radius: alc(var(--this-sum) / 154.25);
 }
 
 .progressBarContainerInstruction {
@@ -378,16 +394,20 @@
     position: absolute;
     width: fit-content;
     height: fit-content;
-    min-width: 360px;
-    padding: 24px 0 24px 0;
-    top: 132px;
+    min-width: alc(var(--this-sum) / 3.43);
+    padding: 
+        calc(var(--this-sum) / 51.42)
+        0 
+        calc(var(--this-sum) / 51.42)
+        0;
+    top: calc(var(--this-sum) / 9.35);
     background-color: #FFFFFF;
-    border-radius: 8px;
+    border-radius: calc(var(--this-sum) / 154.25);
 }
 
 
 #instructionProgressbar {
-    width: 324px;
+    width: calc(var(--this-sum) / 3.80);
 }
 
 .instructionText {
@@ -396,9 +416,9 @@
     font-family: 'Sarabun';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 34px;
-    letter-spacing: 0.18px;
+    font-size: calc(var(--this-sum) / 56.09);
+    line-height: calc(var(--this-sum) / 36.29);
+    letter-spacing: calc(var(--this-sum) / 6855.56);
     color: #393939;
     flex: none;
     order: 0;
@@ -411,8 +431,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0px;
-    gap: 16px;
+    padding: 0;
+    gap: calc(var(--this-sum) / 77.125);
     flex: none;
     order: 1;
     align-self: stretch;
@@ -424,8 +444,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0px;
-    gap: 4px;
+    padding: 0;
+    gap: calc(var(--this-sum) / 308.5);
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -433,14 +453,14 @@
 
 .nextInstruction, .backInstruction {
     background: #FFFFFF;
-    border: 0px;
+    border: 0;
     font-family: 'Sarabun';
     font-style: normal;
     font-weight: 600;
-    font-size: 22px;
-    line-height: 34px;
+    font-size: calc(var(--this-sum) / 56.09);
+    line-height: calc(var(--this-sum) / 36.29);
+    letter-spacing: calc(var(--this-sum) / 6855.56);
     text-align: center;
-    letter-spacing: 0.18px;
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -465,12 +485,12 @@
 
     .progressBarContainer {
         position: absolute;
-        top: 120px;
+        top: calc(var(--this-sum) / 10.28);
     }
 
     .progressBarContainerInstruction {
         position: absolute;
-        top: 135px;
+        top: calc(var(--this-sum) / 9.14);
     }
 
     .canvasContainerInstruction {
@@ -479,13 +499,13 @@
 
     .searchInstruction {
         position: absolute;
-        left: 75px;
-        top: 265px;
+        left: calc(var(--this-sum) / 16.45);
+        top: calc(var(--this-sum) / 4.66);
     }
     
     #myCanvas {
         position: absolute;
-        top: 300px;
+        top: calc(var(--this-sum) / 4.11);
     }
 
     .canvasContainer {

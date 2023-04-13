@@ -9,10 +9,10 @@ function SSLanding() {
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='SSLandingHeader' className='col'>
+            <div id='SSLandingHeader'>
               {<AppHeader />}
             </div>
-            <div id='SSLandingBody' className='col'>
+            <div id='SSLandingBody'>
               <div className="SSLandingProgressBar"></div>
               <div className="SSLandingWindow">
                 {<SSWindow />}

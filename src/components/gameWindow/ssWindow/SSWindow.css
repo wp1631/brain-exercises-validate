@@ -1,10 +1,12 @@
 :root {
-    --cir-base-unit: min(calc(0.15 * 155vw), calc(0.15 * 155vh));
-    --cir-span-radius: min(calc(0.2 * 145vw), calc(0.2 * 145vh));
+    /* --cir-base-unit: min(calc(0.15 * 155vw), calc(0.15 * 155vh));
+    --cir-span-radius: min(calc(0.2 * 145vw), calc(0.2 * 145vh)); */
+    --cir-base-unit: calc(var(--this-sum) / 15.425);
+    --cir-span-radius: calc(var(--this-sum) / 12.37);
     --cos30: 0.86602540378;
     --sin30: 0.5;
-    --inner-button: 194.25px;
-    --outer-button: 259px;
+    --inner-button: calc(var(--this-sum) / 6.35);
+    --outer-button: calc(var(--this-sum) / 4.76);
     --cue-color: #26A445;
     --cue-border-color: #26A445;
     --rest-color: #E5E5E5;
@@ -17,7 +19,7 @@
     line-height: var(--cir-base-unit);
     background: var(--rest-color);
     border-radius: 50%;
-    border: 3px solid var(--rest-border-color);
+    border: calc(var(--this-sum) / 411.33) solid var(--rest-border-color);
     position: absolute;
     transition: 0.05s ease;
     cursor: pointer;
@@ -35,7 +37,7 @@
 .cirButton.hoverDisabled {
     pointer-events: none;
     background: var(--rest-color);
-    border: 3px solid var(--rest-border-color);
+    border: calc(var(--this-sum) / 411.33) solid var(--rest-border-color);
     transition: 0.05s ease;
 }
 
@@ -51,8 +53,15 @@
 
 .cirButton.clicked {
     background-color: var(--cue-color);
-    box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.1), 
-                1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        calc(var(--this-sum) / -1234) 
+        calc(var(--this-sum) / -1234)
+        calc(var(--this-sum) / 617)
+        rgba(255, 255, 255, 0.1),           
+        calc(var(--this-sum) / 1234)
+        calc(var(--this-sum) / 1234)
+        calc(var(--this-sum) / 617)
+        rgba(0, 0, 0, 0.1);
 }
 
 #cirButton1 {
@@ -95,14 +104,14 @@
     color: rgb(0, 0, 0);
     text-align: center;
     height: var(--cir-base-unit);
-    width: 86px;
+    width: calc(var(--this-sum) / 14.35);
 }
 
 #goSignal {
     border-radius: 50%;
-    left: calc(50% - 86px / 2);
-    top: calc(50% - max(0px, calc(var(--cir-span-radius) / 2.6)));
-    line-height: 36px;
-    font-size: 34px;
+    left: calc(50% - calc(var(--this-sum) / 14.35) / 2);
+    top: calc(50% - max(0, calc(var(--cir-span-radius) / 2.6)));
+    line-height: calc(var(--this-sum) / 34.28);
+    font-size: calc(var(--this-sum) / 36.29);
     font-weight: 400;
 }

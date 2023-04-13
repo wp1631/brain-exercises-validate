@@ -8,7 +8,7 @@
 
 .headerText {
     color: white;
-    font-size: 6vmin;
+    font-size: calc(var(--this-sum) / 51.42);
     font-weight: 600;
 }
 
@@ -18,31 +18,31 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: space-around;
-    right: 10px;
-    height: 58.5px;
-    top: 1vh;
+    right: calc(var(--this-sum) / 123.4);
+    height: calc(var(--this-sum) / 21.09);
+    top: calc(var(--this-sum) / 102.83);
 }
 
 .homePic {
     border-radius: 50%;
-    border: 0px;
+    border: 0;
     background-color:rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.4);
-    width: 42px;
-    height: 42px;
+    border: calc(var(--this-sum) / 1234) solid rgba(255,255,255,0.4);
+    width: calc(var(--this-sum) / 29.38);
+    height: calc(var(--this-sum) / 29.38);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .bi::before {
-    font-size: 18px;
+    font-size: calc(var(--this-sum) / 68.56);
 }
 
 .textInHome {
     font-family: 'Sarabun';
     font-style: normal;
     font-weight: 400;
-    font-size: 10px;
+    font-size: calc(var(--this-sum) / 123.4);
     color: white;
 }

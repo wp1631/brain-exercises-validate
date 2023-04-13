@@ -4,7 +4,7 @@
 
 #LandingPageBody {
     height: 85.78vh;
-    padding: 12px;
+    padding: calc(var(--this-sum) / 123.4);
     padding-top: unset;
 }
 
