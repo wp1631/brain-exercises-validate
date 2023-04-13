@@ -1,8 +1,8 @@
 :root {
-    /* --cir-base-unit: min(calc(0.15 * 155vw), calc(0.15 * 155vh));
-    --cir-span-radius: min(calc(0.2 * 145vw), calc(0.2 * 145vh)); */
-    --cir-base-unit: calc(var(--this-sum) / 15.425);
-    --cir-span-radius: calc(var(--this-sum) / 12.37);
+    --cir-base-unit: calc(var(--this-sum) / 13.61);
+    --cir-span-radius: calc(var(--this-sum) / 10.91);
+    /* --cir-base-unit: calc(var(--this-sum) / 15.425);
+    --cir-span-radius: calc(var(--this-sum) / 12.37); */
     --cos30: 0.86602540378;
     --sin30: 0.5;
     --inner-button: calc(var(--this-sum) / 6.35);
@@ -110,7 +110,7 @@
 #goSignal {
     border-radius: 50%;
     left: calc(50% - calc(var(--this-sum) / 14.35) / 2);
-    top: calc(50% - max(0, calc(var(--cir-span-radius) / 2.6)));
+    top: calc(50% - var(--cir-span-radius) + (calc(var(--this-sum) / 18.98)));
     line-height: calc(var(--this-sum) / 34.28);
     font-size: calc(var(--this-sum) / 36.29);
     font-weight: 400;
