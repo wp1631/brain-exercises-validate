@@ -3,7 +3,7 @@
 }
 
 #SSLandingBody {
-    height: 85.78vh;
+    height: calc(100vh - (var(--address-bar-height) + 14.22vh));
     display: flex;
     flex-direction: column;
     align-items: center;
