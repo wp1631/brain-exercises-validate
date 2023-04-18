@@ -1,3 +1,7 @@
+.container-fluid {
+    height: calc(100vh - var(--address-bar-height));
+}
+
 #LandingPageHeader {
     height: 14.22vh;
 }

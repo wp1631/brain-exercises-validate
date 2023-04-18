@@ -16,27 +16,3 @@
   width: 0;
   position: absolute;
 }
-
-@media screen and (orientation: landscape) {
-  html.portrait {
-      transform: rotate(-90deg);
-      transform-origin: left top;
-      width: calc(100vh - var(--this-address-bar));
-      height: 100vw;
-      position: fixed;
-      top: 100%;
-      left: 0;
-  }
-}
-
-@media (orientation: portrait) {
-  html.landscape {
-      transform: rotate(-90deg);
-      transform-origin: left top;
-      width: calc(100vh - var(--this-address-bar));
-      height: 100vw;
-      position: fixed;
-      top: 100%;
-      left: 0;
-  }
-}
