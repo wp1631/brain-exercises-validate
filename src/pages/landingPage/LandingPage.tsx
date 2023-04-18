@@ -1,12 +1,21 @@
-import React from 'react'
+import React from 'react';
+import './LandingPage.css';
+import AppHeader from '../.././components/appHeader/AppHeader';
+import GameCards from '../.././components/gameCards/GameCards';
+import RotateAlert from '../../components/rotateAlert/RotateAlert';
 
 function LandingPage() {
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='header-banner' className='col'></div>
-            <div id='body-window' className='col'></div>
+            <div id='LandingPageHeader'>
+              {<AppHeader />}
+            </div>
+            <div id='LandingPageBody'>
+              {<GameCards />}
+            </div>
         </div>
+        {<RotateAlert />}
     </div>
   )
 }

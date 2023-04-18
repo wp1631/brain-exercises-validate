@@ -1,0 +1,48 @@
+.appHeaderContainer {
+    background: radial-gradient(194.38% 163.33% at 100% 114.17%, #514A9D 0%, #24C6DC 100%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerText {
+    color: white;
+    font-size: calc(var(--this-sum) / 51.42);
+    font-weight: 600;
+}
+
+.flexHomeBtn {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    right: calc(var(--this-sum) / 123.4);
+    height: calc(var(--this-sum) / 21.09);
+    top: calc(var(--this-sum) / 102.83);
+}
+
+.homePic {
+    border-radius: 50%;
+    border: 0;
+    background-color:rgba(255,255,255,0.1);
+    border: calc(var(--this-sum) / 1234) solid rgba(255,255,255,0.4);
+    width: calc(var(--this-sum) / 29.38);
+    height: calc(var(--this-sum) / 29.38);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bi::before {
+    font-size: calc(var(--this-sum) / 68.56);
+}
+
+.textInHome {
+    font-family: 'Sarabun';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(var(--this-sum) / 123.4);
+    color: white;
+}

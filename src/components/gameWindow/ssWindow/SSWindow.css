@@ -1,0 +1,117 @@
+:root {
+    --cir-base-unit: calc(var(--this-sum) / 13.61);
+    --cir-span-radius: calc(var(--this-sum) / 10.91);
+    /* --cir-base-unit: calc(var(--this-sum) / 15.425);
+    --cir-span-radius: calc(var(--this-sum) / 12.37); */
+    --cos30: 0.86602540378;
+    --sin30: 0.5;
+    --inner-button: calc(var(--this-sum) / 6.35);
+    --outer-button: calc(var(--this-sum) / 4.76);
+    --cue-color: #26A445;
+    --cue-border-color: #26A445;
+    --rest-color: #E5E5E5;
+    --rest-border-color: #C5C5C5;
+}
+
+.cirButton {
+    width: var(--cir-base-unit);
+    height: var(--cir-base-unit);
+    line-height: var(--cir-base-unit);
+    background: var(--rest-color);
+    border-radius: 50%;
+    border: calc(var(--this-sum) / 411.33) solid var(--rest-border-color);
+    position: absolute;
+    transition: 0.05s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cirButton:hover {
+    border-color: white;
+}
+
+.cirButton:focus {
+    outline: 0;
+}
+
+.cirButton.hoverDisabled {
+    pointer-events: none;
+    background: var(--rest-color);
+    border: calc(var(--this-sum) / 411.33) solid var(--rest-border-color);
+    transition: 0.05s ease;
+}
+
+.cirButton.pop {
+    background-color: var(--cue-color);
+    border-color: var(--cue-border-color);
+}
+
+.cirButton.readyToClick, .signal.readyToClick {
+    background-color: white;
+    border-color: var(--cue-border-color);
+}
+
+.cirButton.clicked {
+    background-color: var(--cue-color);
+    box-shadow: 
+        calc(var(--this-sum) / -1234) 
+        calc(var(--this-sum) / -1234)
+        calc(var(--this-sum) / 617)
+        rgba(255, 255, 255, 0.1),           
+        calc(var(--this-sum) / 1234)
+        calc(var(--this-sum) / 1234)
+        calc(var(--this-sum) / 617)
+        rgba(0, 0, 0, 0.1);
+}
+
+#cirButton1 {
+    left: calc(50% - var(--cir-base-unit)/2.0);
+    top: calc(50% - var(--cir-span-radius) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton2 {
+    left: calc(50% + var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% - var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton3 {
+    left: calc(50% + var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% + var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton4 {
+    left: calc(50% - var(--cir-base-unit)/2.0);
+    top: calc(50% + var(--cir-span-radius) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton5 {
+    left: calc(50% - var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% + var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+#cirButton6 {
+    left: calc(50% - var(--cir-span-radius)*var(--cos30) - var(--cir-base-unit)/2.0);
+    top: calc(50% - var(--cir-span-radius)*var(--sin30) - var(--cir-base-unit)/2.0);
+}
+
+.signal {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    height: var(--cir-base-unit);
+    width: calc(var(--this-sum) / 14.35);
+}
+
+#goSignal {
+    border-radius: 50%;
+    left: calc(50% - calc(var(--this-sum) / 14.35) / 2);
+    top: calc(50% - var(--cir-span-radius) + (calc(var(--this-sum) / 18.98)));
+    line-height: calc(var(--this-sum) / 34.28);
+    font-size: calc(var(--this-sum) / 36.29);
+    font-weight: 400;
+}

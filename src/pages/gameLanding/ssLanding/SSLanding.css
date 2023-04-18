@@ -1,7 +1,23 @@
-#header-banner {
+#SSLandingHeader {
     height: 14.22vh;
 }
 
-#body-window {
+#SSLandingBody {
     height: 85.78vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.SSLandingProgressBar {
+    height: 10%;
+}
+
+.SSLandingWindow {
+    height: 60%;
+}
+
+.SSLandingEnterButton {
+    height: 20%;
 }

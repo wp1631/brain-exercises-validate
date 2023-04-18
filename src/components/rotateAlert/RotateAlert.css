@@ -1,0 +1,27 @@
+.landscapeOrientation {
+    display: none;
+    height: 100vh;
+}
+
+.rotateImage {
+    width: calc(var(--this-sum) / 19.28);
+    height: calc(var(--this-sum) / 19.28);
+}
+
+.rotateText {
+    font-size: calc(var(--this-sum) / 77.125);
+    padding-top: calc(var(--this-sum) / 102.83);
+}
+
+@media (orientation: landscape) {
+    .row {
+      display: none;
+    }
+
+    .landscapeOrientation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

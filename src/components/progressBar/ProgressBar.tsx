@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import './ProgressBar.css';
 
-function ProgressBar() {
+function ProgressBar(props) {
   return (
-    <div>ProgressBar</div>
+    <div className="progressBarContainer">
+      <progress id="progressBar" hidden value={props.progressValue} max={props.trialNumber}></progress>
+    </div>
   )
 }
 
-export default ProgressBar
+export default ProgressBar;
