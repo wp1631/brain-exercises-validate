@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, NavLink, Routes } from 'react-router-dom';
 import LandingPage from './pages/landingPage/LandingPage';
 import SSLanding from './pages/gameLanding/ssLanding/SSLanding';
 import SSInstruction from './pages/gameInstruction/ssInstruction/SSInstruction';
