@@ -25,6 +25,7 @@ function GameCards() {
 
   return (
     <div className="container-fluid">
+      <div id="control-height"></div>
       <div className="row mb-3 mt-3">
         <div className="headerCategory">
           ความจำ

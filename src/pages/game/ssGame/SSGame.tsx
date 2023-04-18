@@ -718,6 +718,7 @@ function SSGame(this: any) {
 
   return (
     <div className='container-fluid'>
+      <div id="control-height"></div>
         <div className='row'>
             <div id='SSGameHeader' className='col'>
               {<AppHeader />}

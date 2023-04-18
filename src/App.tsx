@@ -47,7 +47,6 @@ function App() {
   
   return (
     <Router>
-      <div id="control-height"></div>
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/spatial-span" element={<SSLanding />}></Route>

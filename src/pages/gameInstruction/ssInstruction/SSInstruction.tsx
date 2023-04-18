@@ -416,6 +416,7 @@ function SSInstruction() {
 
   return (
     <div className='container-fluid'>
+      <div id="control-height"></div>
         {tutorialHide === false ? 
         <div className="row">
             <div className="tutorial">
