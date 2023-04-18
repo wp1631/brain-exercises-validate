@@ -9,6 +9,17 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 function App() {
 
   useEffect(() => {
+    window.onresize = () => {
+      setTimeout(() => {
+        const actualHeight = window.innerHeight;
+        const elementHeight = document.querySelector('#control-height')?.clientHeight;
+        const barHeight = Math.abs((elementHeight ? elementHeight : 0) - actualHeight);
+        if (barHeight <= 200) {
+          document.documentElement.style.setProperty('--this-address-bar', barHeight + 'px');
+        }
+      }, 1);
+    }
+
     const disablePinchZoom = (e) => {
       if (e.touches.length > 1) {
         e.preventDefault()
@@ -36,6 +47,7 @@ function App() {
   
   return (
     <Router>
+      <div id="control-height"></div>
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/spatial-span" element={<SSLanding />}></Route>
