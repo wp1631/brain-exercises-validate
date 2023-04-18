@@ -8,7 +8,7 @@ function generateRandomString(length: number): string {
 }
 
 function generateRandomIntegerSequence(length: number, min: number, max: number): Array<number> {
-  const result = [];
+  const result : number[] = [];
   for (let i = length; i > 0; --i) result.push(Math.floor(Math.random() * (max - min + 1)) + min);
   return result;
 }
