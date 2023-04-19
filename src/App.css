@@ -3,12 +3,19 @@
   --this-height : 0;
   --this-sum : 0;
   --this-address-bar: 0;
+  --vh: 0;
 }
 
-html,
+html {
+  height: -webkit-fill-available;
+}
+
 body {
-  height: 100%;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 100vh;
+  height: -webkit-fill-available;
 }
 
 * {

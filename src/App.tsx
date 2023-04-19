@@ -34,19 +34,23 @@ function App() {
   }, [])
   
   function documentHeightWidth() {
-    const calWidth = '' + document.documentElement.clientWidth;
-    const calHeight = '' + document.documentElement.clientHeight;
-    const calSum = (+calWidth) + (+calHeight);
+    let calWidth = '' + document.documentElement.clientWidth;
+    let calHeight = '' + document.documentElement.clientHeight;
+    let calSum = (+calWidth) + (+calHeight);
+    let vh = window.innerHeight * 0.01;
+    
     getComputedStyle(document.documentElement).getPropertyValue('--this-width');
     getComputedStyle(document.documentElement).getPropertyValue('--this-height');
     getComputedStyle(document.documentElement).getPropertyValue('--this-sum');
     document.documentElement.style.setProperty('--this-width', calWidth + 'px');
     document.documentElement.style.setProperty('--this-height', calHeight + 'px');
     document.documentElement.style.setProperty('--this-sum', calSum + 'px');
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
   
   return (
     <Router>
+      <div className="body">
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/spatial-span" element={<SSLanding />}></Route>
@@ -54,6 +58,7 @@ function App() {
           <Route path="/spatial-span/trial" element={<SSGame />}></Route>
         </Routes>
         <LoadingSpinner />
+      </div>
     </Router>
   );
 }
