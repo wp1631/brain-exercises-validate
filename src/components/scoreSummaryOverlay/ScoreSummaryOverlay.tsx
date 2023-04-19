@@ -1,5 +1,6 @@
 import React from 'react';
 import './ScoreSummaryOverlay.scss';
+import scoreBadge from '../../assets/png/scoreBadge.png';
 
 function ScoreSummaryOverlay(props) {
   return (
@@ -10,7 +11,7 @@ function ScoreSummaryOverlay(props) {
               <p className='bigScore'>{Math.max(10000, Math.round(props.sumScores)).toLocaleString()}</p>
           </div>
           <div className="summaryBadge">
-              <img src={props.scorePageBadge} alt='badge' className={'medalBadge'}></img>
+              <img src={scoreBadge} alt='badge' className={'medalBadge'}></img>
               {/* <p className='highestScore'>คะแนนสูงสุด: 67,445</p> */}
           </div>
           <div className="btnContainerSummary">
