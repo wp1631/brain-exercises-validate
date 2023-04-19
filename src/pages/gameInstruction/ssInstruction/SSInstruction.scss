@@ -356,7 +356,6 @@
 }
 
 .instructionSearchInstruction {
-    font-family: 'Sarabun';
     font-style: normal;
     font-weight: 400;
     font-size: calc(var(--this-sum) / 56.09);
@@ -396,11 +395,6 @@
     height: fit-content;
     width: calc(var(--this-sum) / 3.55);
     padding: calc(var(--this-sum) / 77.125);
-    // padding: 
-    //     calc(var(--this-sum) / 51.42)
-    //     0 
-    //     calc(var(--this-sum) / 51.42)
-    //     0;
     top: calc(var(--this-sum) / 10.28);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
@@ -414,7 +408,6 @@
 .instructionText {
     width: fit-content;
     height: fit-content;
-    font-family: 'Sarabun';
     font-style: normal;
     font-weight: 400;
     font-size: calc(var(--this-sum) / 56.09);
@@ -455,7 +448,6 @@
 .nextInstruction, .backInstruction {
     background: #FFFFFF;
     border: 0;
-    font-family: 'Sarabun';
     font-style: normal;
     font-weight: 600;
     font-size: calc(var(--this-sum) / 56.09);
