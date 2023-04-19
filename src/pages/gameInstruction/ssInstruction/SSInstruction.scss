@@ -288,7 +288,6 @@
 .instructionContainer {
     display: flex;
     flex-direction: column;
-    // align-items: flex-end;
     padding: 0;
     position: absolute;
     width: fit-content;
@@ -314,7 +313,8 @@
     padding: calc(var(--this-sum) / 77.125);
     gap: calc(var(--this-sum) / 38.56);
     min-width: calc(var(--this-sum) / 3.74);
-    width: fit-content;
+    width: calc(var(--this-sum) / 1.08);
+    // width: fit-content;
     height: fit-content;
     background: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
@@ -402,7 +402,7 @@
         0 
         calc(var(--this-sum) / 51.42)
         0;
-    top: calc(var(--this-sum) / 9.35);
+    top: calc(var(--this-sum) / 15.425);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
 }
