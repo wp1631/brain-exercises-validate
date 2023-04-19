@@ -312,8 +312,7 @@
     align-items: center;
     padding: calc(var(--this-sum) / 77.125);
     gap: calc(var(--this-sum) / 38.56);
-    min-width: calc(var(--this-sum) / 3.74);
-    width: calc(var(--this-width) / 3.65);
+    width: calc(var(--this-sum) / 3.74);
     height: fit-content;
     background: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
@@ -401,7 +400,7 @@
         0 
         calc(var(--this-sum) / 51.42)
         0;
-    top: calc(var(--this-sum) / 15.425);
+    top: calc(var(--this-sum) / 10.28);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
 }
