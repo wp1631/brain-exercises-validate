@@ -8,7 +8,7 @@
 
 .headerText {
     color: white;
-    font-size: calc(var(--this-sum) / 51.42);
+    font-size: calc(var(--this-sum) / 47.46);
     font-weight: 600;
 }
 
