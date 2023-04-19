@@ -312,7 +312,7 @@
     align-items: center;
     padding: calc(var(--this-sum) / 77.125);
     gap: calc(var(--this-sum) / 38.56);
-    width: calc(var(--this-sum) / 3.74);
+    width: calc(var(--this-sum) / 3.55);
     height: fit-content;
     background: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
@@ -394,7 +394,7 @@
     position: absolute;
     width: fit-content;
     height: fit-content;
-    min-width: alc(var(--this-sum) / 3.43);
+    min-width: calc((var(--this-sum) / 77.125) + (var(--this-sum) / 3.55));
     padding: 
         calc(var(--this-sum) / 51.42)
         0 
