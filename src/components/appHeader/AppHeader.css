@@ -18,7 +18,7 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: space-around;
-    right: calc(var(--this-sum) / 123.4);
+    right: calc(var(--this-sum) / 102.83);
     height: calc(var(--this-sum) / 21.09);
     top: calc(var(--this-sum) / 102.83);
 }
@@ -28,8 +28,8 @@
     border: 0;
     background-color:rgba(255,255,255,0.1);
     border: calc(var(--this-sum) / 1234) solid rgba(255,255,255,0.4);
-    width: calc(var(--this-sum) / 29.38);
-    height: calc(var(--this-sum) / 29.38);
+    width: calc(var(--this-sum) / 27.42);
+    height: calc(var(--this-sum) / 27.42);
     display: flex;
     align-items: center;
     justify-content: center;
