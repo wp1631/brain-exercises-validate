@@ -464,7 +464,7 @@ function SSInstruction() {
                         {tutorialStep < 9 ?  
                             <button disabled={justWait === true} className={'nextInstruction' + (tutorialTest === 'wrong' ? ' onHide' : '')} onMouseDown={() => {instructionControl()}}>
                                 {tutorialStep === 2 && tutorialExample === false ? `ดูตัวอย่าง >` : null}
-                                {tutorialStep === 2 && tutorialExample === true ? `ฉันเข้าใจแล้ว >` : null}
+                                {tutorialStep === 2 && tutorialExample === true ? `เข้าใจแล้ว >` : null}
                                 {tutorialStep !== 2 && tutorialStep !== 4 && tutorialStep !== 6 ? `ถัดไป >` : null}
                                 {tutorialStep === 4 ? `ลองเล่น >` : null}
                                 {tutorialStep === 6 ? `เริ่มเลย >` : null}</button> :
