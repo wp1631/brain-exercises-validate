@@ -12,6 +12,7 @@ import losingSoundSrc from '../../../assets/sound/losingStreak.mp3';
 import $ from 'jquery';
 import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
+import scorePageBadge from '../../assets/svg/scorepage-badge.svg';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -734,7 +735,7 @@ function SSGame(this: any) {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay scorePageBadge={scorePageBadge} sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
