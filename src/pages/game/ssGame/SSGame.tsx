@@ -91,6 +91,7 @@ function SSGame(this: any) {
       seqGenerator();
       
       return () => {
+        refreshPage();
         timeoutList.forEach(tm => {
             clearTimeout(tm);
         })
@@ -713,12 +714,10 @@ function SSGame(this: any) {
 
   function backToLandingPage() {
     navigate('/');
-    refreshPage();
   }
 
   return (
     <div className='container-fluid'>
-      <div id="control-height"></div>
         <div className='row'>
             <div id='SSGameHeader' className='col'>
               {<AppHeader />}

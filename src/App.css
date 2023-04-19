@@ -2,20 +2,7 @@
   --this-width : 0;
   --this-height : 0;
   --this-sum : 0;
-  --this-address-bar: 0;
   --vh: 0;
-}
-
-html {
-  height: -webkit-fill-available;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  height: 100vh;
-  height: -webkit-fill-available;
 }
 
 * {
@@ -24,8 +11,3 @@ body {
   border: box-sizing;
 }
 
-#control-height {
-  height: 100vh;
-  width: 0;
-  position: absolute;
-}

@@ -8,7 +8,6 @@ import RotateAlert from '../../../components/rotateAlert/RotateAlert'
 function SSLanding() {
   return (
     <div className='container-fluid'>
-      <div id="control-height"></div>
         <div className='row'>
             <div id='SSLandingHeader'>
               {<AppHeader />}

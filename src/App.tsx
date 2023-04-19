@@ -9,26 +9,13 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 function App() {
 
   useEffect(() => {
-    window.onresize = () => {
-      setTimeout(() => {
-        const actualHeight = window.innerHeight;
-        const elementHeight = document.querySelector('#control-height')?.clientHeight;
-        const barHeight = Math.abs((elementHeight ? elementHeight : 0) - actualHeight);
-        if (barHeight <= 200) {
-          document.documentElement.style.setProperty('--this-address-bar', barHeight + 'px');
-        }
-      }, 1);
-    }
-
     const disablePinchZoom = (e) => {
       if (e.touches.length > 1) {
         e.preventDefault()
       }
     }
     document.addEventListener("touchmove", disablePinchZoom, { passive: false })
-    
     documentHeightWidth();
-
     window.addEventListener('resize', documentHeightWidth);
     window.addEventListener('orientationchange', documentHeightWidth);
   }, [])
@@ -45,12 +32,11 @@ function App() {
     document.documentElement.style.setProperty('--this-width', calWidth + 'px');
     document.documentElement.style.setProperty('--this-height', calHeight + 'px');
     document.documentElement.style.setProperty('--this-sum', calSum + 'px');
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.documentElement.style.setProperty('--vh', vh + 'px');
   }
   
   return (
     <Router>
-      <div className="body">
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/spatial-span" element={<SSLanding />}></Route>
@@ -58,7 +44,6 @@ function App() {
           <Route path="/spatial-span/trial" element={<SSGame />}></Route>
         </Routes>
         <LoadingSpinner />
-      </div>
     </Router>
   );
 }

@@ -406,17 +406,12 @@ function SSInstruction() {
       }
   }
 
-  function refreshPage(){
-      window.location.reload();
-  }
-
   function backToSSLanding() {
     navigate('/spatial-span');
   }
 
   return (
     <div className='container-fluid'>
-      <div id="control-height"></div>
         {tutorialHide === false ? 
         <div className="row">
             <div className="tutorial">
