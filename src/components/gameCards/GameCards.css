@@ -18,17 +18,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: calc(var(--this-width) / 32.5);
 }
 
 .headerCategory {
     padding: calc(var(--this-sum) / 88.14);
-    font-size: calc(var(--this-sum) / 56.09);
+    font-size: calc(var(--this-sum) / 51.42);
 }
 
 .gameImage {
-    width: calc(var(--this-sum) / 22.04);
+    width: calc(var(--this-width) / 7.09);
 }
 
 .gameName {
-    font-size: calc(var(--this-sum) / 77.125);
+    font-size: calc(var(--this-sum) / 68.56);
 }
