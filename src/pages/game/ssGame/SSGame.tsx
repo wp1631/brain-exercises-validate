@@ -75,7 +75,7 @@ let scoringDataResult: any[] = [];
 let metricDataResult: any[] = [];
 let postEntryResult;
 
-function SSGame(this: any) {
+function SSGame() {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLButtonElement>(null);
   const [clickSound] = useSound(clickSoundSrc);

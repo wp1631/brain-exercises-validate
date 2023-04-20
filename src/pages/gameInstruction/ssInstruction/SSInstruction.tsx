@@ -132,41 +132,42 @@ function SSInstruction() {
   }
 
   function timeIntervalPerTrial() {
-      $('.cirButton').addClass('hoverDisabled');
-  
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("3");
-          }, 100) 
-      )
+        $('#goSignal').html("");
+        $('.cirButton').addClass('hoverDisabled');
+    
+        timeoutList.push(
+            setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("3");
+            }, 100) 
+        )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("2");
-          }, 1100) 
-      )
+        timeoutList.push(
+            setTimeout(function() {
+                $('#goSignal').html("");
+                $('#goSignal').html("2");
+            }, 1100) 
+        )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("1");
-          }, 2100) 
-      )
+        timeoutList.push(
+            setTimeout(function() {
+                $('#goSignal').html("");
+                $('#goSignal').html("1");
+            }, 2100) 
+        )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-          }, 3100) 
-      )
+        timeoutList.push(
+            setTimeout(function() {
+                $('#goSignal').html("");
+            }, 3100) 
+        )
 
-      timeoutList.push(
-          setTimeout(function() {
-              instructionPopCircleButton();
-          }, 4100) 
-      )
-  }
+        timeoutList.push(
+            setTimeout(function() {
+                instructionPopCircleButton();
+            }, 4100) 
+        )
+    }
 
   function instructionPopCircleButton(popTime = flashDuration, intervalTime = flashInterval) {
       isTest = true;
@@ -345,11 +346,11 @@ function SSInstruction() {
               isTest = false;
               setTutorialHide(false);
               
-              if (equalCheck(currAns, currSeq)) {
-                  $('#goSignal').html("ถูก");
-                  setTutorialTest('right');
-                  combo2Sound();
-                  currSeq = [];
+            if (equalCheck(currAns, currSeq)) {
+                $('#goSignal').html("ถูก");
+                setTutorialTest('right');
+                combo2Sound();
+                currSeq = [];
 
               if (tutorialStep === 5){
                   setProgressValue(60);
@@ -357,13 +358,12 @@ function SSInstruction() {
                   setProgressValue(100);
               }
 
-          } else {
-              $('#goSignal').html("ผิด");
-              setTutorialTest('wrong');
-              losingSound();
-              currSeq = [];
-              
-          }
+            } else {
+                $('#goSignal').html("ผิด");
+                setTutorialTest('wrong');
+                losingSound();
+                currSeq = [];
+            }
       }
   };
 
@@ -464,7 +464,7 @@ function SSInstruction() {
                         {tutorialStep < 9 ?  
                             <button disabled={justWait === true} className={'nextInstruction' + (tutorialTest === 'wrong' ? ' onHide' : '')} onMouseDown={() => {instructionControl()}}>
                                 {tutorialStep === 2 && tutorialExample === false ? `ดูตัวอย่าง >` : null}
-                                {tutorialStep === 2 && tutorialExample === true ? `เข้าใจแล้ว >` : null}
+                                {tutorialStep === 2 && tutorialExample === true ? `ฉันเข้าใจแล้ว >` : null}
                                 {tutorialStep !== 2 && tutorialStep !== 4 && tutorialStep !== 6 ? `ถัดไป >` : null}
                                 {tutorialStep === 4 ? `ลองเล่น >` : null}
                                 {tutorialStep === 6 ? `เริ่มเลย >` : null}</button> :
