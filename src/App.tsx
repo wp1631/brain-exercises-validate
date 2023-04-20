@@ -35,18 +35,20 @@ function App() {
     document.documentElement.style.setProperty('--this-sum', calSum + 'px');
     document.documentElement.style.setProperty('--vh', vh + 'px');
   }
-  
+  const [userPhone,setUserPhone] = useState("XXXX");
   return (
-    <Router>
-        <Routes>
-          <Route path="/" element={< ParticipantForm />}></Route>
-          <Route path="/landing" element={< LandingPage />}></Route>
-          <Route path="/spatial-span" element={<SSLanding />}></Route>
-          <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
-          <Route path="/spatial-span/trial" element={<SSGame />}></Route>
-        </Routes>
-        <LoadingSpinner />
-    </Router>
+    <>
+      <Router>
+          <Routes>
+            <Route path="/" element={< ParticipantForm setUserPhone={setUserPhone}/>}></Route>
+            <Route path="/landing" element={< LandingPage />}></Route>
+            <Route path="/spatial-span" element={<SSLanding />}></Route>
+            <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
+            <Route path="/spatial-span/trial" element={<SSGame />}></Route>
+          </Routes>
+          <LoadingSpinner />
+      </Router>
+    </>
   );
 }
 

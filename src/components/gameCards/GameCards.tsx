@@ -9,16 +9,16 @@ function GameCards() {
   function selectGame(game: string) {
     switch (game) {
       case 'spatial-span':
-          navigate(`./${game}`);
+          navigate(`/${game}`);
           break
       case 'conjunction-search':
-          navigate(`./${game}`);
+          navigate(`/${game}`);
           break;
       case 'go-nogo':
-          navigate(`./${game}`);
+          navigate(`/${game}`);
           break
       default:
-          navigate(`./${game}`);
+          navigate(`/${game}`);
           break;
     }
   }
