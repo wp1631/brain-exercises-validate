@@ -1,4 +1,4 @@
-import { generateRandomIntegerSequence, generateRandomString, randomSequenceFromList, samplingFromList } from "./main";
+import { generateRandomIntegerSequence, generateRandomString, randomSequenceFromList, samplingFromList, saveDataToClientDevice } from "./main";
 
 describe("generateRandomString", () => {
     test("should return a string of the specified length", () => {

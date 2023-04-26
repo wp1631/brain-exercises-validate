@@ -1,3 +1,5 @@
+import { data } from "jquery";
+
 type integer = number;
 
 function generateRandomString(length: number): string {
@@ -30,9 +32,25 @@ function samplingFromList<T>(list: Array<T>,num: integer, replace:boolean) {
     }
 }
 
+function saveDataToClientDevice(data: any, filename: string) {
+    const blob = new Blob([data], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('download', filename);
+    a.setAttribute('href', url);
+    a.click();
+}
+
+function saveJSONDataToClientDevice(data: any, filename: string) {
+    saveDataToClientDevice(JSON.stringify(data), filename);
+}
+
+
 export {
     generateRandomString,
     generateRandomIntegerSequence,
     randomSequenceFromList,
-    samplingFromList
+    samplingFromList,
+    saveDataToClientDevice,
+    saveJSONDataToClientDevice
 }
