@@ -1,4 +1,4 @@
-import { data } from "jquery";
+import { saveDataToIndexedDB } from "./offline";
 
 type integer = number;
 
@@ -42,6 +42,7 @@ function saveDataToClientDevice(data: any, filename: string) {
 }
 
 function saveJSONDataToClientDevice(data: any, filename: string) {
+    saveDataToIndexedDB(data, "offline");
     saveDataToClientDevice(JSON.stringify(data), filename);
 }
 
