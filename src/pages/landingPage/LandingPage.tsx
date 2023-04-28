@@ -36,6 +36,7 @@ function LandingPage() {
               {<GameSelectionCard games={gameInfos} />}
             </div>
         </div>
+      </div>
         {<RotateAlert />}
     </div>
   )
