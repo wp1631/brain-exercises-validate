@@ -51,6 +51,12 @@ function App() {
             <Route path="/spatial-span" element={<SSLanding />}></Route>
             <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
             <Route path="/spatial-span/trial" element={<SSGame />}></Route>
+            <Route path="/conjunction-search" element={<CJSLanding />}></Route>
+            <Route path="/conjunction-search/instruction" element={<CJSInstruction />}></Route>
+            <Route path="/conjunction-search/trial" element={<CJSGame />}></Route>
+            <Route path="/go-nogo" element={<GNGLanding />}></Route>
+            <Route path="/go-nogo/instruction" element={<GNGInstruction />}></Route>
+            <Route path="/go-nogo/trial" element={<GNGGame />}></Route>
           </Routes>
           <LoadingSpinner />
       </Router>
