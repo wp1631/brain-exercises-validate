@@ -36,13 +36,15 @@ const gameInfos = [
 function LandingPage() {
   return (
     <div className='h-screen w-full bg-slate-50'>
-      <div id='LandingPageHeader' className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
-          {<BreadCrumb />}
-      </div>
-      <div className='w-full px-8 sm:px-12 py-12 sm:py-24'>
-          <div id='LandingPageBody'>
-            {<GameSelectionCard games={gameInfos} />}
-          </div>
+      <div className="row">
+        <div id='LandingPageHeader' className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+            {<BreadCrumb />}
+        </div>
+        <div className='w-full px-8 sm:px-12 py-12 sm:py-24'>
+            <div id='LandingPageBody'>
+              {<GameSelectionCard games={gameInfos} />}
+            </div>
+        </div>
       </div>
         {<RotateAlert />}
     </div>
