@@ -55,7 +55,7 @@ export default function ParticipantForm(props:{
                     alert("กรุณากรอก 4 ตัวเท่านั้น");}
                   else {
                     props.setUserPhone(promptUserPhone);
-                    navigate("./landing");
+                    navigate("/landing");
                   }
                 }}
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
