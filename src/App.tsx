@@ -4,6 +4,12 @@ import LandingPage from './pages/landingPage/LandingPage';
 import SSLanding from './pages/gameLanding/ssLanding/SSLanding';
 import SSInstruction from './pages/gameInstruction/ssInstruction/SSInstruction';
 import SSGame from './pages/game/ssGame/SSGame';
+import CJSLanding from './pages/gameLanding/cjsLanding/CJSLanding';
+import CJSInstruction from './pages/gameInstruction/cjsInstruction/CJSInstruction';
+import CJSGame from './pages/game/cjsGame/CJSGame';
+import GNGLanding from './pages/gameLanding/gngLanding/GNGLanding';
+import GNGInstruction from './pages/gameInstruction/gngInstruction/GNGInstruction';
+import GNGGame from './pages/game/gngGame/GNGGame';
 import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 import ParticipantForm from './pages/participantForm/participantForm';
 
