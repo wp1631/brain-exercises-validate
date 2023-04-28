@@ -1,8 +1,8 @@
 import { HomeIcon } from '@heroicons/react/20/solid'
 
 const pages = [
-  { name: 'เกม', href: '/games', current: false },
-  { name: 'วิญญาณตามติด', href: '/games/insidious', current: true },
+  { name: 'เกม', href: '#/landing', current: false },
+  // { name: 'วิญญาณตามติด', href: '', current: true },
 ]
 
 export default function Example() {
@@ -11,7 +11,7 @@ export default function Example() {
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>
-            <a href="/home" className="text-gray-400 hover:text-gray-500 ">
+            <a href="/" className="text-gray-400 hover:text-gray-500 ">
               <HomeIcon className="h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
