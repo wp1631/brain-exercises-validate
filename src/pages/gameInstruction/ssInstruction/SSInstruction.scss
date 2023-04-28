@@ -346,12 +346,10 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    width: fit-content;
     height: fit-content;
-    min-width: calc(var(--this-sum) / 3.43);
     padding: calc(var(--this-sum) / 102.83);
     left: 0;
-    bottom: calc(var(--this-sum) / 7.05);
+    bottom: calc(var(--this-sum) / 5.48);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
 }
@@ -396,7 +394,7 @@
     height: fit-content;
     width: calc(var(--this-sum) / 3.55);
     padding: calc(var(--this-sum) / 77.125);
-    top: calc(var(--this-sum) / 9.15);
+    top: calc(var(--this-sum) / 9.872);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
 }
