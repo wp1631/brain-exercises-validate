@@ -31,6 +31,39 @@ interface IGameInfo {
     gameUri: string;
     imageUrl: string;
 }
+import { PlayIcon } from '@heroicons/react/20/solid'
+
+const people = [
+  {
+    name: 'Jane Cooper',
+    title: 'Paradigm Representative',
+    role: 'Admin',
+    email: 'janecooper@example.com',
+    telephone: '+1-202-555-0170',
+    imageUrl:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+  },
+  // More people...
+]
+
+const gameInfos = [
+    {
+        name: 'จำจด กดตาม',
+        title: 'Spatial span',
+        domain: 'ความจำ',
+        gameUri: 'spatial-span',
+        imageUrl:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+    }
+]
+
+interface IGameInfo {
+    name: string;
+    title: string;
+    domain: string;
+    gameUri: string;
+    imageUrl: string;
+}
 
 export default function GameSelectionCards(props: {games: IGameInfo[]}) {
   return (
@@ -58,7 +91,7 @@ export default function GameSelectionCards(props: {games: IGameInfo[]}) {
             <div className="-mt-px flex divide-x divide-gray-200">
               <div className="-ml-px flex w-0 flex-1">
                 <a
-                  href={`./${game.gameUri}`}
+                  href={`#/${game.gameUri}`}
                   className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
                 >
                   <PlayIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
