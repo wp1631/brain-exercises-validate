@@ -12,13 +12,13 @@ import losingSoundSrc from '../../../assets/sound/losingStreak.mp3';
 import $ from 'jquery';
 import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
+import { Shuffle } from '../../../scripts/shuffle';
 
 let progressBarElement: HTMLProgressElement;
 
 //Test parameters
 const flashDuration: number = 250;
 const flashInterval: number = 750;
-const trialNumber: number = 2; // to edit
 const initialSpan: number = 2;
 const probeNumber: number = 6;
 const allProbe: number[] = [1,2,3,4,5,6];
@@ -26,18 +26,20 @@ const probeAngularPosition: number[] = [45, 90, 135, 225, 270, 315];
 const probeShape: string = 'circle';
 const probeParams: string = 'radius'; 
 const radius: string = (getComputedStyle(document.documentElement).getPropertyValue('--cir-base-unit') + " / 2 " );
-const cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color');
-const cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color');
-const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color');
-const restBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('-rest-border-color');
+const cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
+const cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
+const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color').trim();
+const restBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('-rest-border-color').trim();
 const rampingCorrectCount: number = 3;
 const maxFailStreakCount: number = 2;
-const maxFailCount: number = 3; 
+const maxFailCount: number = 1; 
 
 // Initaial values
+let trialNumber;
 let currSpan = initialSpan;
 let currTrial: number = 0;
 let allSpan: number[] = [];
+let spanSizeAndDirection: number[][] = [];
 let spanInCorrectAns: any[] = [];
 let allSeq: string[] = [];
 let genSeq: number[] = [];
@@ -73,6 +75,7 @@ let trialDataResult: any[] = [];
 let gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string };
 let scoringDataResult: any[] = [];
 let metricDataResult: any[] = [];
+let directionMode: string[] = [];
 let postEntryResult;
 
 function SSGame() {
@@ -86,6 +89,7 @@ function SSGame() {
 
   useEffect(() => {
       initiateData();
+      createPseudorandomStimuli();
       gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
       seqGenerator();
@@ -162,11 +166,10 @@ function SSGame() {
           )
       }
 
-      if (currAns.length === currSpan) {
+      if (currAns.length === spanSizeAndDirection[currTrial][0]) {
           cueData(currSeq, cueColor, cueBorderColor, cueStartTime, cueEndTime);
           probeData(probeNumber, allProbe, restColor, restBorderColor, probeShape, probeParams, radius, probeAngularPosition);
           answerData(currAns, answerTimePerTrial);
-          trialData(currSpan, cueDataResult, probeDataResult, answerDataResult);
           timeoutList.push(
               setTimeout(function() {
                   $('.cirButton').removeClass('clicked');
@@ -181,6 +184,10 @@ function SSGame() {
           const equalCheck = (currAns: any[], currSeq: string | any[]) => 
               currAns.length === currSeq.length && currAns.every((value, index) => value === currSeq[index]);
               
+          if (spanSizeAndDirection[currTrial][1] === 1){
+              currAns.reverse();
+          } 
+
           if (equalCheck(currAns, currSeq)) {
               $('#goSignal').html("ถูก");
               setProgressValue(progressValue + 1);
@@ -320,17 +327,17 @@ function SSGame() {
                   "description" : "Probe angular position"
               },
               "rampingCorrectCount" : {
-                  "value" : rampingCorrectCount,
+                  "value" : null,
                   "unit" : null,
                   "description" : "Correct count before increase of sequence size"
               },
               "maxFailStreakCount" : {
-                  "value" : maxFailStreakCount,
+                  "value" : null,
                   "unit" : null,
                   "description" : "Fail count before decrease of sequence size"
               },
               "maxFailCount" : {
-                  "value" : maxFailCount,
+                  "value" : null,
                   "unit" : null,
                   "description" : "Maximum fail count in struggle loop"
               }
@@ -340,73 +347,104 @@ function SSGame() {
       return gameLogicSchemeResult;
   }
 
+  function createPseudorandomStimuli() {
+    let allSpanSizeRange = [2, 3, 4, 5, 6, 7, 8];
+    let trialsPerSpanSize = 8; 
+    let sequenceDirection = 2; // forward and backward
+    let trialsPerDirection = trialsPerSpanSize / sequenceDirection; 
+
+    for (let iSpanSize = 0; iSpanSize < allSpanSizeRange.length; iSpanSize++) {
+        for (let iRep = 0; iRep < trialsPerDirection; iRep++) {
+            for (let iDirection = 0; iDirection < sequenceDirection; iDirection++) {
+                spanSizeAndDirection.push([allSpanSizeRange[iSpanSize],iDirection])
+            }
+        }
+    }
+    Shuffle(spanSizeAndDirection);
+        trialNumber = trialsPerSpanSize * allSpanSizeRange.length;
+    }
+
   function seqGenerator() {
       if (currTrial !== trialNumber) {
-          allSpan.push(currSpan);
+          allSpan.push(spanSizeAndDirection[currTrial][0]);
           if (genSeq.length === 0) {
-              for (let i = 0; i < currSpan; i++) {
+              for (let i = 0; i < spanSizeAndDirection[currTrial][0]; i++) {
                   let thisSeq = Math.floor(Math.random() * probeNumber) + 1;
                   genSeq.push(thisSeq);
               }
           }
+
+          if (spanSizeAndDirection[currTrial][1] === 0){
+            directionMode.push('forward');
+        } else {
+            directionMode.push('backward');
+        }
+
           timeIntervalPerTrial();
       } 
   }
 
   function timeIntervalPerTrial() {
-      $('.cirButton').addClass('hoverDisabled');
+    $('.cirButton').addClass('hoverDisabled');
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("3");
-          }, 100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("3");
+        }, 100) 
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("2");
-          }, 1100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("2");
+        }, 1100)
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-              $('#goSignal').html("1");
-          }, 2100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            $('#goSignal').html("1");
+        }, 2100) 
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              $('#goSignal').html("");
-          }, 3100) 
-      )
+    timeoutList.push(
+        setTimeout(function() {
+            $('#goSignal').html("");
+            if (spanSizeAndDirection[currTrial][1] === 0){
+                $('#goSignal').html("ตามลำดับ");
+            } else {
+                $('#goSignal').html("ย้อนกลับ");
+            }
+        }, 3100) 
+    )
 
-      timeoutList.push(
-          setTimeout(function() {
-              popCircleButton();
-          }, 4100) 
-      )
-  }
+    timeoutList.push(
+        setTimeout(function() {
+            popCircleButton();
+        }, 4100) 
+    )
+}
   
   function popCircleButton(popTime = flashDuration, intervalTime = flashInterval, locationPop = allSeq) {
       isTest = false;
       currAns = [];
       cueStartTime = [];
       cueEndTime = [];
+      answerTimePerTrial = [];
       
       timeoutList.push(
           setTimeout(function () {
+                $('#goSignal').html("");
               $('#goSignal').html("ตาคุณ");
               startTime = timeStart();
               $('.cirButton').removeClass('hoverDisabled');
               $('.cirButton').addClass('readyToClick');
               isTest = true;
-          }, currSpan * ((popTime/5) + (intervalTime))) 
+          }, spanSizeAndDirection[currTrial][0] * ((popTime/5) + (intervalTime))) 
       )
   
-      for (let i = 0; i < currSpan; i++) {
+      for (let i = 0; i < spanSizeAndDirection[currTrial][0]; i++) {
           if (genSeq[i] === 1) {
               timeoutList.push(
                   setTimeout(function () {
@@ -532,6 +570,7 @@ function SSGame() {
       setIsItDone(true);
       let end = endTime();
       score = sumScores;
+      trialData(spanSizeAndDirection, cueDataResult, probeDataResult, answerDataResult, directionMode);
       scoringData(trialNumber, spanMultiplier, score);
       metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
       postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
@@ -594,16 +633,16 @@ function SSGame() {
       return answerDataResult;
   }
 
-  function trialData(currSpan: number, cueDataResult: any[], probeDataResult: any[], answerDataResult: any[]){
+  function trialData(spanSizeAndDirection: number[][], cueDataResult: any[], probeDataResult: any[], answerDataResult: any[], directionMode: string[]){
       
       for (let i = 0; i < 1; i++) {
           let obj_to_append;
           obj_to_append = {
-              "spanSize" : currSpan,
+              "spanSize" : spanSizeAndDirection[i][0],
               "cueData" : cueDataResult[i],
               "probeData" : probeDataResult[i],
               "answerData" : answerDataResult[i],
-              "mode" : 'forward'
+              "mode" : directionMode[i]
           }
           trialDataResult.push(obj_to_append);
       }
@@ -644,7 +683,7 @@ function SSGame() {
       let metricValue 
           = [summaryCorrect, 
               trialNumber - summaryCorrect, 
-              enterStruggleTimeCount, 
+              null, 
               spanInCorrectAns[spanInCorrectAns.length - 1]];
       let metricUnit = [null, null, null, null, null];
       let metricDescription 
@@ -691,9 +730,7 @@ function SSGame() {
               scorePerTrial.push(allSpan[correctIndex] * spanMultiplier);
               summaryCorrect++;
               spanInCorrectAns.push(allSpan[correctIndex]);
-          } else if (checkAns[correctIndex] === 0 && checkAns[correctIndex + 1] === 1) {
-              summaryCorrect--;
-          }
+          } 
       }
       
       sumScores = scorePerTrial.reduce((sum, score) => {

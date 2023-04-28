@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './SSInstruction.scss'
 import AppHeader from '../../../components/appHeader/AppHeader';
 import SSWindow from '../../../components/gameWindow/ssWindow/SSWindow';
@@ -12,7 +13,6 @@ import instructionPerson from '../../../assets/png/instructionPerson.png';
 import instructionFinished from '../../../assets/png/instructionFinished.png';
 import handClick from '../../../assets/png/handClick.png';
 import $ from 'jquery';
-import { useNavigate } from 'react-router-dom';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 
 let progressBarElement: HTMLProgressElement;

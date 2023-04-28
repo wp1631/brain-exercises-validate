@@ -19,6 +19,7 @@
 .SSInstructionWindow {
     height: 60%;
 }
+
 .SSInstructionEnterButton {
     height: 20%;
 }
@@ -134,7 +135,7 @@
     justify-content: center;
     flex-direction: row;
     position: relative;
-    height: calc(var(--outer-button) + calc(var(--this-sum) / 24.68));
+    height: calc(var(--outer-button) + calc(var(--this-sum) / 18));
     min-width: calc(var(--this-sum) / 3.65);
     padding: 
     calc(var(--this-sum) / 77.125)
@@ -395,7 +396,7 @@
     height: fit-content;
     width: calc(var(--this-sum) / 3.55);
     padding: calc(var(--this-sum) / 77.125);
-    top: calc(var(--this-sum) / 10.28);
+    top: calc(var(--this-sum) / 9.15);
     background-color: #FFFFFF;
     border-radius: calc(var(--this-sum) / 154.25);
 }
@@ -471,38 +472,4 @@
     color: #6C6C6C;
 }
 
-@media (orientation: landscape) {
-    .card {
-        position: unset;
-    }
-
-    .progressBarContainer {
-        position: absolute;
-        top: calc(var(--this-sum) / 10.28);
-    }
-
-    .progressBarContainerInstruction {
-        position: absolute;
-        top: calc(var(--this-sum) / 9.14);
-    }
-
-    .canvasContainerInstruction {
-        z-index: -1;
-    }
-
-    .searchInstruction {
-        position: absolute;
-        left: calc(var(--this-sum) / 16.45);
-        top: calc(var(--this-sum) / 4.66);
-    }
-    
-    #myCanvas {
-        position: absolute;
-        top: calc(var(--this-sum) / 4.11);
-    }
-
-    .canvasContainer {
-        height: 75%;
-    }
-}
 

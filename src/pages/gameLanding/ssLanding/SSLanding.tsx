@@ -1,5 +1,6 @@
 import React from 'react'
 import './SSLanding.css'
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb'
 import AppHeader from '../../.././components/appHeader/AppHeader'
 import SSWindow from '../../.././components/gameWindow/ssWindow/SSWindow'
 import EnterButtons from '../../.././components/enterButtons/EnterButtons'
