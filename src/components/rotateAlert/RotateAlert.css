@@ -14,6 +14,7 @@
 }
 
 @media (orientation: landscape) {
+
     .row {
       display: none;
     }
