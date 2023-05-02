@@ -1,35 +1,33 @@
 import React from 'react';
 import './LandingPage.css';
-// import AppHeader from '../.././components/appHeader/AppHeader';
 import GameSelectionCard from '../../components/gameSelectionCard/gameSelectionCard';
 import BreadCrumb from '../.././components/breadcrumbs/breadCrumb';
-import GameCards from '../.././components/gameCards/GameCards';
 import RotateAlert from '../../components/rotateAlert/RotateAlert';
+import SSImage from  '../../assets/png/ss-img.png'
+import CJSImage from  '../../assets/png/conjs-img.png'
+import GNGImage from  '../../assets/png/gonogo-img.png'
 
 const gameInfos = [
   {
     name: 'จำจด กดตาม',
-    title: 'Spatial span',
+    title: 'Spatial Span',
     domain: 'ความจำ',
     gameUri: 'spatial-span',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+    image: `${SSImage}`,
   },
   {
     name: 'หากันจนเจอ',
     title: 'Conjunction Search',
     domain: 'ความไว',
     gameUri: 'conjunction-search',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+    image: `${CJSImage}`,
   },
   {
     name: 'เขียวไป แดงหยุด',
-    title: 'Go No-go',
+    title: 'Go-Nogo',
     domain: 'สมาธิ',
     gameUri: 'go-nogo',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
+    image: `${GNGImage}`,
   },
 ]
 
@@ -37,7 +35,7 @@ function LandingPage() {
   return (
     <div className='h-screen w-full bg-slate-50'>
       <div className="row">
-        <div id='LandingPageHeader' className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+        <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
             {<BreadCrumb />}
         </div>
         <div className='w-full px-8 sm:px-12 py-12 sm:py-24'>
