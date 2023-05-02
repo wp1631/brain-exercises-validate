@@ -14,6 +14,7 @@ import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 import { Shuffle } from '../../../scripts/shuffle';
 import * as vismem from '../../../scripts/vismemCC_simon';
 import CJSButton from '../../../components/gameWindow/cjsWindow/cjsButton/CJSButton';
+import { saveJSONDataToClientDevice } from '../../../uitls/offline';
 
 let myCanvas: HTMLCanvasElement;
 let canvasContext: CanvasRenderingContext2D;
@@ -107,7 +108,7 @@ let setSizeInCorrectAns: any[] = [];
 let metricDataResult: any[] = [];
 let postEntryResult;
 
-function CJSGame(): any {
+function CJSGame(props): any {
     const navigate = useNavigate();
     const [clickSound] = useSound(clickSoundSrc);
     const [combo2Sound] = useSound(combo2SoundSrc);
@@ -119,7 +120,6 @@ function CJSGame(): any {
         useEffect(() => {
             initiateData();
             setSearchTarget({ shape: (Math.random() > 0.5 ? 1 : 0), col: (Math.random() > 0.5 ? 1 : 0) });
-            createPseudorandomStimuli();
         }, [])
 
         useEffect(() => {
@@ -140,7 +140,7 @@ function CJSGame(): any {
                 createTargetCanvas();
                 createPseudorandomStimuli();
                 createCanvas();
-                gameLogicScheme(trialNumber, backgroundColor, squareWidth, radius, stimulusColor, positionJitter, XblockNumber, YblockNumber, ceilingTimeLimit, timeLimitDeclineStep, timeLimitInclineStep, canvasHeight, canvasWidth, initialSetSize);
+                gameLogicSchemeResult = gameLogicScheme(trialNumber, backgroundColor, squareWidth, radius, stimulusColor, positionJitter, XblockNumber, YblockNumber, ceilingTimeLimit, timeLimitDeclineStep, timeLimitInclineStep, canvasHeight, canvasWidth, initialSetSize);
             }
         }, [searchTarget])
 
@@ -536,7 +536,7 @@ function CJSGame(): any {
             checkAns.push(thatRight);
             incorrectCount++;
         }
-        trialData(targetMatch, allStartTime, allCurrSS, allClickTime, checkAns, stimulusDataResult);
+        trialDataResult = trialData(targetMatch, allStartTime, allCurrSS, allClickTime, checkAns, stimulusDataResult);
         trialIsOver();
     }
 
@@ -627,10 +627,11 @@ function CJSGame(): any {
     function Done() {
         setIsItDone(true);
         let score = summaryScore();
-        scoringData(rtBound, incorrectMultiplier, lateMultiplier, scoresMultiplier, trialNumber, total);
         hightestSetSizeCheck(checkAns, setSizeRecord);
-        metricData(trialNumber, incorrectCount, correctButLateCount, setSizeInCorrectAns, timeLimitRecord, hitRt, avgHitRt, swiftness);
-        postEntry(targetDataResult, trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+        scoringDataResult = scoringData(rtBound, incorrectMultiplier, lateMultiplier, scoresMultiplier, trialNumber, total);
+        metricDataResult = metricData(trialNumber, incorrectCount, correctButLateCount, setSizeInCorrectAns, timeLimitRecord, hitRt, avgHitRt, swiftness);
+        postEntryResult = postEntry(targetDataResult, trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+        saveJSONDataToClientDevice(postEntryResult, `CJS_${props.userPhone}_${thisTime().toString()}`);
         console.log(postEntryResult);
     }
 
@@ -728,8 +729,7 @@ function CJSGame(): any {
 
     function postEntry(targetDataResult, trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult){
         postEntryResult = {
-            // "profileID" : user?.currentProfile?.profile_id,
-            "profileID" : '8b332a3a-434c-4c90-b800-00002e031cd0',
+            "profileID" : props.userPhone,
             "entryInformation" : {
                 "rawData" : {
                     "target" : targetDataResult,

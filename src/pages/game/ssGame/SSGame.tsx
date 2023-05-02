@@ -13,6 +13,7 @@ import $ from 'jquery';
 import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 import { Shuffle } from '../../../scripts/shuffle';
+import { saveDataToClientDevice, saveDataToIndexedDB, saveJSONDataToClientDevice } from '../../../uitls/offline';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -78,7 +79,7 @@ let metricDataResult: any[] = [];
 let directionMode: string[] = [];
 let postEntryResult;
 
-function SSGame() {
+function SSGame(props) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLButtonElement>(null);
   const [clickSound] = useSound(clickSoundSrc);
@@ -90,12 +91,11 @@ function SSGame() {
   useEffect(() => {
       initiateData();
       createPseudorandomStimuli();
-      gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
+      gameLogicSchemeResult = gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
       seqGenerator();
       
       return () => {
-        refreshPage();
         timeoutList.forEach(tm => {
             clearTimeout(tm);
         })
@@ -570,10 +570,11 @@ function SSGame() {
       setIsItDone(true);
       let end = endTime();
       score = sumScores;
-      trialData(spanSizeAndDirection, cueDataResult, probeDataResult, answerDataResult, directionMode);
-      scoringData(trialNumber, spanMultiplier, score);
-      metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
-      postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+      trialDataResult = trialData(spanSizeAndDirection, cueDataResult, probeDataResult, answerDataResult, directionMode);
+      scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
+      metricDataResult = metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
+      postEntryResult = postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+      saveJSONDataToClientDevice(postEntryResult, `SS_${props.userPhone}_${thisTime().toString()}`);
   }
 
   function cueData(currSeq: string | any[], cueColor: string, cueBorderColor: string, cueStartTime: any[], cueEndTime: any[]){
@@ -635,7 +636,7 @@ function SSGame() {
 
   function trialData(spanSizeAndDirection: number[][], cueDataResult: any[], probeDataResult: any[], answerDataResult: any[], directionMode: string[]){
       
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < trialNumber; i++) {
           let obj_to_append;
           obj_to_append = {
               "spanSize" : spanSizeAndDirection[i][0],
@@ -706,7 +707,7 @@ function SSGame() {
 
   function postEntry(trialDataResult: any[], gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string }, scoringDataResult: any[], metricDataResult: any[]){
       postEntryResult = {
-          "profileID" : '8b332a3a-434c-4c90-b800-00002e031cd0',
+          "profileID" : props.userPhone,
           "entryInformation" : {
               "rawData" : {
                   "trialData" : trialDataResult,
@@ -718,7 +719,7 @@ function SSGame() {
           }
       }
       console.log(postEntryResult);
-      console.log(JSON.stringify(postEntryResult));
+    //   console.log(JSON.stringify(postEntryResult));
       return postEntryResult;
   }
 
@@ -733,9 +734,13 @@ function SSGame() {
           } 
       }
       
-      sumScores = scorePerTrial.reduce((sum, score) => {
-        return sum + score;
-      });
+      if (scorePerTrial.length !== 0){
+          sumScores = scorePerTrial.reduce((sum, score) => {
+            return sum + score;
+          });
+      } else {
+        scorePerTrial.push(0);
+      }
   
       return sumScores;
   }
@@ -746,7 +751,7 @@ function SSGame() {
   }
 
   function refreshPage(){
-      window.location.reload();
+    window.location.reload();
   } 
 
   function backToLandingPage() {
@@ -790,5 +795,6 @@ function thisTime() {
   let thisTime = moment().format('YYYY-MM-DDTkk:mm:ss.SSSSSS');
   return thisTime;
 }
+
 
 

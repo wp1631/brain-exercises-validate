@@ -13,8 +13,9 @@ import losingSoundSrc from '../../../assets/sound/losingStreak.mp3';
 import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 import { Shuffle } from '../../../scripts/shuffle';
+import { saveJSONDataToClientDevice } from '../../../uitls/offline';
 
-let trialNumber = 200;
+let trialNumber = 100;
 let goSignalColor: string = getComputedStyle(document.documentElement).getPropertyValue('--go-color').trim();
 let noGoSignalColor: string = getComputedStyle(document.documentElement).getPropertyValue('--nogo-color').trim();
 let restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color').trim();
@@ -65,7 +66,6 @@ eventId = eventId.concat(tempEventGo);
 eventId = eventId.concat(tempEventGoNoGo);
 eventId = eventId.concat(0);
 trialNumber = eventId.length;
-console.log(eventId)
 let currEventId = 0;
 let jitterBase = 400;
 let jitterAmplitude = 300;
@@ -106,7 +106,7 @@ function GNGGame(props) {
         initiateData();
         let progressDuration = ((flashDuration + ((trialNumber - 1) * baseFlashInterval) + Jitter[trialNumber - 1] + 200) / 1000).toString() + 's';
         createProgressBar('progressBar', progressDuration);
-        gameLogicScheme(trialNumber, changeRate, noGoRate, onlyGoBlockRatio, goNoGoBlockRatio, flashDuration, baseFlashInterval, jitterBase, jitterAmplitude, timeOffset);
+        gameLogicSchemeResult = gameLogicScheme(trialNumber, changeRate, noGoRate, onlyGoBlockRatio, goNoGoBlockRatio, flashDuration, baseFlashInterval, jitterBase, jitterAmplitude, timeOffset);
         popColor(flashDuration, baseFlashInterval, eventId);
         return () => {
             timeoutList.forEach(tm => {
@@ -317,16 +317,16 @@ function GNGGame(props) {
     }
 
     function Done() {
-        console.log(allTimeEvent.length)
+        setIsItDone(true);
         let end = endTime();
         score = Math.max(10000, checkAllAns());
-        cueData(allColorPop, allTimeEvent);
-        userInteractionData(allInteractionEvent, allClickEvent);
-        scoringData(rtBound, trialNumber, score);
-        metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt);
-        postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+        cueDataResult = cueData(allColorPop, allTimeEvent);
+        userInteractionDataResult = userInteractionData(allInteractionEvent, allClickEvent);
+        scoringDataResult = scoringData(rtBound, trialNumber, score);
+        metricDataResult = metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt);
+        postEntryResult = postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+        saveJSONDataToClientDevice(postEntryResult, `GNG_${props.userPhone}_${thisTime().toString()}`);
         console.log(postEntryResult);
-        setIsItDone(true);
     }
 
     function scoringData(rtBound, trialNumber, score){
@@ -434,8 +434,7 @@ function GNGGame(props) {
 
     function postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult) {
         postEntryResult = {
-            // "profileID" : user?.currentProfile?.profile_id,
-            "profileID" : '8b332a3a-434c-4c90-b800-00002e031cd0',
+            "profileID" : props.userPhone,
             "entryInformation" : {
                 "rawData" : {
                     "cueData" : cueDataResult,
