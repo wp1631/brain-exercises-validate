@@ -171,10 +171,6 @@ function GNGInstruction(props) {
         event.target.classList.remove('clicked');
     }
 
-     function refreshPage(){
-        window.location.reload();
-    } 
-
     function checkResp(foo) {
         clickSound();
         if (tutorialStep === 5) {

@@ -294,10 +294,6 @@ function CJSInstruction(props) {
         } 
     }
 
-    function refreshPage(){
-        window.location.reload();
-    } 
-
     function backToCJSLanding() {
         navigate('/conjunction-search');
     }
