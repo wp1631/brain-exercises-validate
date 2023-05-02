@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './SSInstruction.scss'
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import SSWindow from '../../../components/gameWindow/ssWindow/SSWindow';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
 import useSound from 'use-sound';
@@ -477,8 +477,8 @@ function SSInstruction() {
         </div>
         : null}
         <div className='row'>
-            <div id='SSInstructionHeader'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='SSInstructionBody'>
             <div className="SSInstructionBodyProgressBar">

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SSGame.css';
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import SSWindow from '../../../components/gameWindow/ssWindow/SSWindow';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
 import ScoreSummaryOverlay from '../../../components/scoreSummaryOverlay/ScoreSummaryOverlay';
@@ -750,14 +750,14 @@ function SSGame() {
   } 
 
   function backToLandingPage() {
-    navigate('/');
+    navigate('/landing');
   }
 
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='SSGameHeader' className='col'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='SSGameBody' className='col'>
             <div className="SSGameBodyProgressBar">

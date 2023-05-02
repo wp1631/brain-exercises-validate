@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CJSInstruction.scss';
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
 import CJSWindow from '../../../components/gameWindow/cjsWindow/CJSWindow';
 import CJSButton from '../../../components/gameWindow/cjsWindow/cjsButton/CJSButton';
@@ -359,17 +359,17 @@ function CJSInstruction(props) {
                 </div>
             : null}
             <div className='row'>
-            <div id='SSInstructionHeader'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
-            <div id='SSInstructionBody'>
-                <div className="SSInstructionBodyProgressBar">
+            <div id='CJSInstructionBody'>
+                <div className="CJSInstructionBodyProgressBar">
                     {<ProgressBar progressValue={progressValue} trialNumber={100}/>}
                 </div>
-                <div className="SSInstructionWindow">
+                <div className="CJSInstructionWindow">
                     {<CJSWindow searchTarget={searchTarget} searchTargetList={searchTargetList} canvasWidth={canvasWidth} canvasHeight={canvasHeight}/>}
                 </div>
-                <div className="SSInstructionEnterButton">
+                <div className="CJSInstructionEnterButton">
                     {<CJSButton searchTarget={searchTarget} checkResp={checkResp}/>}
                 </div>
             </div>

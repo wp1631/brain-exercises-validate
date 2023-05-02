@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './CJSLanding.css'
-import AppHeader from '../../.././components/appHeader/AppHeader'
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb'
 import CJSWindow from '../../../components/gameWindow/cjsWindow/CJSWindow'
 import EnterButtons from '../../.././components/enterButtons/EnterButtons'
 import RotateAlert from '../../../components/rotateAlert/RotateAlert'
@@ -47,8 +47,8 @@ function makeBackground(bgcolor) {
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='CJSLandingHeader'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='CJSLandingBody'>
               <div className="CJSLandingProgressBar"></div>

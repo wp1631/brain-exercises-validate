@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CJSGame.css';
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
 import CJSWindow from '../../../components/gameWindow/cjsWindow/CJSWindow';
 import ScoreSummaryOverlay from '../../../components/scoreSummaryOverlay/ScoreSummaryOverlay';
@@ -756,14 +756,14 @@ function CJSGame(): any {
     } 
 
     function backToLandingPage(){
-        navigate('/');
+        navigate('/landing');
     }
 
     return (
      <div className='container-fluid'>
         <div className='row'>
-            <div id='CJSGameHeader' className='col'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='CJSGameBody' className='col'>
               <div className="CJSGameBodyProgressBar">

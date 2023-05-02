@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GNGInstruction.scss';
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import ProgressBar from '../../../components/progressBar/ProgressBar';
 import GNGWindow from '../../../components/gameWindow/gngWindow/GNGWindow';
 import useSound from 'use-sound';
@@ -269,8 +269,8 @@ function GNGInstruction(props) {
                 </div>
             : null}
             <div className='row'>
-                <div id='GNGInstructionHeader'>
-                    {<AppHeader />}
+                <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+                    {<BreadCrumb />}
                 </div>
                 <div id='GNGInstructionBody'>
                 <div className="GNGInstructionBodyProgressBar">

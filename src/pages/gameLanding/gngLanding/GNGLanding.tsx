@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './GNGLanding.scss'
-import AppHeader from '../../.././components/appHeader/AppHeader'
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb'
 import GNGWindow from '../../../components/gameWindow/gngWindow/GNGWindow'
 import EnterButtons from '../../.././components/enterButtons/EnterButtons'
 import RotateAlert from '../../../components/rotateAlert/RotateAlert'
@@ -10,8 +10,8 @@ function GNGLanding() {
   return (
     <div className='container-fluid'>
         <div className='row'>
-            <div id='GNGLandingHeader'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='GNGLandingBody'>
               <div className="GNGLandingProgressBar"></div>

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GNGGame.css';
-import AppHeader from '../../../components/appHeader/AppHeader';
+import BreadCrumb from '../../../components/breadcrumbs/breadCrumb';
 import GNGWindow from '../../../components/gameWindow/gngWindow/GNGWindow';
 import ScoreSummaryOverlay from '../../../components/scoreSummaryOverlay/ScoreSummaryOverlay';
 import useSound from 'use-sound';
@@ -584,14 +584,14 @@ function GNGGame(props) {
     } 
 
     function backToLandingPage() {
-        navigate('/');
+        navigate('/landing');
     }
 
     return (
         <div className='container-fluid'>
         <div className='row'>
-            <div id='GNGGameHeader' className='col'>
-              {<AppHeader />}
+            <div className='py-4 px-12 sm:py-8 w-full bg-blue-100 shadow-md'>
+              {<BreadCrumb />}
             </div>
             <div id='GNGGameBody' className='col'>
             <div className="GNGGameBodyProgressBar">
