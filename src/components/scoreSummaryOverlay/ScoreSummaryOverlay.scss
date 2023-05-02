@@ -127,3 +127,10 @@
 .invisible {
     visibility: none;
 }
+
+@media (orientation: landscape) {
+
+    .summary {
+        display: none;
+    }
+}
