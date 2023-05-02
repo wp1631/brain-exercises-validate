@@ -18,6 +18,8 @@
 
 .CJSGameWindow {
     height: 60%;
+    display: flex;
+    align-items: center;
 }
 
 .CJSGameEnterButton {

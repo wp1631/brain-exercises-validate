@@ -18,6 +18,8 @@
 
 .CJSLandingWindow {
     height: 60%;
+    display: flex;
+    align-items: center;
 }
 
 .CJSLandingEnterButton {
