@@ -1,17 +1,53 @@
 import { HomeIcon } from '@heroicons/react/20/solid'
-
-const pages = [
-  { name: 'เกม', href: '#/landing', current: false },
-  // { name: 'วิญญาณตามติด', href: '', current: true },
-]
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import './breadCrumb.css'
 
 export default function Example() {
+  const [headerText, setHeaderText] = useState('');
+  const [homeButtonLink, setHomeButtonLink] = useState('');
+  const [gameButtonLink, setGameButtonLink] = useState('#/landing');
+  const [disableHomeButton, setDisableHomeButton] = useState('');
+  const [disableGameButton, setDisableGameButton] = useState('');
+  const location = useLocation();
+  const pathName = location.pathname;
+
+  let SSHeaderText = 'จำจด กดตาม';
+  let CJSHeaderText = 'หากันจนเจอ';
+  let GNGHeaderText = 'เขียวไป แดงหยุด';
+  let pages = [
+    { name: headerText, href: gameButtonLink, current: false },
+  ]
+
+  useEffect(() => {
+    if (pathName === '/landing') {
+      setHeaderText('หน้าเลือกเกม');
+    } else if (pathName.includes('/spatial-span')) {
+      setHeaderText(SSHeaderText);
+      setHomeButtonLink('#/landing');
+      setGameButtonLink('#/spatial-span');
+    } else if (pathName.includes('/conjunction-search')) {
+      setHeaderText(CJSHeaderText);
+      setHomeButtonLink('#/landing');
+      setGameButtonLink('#/conjunction-search');
+    } else if (pathName.includes('/go-nogo')) {
+      setHeaderText(GNGHeaderText);
+      setHomeButtonLink('#/landing');
+      setGameButtonLink('#/go-nogo');
+    }
+
+    if (pathName.includes('/instruction') || pathName.includes('/trial')) {
+      setDisableHomeButton(' disabled')
+      setDisableGameButton(' disabled');
+    } 
+  }, [])
+  
   return (
     <nav className="flex h-fit" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>
-            <a href="/" className="text-gray-400 hover:text-gray-500 ">
+            <a href={homeButtonLink} className={`text-gray-400 hover:text-gray-500 + ${disableHomeButton}`}>
               <HomeIcon className="h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
@@ -30,7 +66,7 @@ export default function Example() {
               </svg>
               <a
                 href={page.href}
-                className="ml-4 text-sm sm:text-lg font-medium sm:font-medium text-gray-500 hover:text-gray-700"
+                className={`ml-4 text-sm sm:text-lg font-medium sm:font-medium text-gray-500 hover:text-gray-700 + ${disableGameButton}`}
                 aria-current={page.current ? 'page' : undefined}
               >
                 {page.name}
