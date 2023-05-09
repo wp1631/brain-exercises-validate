@@ -34,8 +34,10 @@ function App() {
       // window.location.replace(window.location.origin + "#/landing");
     } else {
       if (window.location.href === window.location.origin +"/"){
+        console.log(window.location.href)
       } else {
-        window.location.replace("https://cccnlab.co/brain-exercises-hard/");
+        window.location.replace(window.location.origin);
+        console.log(window.location.href)
       }
     }
   }, [])
