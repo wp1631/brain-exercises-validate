@@ -35,9 +35,7 @@ function App() {
     } else {
       if (window.location.href === window.location.origin +"/"){
       } else {
-        if (window.location.href !== "https://cccnlab.co/"){
-          window.location.replace(window.location.origin);
-        }
+        // window.location.replace(window.location.origin);
       }
     }
   }, [])
