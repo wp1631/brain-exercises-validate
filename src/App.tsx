@@ -33,10 +33,10 @@ function App() {
       setUserPhone(phone);
       // window.location.replace(window.location.origin + "#/landing");
     } else {
-      if (window.location.href === "https://cccnlab.co/brain-exercises-easy/" +"#/"){
+      if (window.location.href === "https://cccnlab.co/brain-exercises-hard/" +"#/"){
         console.log(window.location.href)
       } else {
-        window.location.replace("https://cccnlab.co/brain-exercises-easy/");
+        window.location.replace("https://cccnlab.co/brain-exercises-hard/");
         console.log(window.location.href)
       }
     }
