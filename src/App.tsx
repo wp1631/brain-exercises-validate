@@ -33,7 +33,7 @@ function App() {
       setUserPhone(phone);
       // window.location.replace(window.location.origin + "#/landing");
     } else {
-      if (window.location.href === "https://cccnlab.co/brain-exercises-hard/"){
+      if (window.location.href === window.location.origin +"/"){
       } else {
         window.location.replace("https://cccnlab.co/brain-exercises-hard/");
       }
