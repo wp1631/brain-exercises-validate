@@ -33,7 +33,7 @@ function App() {
       setUserPhone(phone);
       // window.location.replace(window.location.origin + "#/landing");
     } else {
-      if (window.location.href === window.location.origin +"/"){
+      if (window.location.href === window.location.origin +"#/"){
         console.log(window.location.href)
       } else {
         window.location.replace(window.location.origin);
@@ -62,7 +62,7 @@ function App() {
     <>
       <Router>
           <Routes>
-            <Route path="/React" element={< ParticipantForm setUserId={setUserId} setUserPhone={setUserPhone}/>}></Route>
+            <Route path="/" element={< ParticipantForm setUserId={setUserId} setUserPhone={setUserPhone}/>}></Route>
             <Route path="/landing" element={< LandingPage />}></Route>
             <Route path="/spatial-span" element={<SSLanding />}></Route>
             <Route path="/spatial-span/instruction" element={<SSInstruction />}></Route>
