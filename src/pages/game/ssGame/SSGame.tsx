@@ -14,6 +14,7 @@ import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 import { Shuffle } from '../../../scripts/shuffle';
 import { saveDataToClientDevice, saveDataToIndexedDB, saveJSONDataToClientDevice } from '../../../uitls/offline';
+import axios from 'axios';
 
 let progressBarElement: HTMLProgressElement;
 
@@ -574,6 +575,13 @@ function SSGame(props) {
       scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
       metricDataResult = metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
       postEntryResult = postEntry(trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+      axios.post('http://hwsrv-1063269.hostwindsdns.com:9002/spatial-span', postEntryResult)
+            .then(function (postEntryResult) {
+                console.log(postEntryResult)
+            })
+            .catch(function (error) {
+                console.log('error')
+            });
       saveJSONDataToClientDevice(postEntryResult, `SS_${props.userPhone}_${thisTime().toString()}`);
   }
 
@@ -707,9 +715,9 @@ function SSGame(props) {
 
   function postEntry(trialDataResult: any[], gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string }, scoringDataResult: any[], metricDataResult: any[]){
       postEntryResult = {
-          "userID" : props.userId,
+          "userId" : props.userId,
           "userPhone" : props.userPhone,
-          "entryInformation" : {
+          "data" : {
               "rawData" : {
                   "trialData" : trialDataResult,
                   "description" : 'all important data per trial'
@@ -719,7 +727,6 @@ function SSGame(props) {
               "metricData" : metricDataResult
           }
       }
-      console.log(postEntryResult);
     //   console.log(JSON.stringify(postEntryResult));
       return postEntryResult;
   }
