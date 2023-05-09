@@ -7,7 +7,7 @@ import { getDataFromLocalStorage } from '../../uitls/offline';
 
 export default function BreadCrumb() {
   const [headerText, setHeaderText] = useState('');
-  const [gameButtonLink, setGameButtonLink] = useState('/landing');
+  const [gameButtonLink, setGameButtonLink] = useState('#/landing');
   const [disableHomeButton, setDisableHomeButton] = useState('');
   const [disableGameButton, setDisableGameButton] = useState('');
   const [hideUserId, setHideUserId] = useState(false);
@@ -29,13 +29,13 @@ export default function BreadCrumb() {
       setHideUserId(true);
       if (pathName.includes('/spatial-span')) {
         setHeaderText(SSHeaderText);
-        setGameButtonLink('/spatial-span');
+        setGameButtonLink('#/spatial-span');
       } else if (pathName.includes('/conjunction-search')) {
         setHeaderText(CJSHeaderText);
-        setGameButtonLink('/conjunction-search');
+        setGameButtonLink('#/conjunction-search');
       } else if (pathName.includes('/go-nogo')) {
         setHeaderText(GNGHeaderText);
-        setGameButtonLink('/go-nogo');
+        setGameButtonLink('#/go-nogo');
       }
     }
 
@@ -50,7 +50,7 @@ export default function BreadCrumb() {
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>
-            <a href={'/landing'} className={`text-gray-400 hover:text-gray-500 + ${disableHomeButton}`}>
+            <a href={'#/landing'} className={`text-gray-400 hover:text-gray-500 + ${disableHomeButton}`}>
               <HomeIcon className="h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>
