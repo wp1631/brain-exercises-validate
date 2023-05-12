@@ -93,7 +93,8 @@ let comboCount: number[] = [];
 let rtBound = 10000;
 let avgHitRt;
 let swiftness: string = '';
-let total = 0;
+let total: number = 0;
+let score: number;
 let targetMatch: boolean[] = [];
 let allStartTime: string[] = [];
 let allClickTime: string[] = [];
@@ -627,7 +628,7 @@ function CJSGame(props): any {
 
     function Done() {
         setIsItDone(true);
-        let score = summaryScore();
+        score = total;
         hightestSetSizeCheck(checkAns, setSizeRecord);
         scoringDataResult = scoringData(rtBound, incorrectMultiplier, lateMultiplier, scoresMultiplier, trialNumber, total);
         metricDataResult = metricData(trialNumber, incorrectCount, correctButLateCount, setSizeInCorrectAns, timeLimitRecord, hitRt, avgHitRt, swiftness);
@@ -787,7 +788,7 @@ function CJSGame(props): any {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay sumScores={total} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}

@@ -27,6 +27,7 @@ let haveDone = false;
 let haveToClick = false;
 let falseClicked = false;
 let rtBound = 1000;
+let scorePerTrial: number[] = [];
 let total = 0;
 let score: number;
 let correctCountForCombo = 0;
@@ -39,6 +40,8 @@ let allClickEvent: string[] = [];
 let testEnd: Date[] = [];
 let rt: number[] = [];
 let hitRt: number[] = [0];
+let latestRtIndex = 0;
+let latestHitRtIndex = 0;
 let sumHitRt;
 let avgHitRt;
 let blockDuration = 1; // sec เข้าใจว่าระยะห่างของเวลาการปิ้งแว้บขึ้นของแต่ละตัว (ยิ่งเยอะตัวปิ้งแว้บยิ่งน้อย)
@@ -118,7 +121,7 @@ function GNGGame(props) {
 
     function initiateData() {
         rt = [];
-        hitRt = [0];
+        hitRt = [];
         allTimePop = [];
         allColorPop = [];
         testEnd = [];
@@ -317,25 +320,6 @@ function GNGGame(props) {
         )
     }
 
-    function Done() {
-        setIsItDone(true);
-        let end = endTime();
-        score = Math.max(10000, checkAllAns());
-        cueDataResult = cueData(allColorPop, allTimeEvent);
-        userInteractionDataResult = userInteractionData(allInteractionEvent, allClickEvent);
-        scoringDataResult = scoringData(rtBound, trialNumber, score);
-        metricDataResult = metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt);
-        postEntryResult = postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
-        axios.post('https://hwsrv-1063269.hostwindsdns.com/exercise-api-hard/go-nogo', postEntryResult)
-            .then(function (postEntryResult) {
-                console.log(postEntryResult)
-            })
-            .catch(function (error) {
-                console.log('error')
-            });
-        saveJSONDataToClientDevice(postEntryResult, `GNG_${props.userPhone}_${thisTime().toString()}`);
-    }
-
     function scoringData(rtBound, trialNumber, score){
         scoringDataResult = [{
             "scoringModel" : {
@@ -457,7 +441,6 @@ function GNGGame(props) {
     }
 
     function checkAllAns() {
-        let latestRtIndex = 0;
         for (let popIndex = 0; popIndex < allColorPop.length; popIndex++) {
             let currColorPop = allColorPop[popIndex];
             let currTimePop = allTimePop[popIndex];
@@ -474,7 +457,7 @@ function GNGGame(props) {
                     continue;
                 } else if ((currRt >= currTimePop) && (currRt < nextTimePop)) {
                     if (satisfied === false) {
-                        if (currColorPop === '#26A445') {
+                        if (currColorPop === goSignalColor) {
                             hitRt.push(currRt - currTimePop.getTime());
                         }
                         satisfied = true;
@@ -484,15 +467,10 @@ function GNGGame(props) {
                 }
             }
         }
-        if (hitRt.length > 1) {
-            hitRt.shift();
-        }
-        return getSummaryScore();
+        getSummaryScore();
     }
 
     function getSummaryScore() {
-        let scorePerTrial = [0];
-        let latestHitRtIndex = 0;
         for (let correctIndex = latestHitRtIndex; correctIndex < comboCount.length; correctIndex++) {
             latestHitRtIndex = correctIndex;
             let rtScore = rtBound - hitRt[correctIndex];
@@ -514,9 +492,13 @@ function GNGGame(props) {
 
         avgHitRt = sumHitRt / 1000 / hitRt.length;
         
-        total = scorePerTrial.reduce((sum, score) => {
-            return sum + score;
-        });
+        if (scorePerTrial.length !== 0){
+            total = scorePerTrial.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+          scorePerTrial.push(0);
+        }
 
         return total;
     }
@@ -568,6 +550,24 @@ function GNGGame(props) {
                 }
             }
         }
+    }
+
+    function Done() {
+        setIsItDone(true);
+        score = Math.max(10000, Math.round(total));
+        cueDataResult = cueData(allColorPop, allTimeEvent);
+        userInteractionDataResult = userInteractionData(allInteractionEvent, allClickEvent);
+        scoringDataResult = scoringData(rtBound, trialNumber, score);
+        metricDataResult = metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt);
+        postEntryResult = postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
+        axios.post('https://hwsrv-1063269.hostwindsdns.com/exercise-api-hard/go-nogo', postEntryResult)
+            .then(function (postEntryResult) {
+                console.log(postEntryResult)
+            })
+            .catch(function (error) {
+                console.log('error')
+            });
+        saveJSONDataToClientDevice(postEntryResult, `GNG_${props.userPhone}_${thisTime().toString()}`);
     }
 
     function touchStart() {

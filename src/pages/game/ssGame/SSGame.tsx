@@ -570,7 +570,7 @@ function SSGame(props) {
   function Done() {
       setIsItDone(true);
       let end = endTime();
-      score = sumScores;
+      score = Math.round(sumScores);
       trialDataResult = trialData(spanSizeAndDirection, cueDataResult, probeDataResult, answerDataResult, directionMode);
       scoringDataResult = scoringData(trialNumber, spanMultiplier, score);
       metricDataResult = metricData(trialNumber, summaryCorrect, spanInCorrectAns, enterStruggleTimeCount);
