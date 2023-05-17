@@ -571,6 +571,7 @@ function CJSGame(props): any {
         }
         currTrial = currTrial + 1;
         if (currTrial >= trialNumber) {
+            summaryScore();
             Done();
         } else {
             initialT(0, allSetsizeAndTarget[currTrial][0]);
