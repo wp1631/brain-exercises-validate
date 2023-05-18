@@ -498,14 +498,14 @@ function CJSGame(props): any {
     
     function checkResp(foo) {
         setProgressValue(progressValue + 1);
-        clickSound();
+        // clickSound();
         let dT2 = new Date();
         ET = dT2.getTime();
         allClickTime.push(thisTime());
         let rt = ET - STT;
         allRt.push(rt);
         if (change === foo) {
-            combo2Sound();
+            // combo2Sound();
             if (rt < timeLimit) {
                 trackRecord = trackRecord + 1;
                 thatRight = 'right';
@@ -525,14 +525,14 @@ function CJSGame(props): any {
                     comboCount.push(5);
                 }
             } else {
-                combo2Sound();
+                // combo2Sound();
                 thatRight = 'late';
                 trackRecord = 0;
                 checkAns.push(thatRight);
                 correctButLateCount++;
             }
         } else {
-            losingSound()
+            // losingSound()
             thatRight = 'wrong';
             trackRecord = 0;
             checkAns.push(thatRight);
