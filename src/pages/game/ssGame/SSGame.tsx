@@ -114,7 +114,7 @@ function SSGame(props) {
           let end : number = endTime();
           reactionTime.push(end - startTime);
           answerTimePerTrial.push(thisTime());
-          clickSound();
+        //   clickSound();
       }
 
       if (event.currentTarget.classList.contains('1')) {
@@ -192,7 +192,7 @@ function SSGame(props) {
           if (equalCheck(currAns, currSeq)) {
               $('#goSignal').html("ถูก");
               setProgressValue(progressValue + 1);
-              combo2Sound();
+            //   combo2Sound();
               currSeq = [];
               genSeq = [];
               currTrial++;
@@ -227,7 +227,7 @@ function SSGame(props) {
               )
           } else {
               $('#goSignal').html("ผิด");
-              losingSound();
+            //   losingSound();
               struggleTime = true;
               currSeq = [];
               checkAns.push(0);
