@@ -504,7 +504,7 @@ function GNGGame(props) {
     }
 
     function checkResp() {
-        clickSound();
+        // clickSound();
         if (currEventId === 1) {
             if (haveToClick === false) {
                 haveToClick = true;
@@ -515,26 +515,26 @@ function GNGGame(props) {
                 }
                 if (correctCountForCombo === 1) {
                     comboCount.push(1);
-                    combo1Sound();
+                    // combo1Sound();
                 } else if (correctCountForCombo === 2) {
                     comboCount.push(1);
-                    combo2Sound();
+                    // combo2Sound();
                 } else if (correctCountForCombo === 3) {
                     comboCount.push(2);
-                    combo3Sound();
+                    // combo3Sound();
                 } else if (correctCountForCombo === 4) {
                     comboCount.push(3);
-                    combo3Sound();
+                    // combo3Sound();
                 } else if (correctCountForCombo === 5) {
                     comboCount.push(4);
-                    combo3Sound();
+                    // combo3Sound();
                 }
             }
             hitCount++;
         } else {
             if (falseClicked === false) {
                 correctCountForCombo = 0;
-                losingSound();
+                // losingSound();
                 falseClicked = true;
                 if (currEventId === 0) {
                     falseAlarmCount++;
