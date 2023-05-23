@@ -60,6 +60,9 @@ let allReactionTime: string[]  = [];
 let reactionTime: number[] = [];
 let allReactionTrial: number[] = [];
 let answerTimePerTrial: any[] = [];
+let hitRt: number[] = [];
+let sumHitRt;
+let avgHitRt;
 let latestIndex: number = 0;
 let scorePerTrial: number[] = [];
 let spanMultiplier: number = 1000;
@@ -371,7 +374,7 @@ function SSGame(props) {
 
   function createPseudorandomStimuli() {
     let allSpanSizeRange = [2, 3, 4];
-    let trialsPerSpanSize = 10; 
+    let trialsPerSpanSize = 1; 
     let sequenceDirection = 2; // forward and backward
     let trialsPerDirection = trialsPerSpanSize / sequenceDirection; 
 
@@ -787,8 +790,18 @@ function seqGenerator() {
               scorePerTrial.push(allSpan[correctIndex] * spanMultiplier);
               summaryCorrect++;
               spanInCorrectAns.push(allSpan[correctIndex]);
+              hitRt.push(allReactionTrial[correctIndex]);
           } 
       }
+
+      if (hitRt.length !== 0){
+
+          sumHitRt = hitRt.reduce((sum, time) => {
+            return sum + time;
+            });
+      }
+
+        avgHitRt = sumHitRt / 1000 / hitRt.length;
       
       if (scorePerTrial.length !== 0){
           sumScores = scorePerTrial.reduce((sum, score) => {
@@ -797,7 +810,7 @@ function seqGenerator() {
       } else {
         scorePerTrial.push(0);
       }
-  
+      
       return sumScores;
   }
   
@@ -832,7 +845,7 @@ function seqGenerator() {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay sumScores={sumScores} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay accuracy={(summaryCorrect / trialNumber) * 100} avgHitRt={avgHitRt} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
