@@ -836,7 +836,7 @@ function CJSGame(props): any {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay sumScores={total} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay accuracy={((trialNumber - incorrectCount) / trialNumber) * 100} avgHitRt={avgHitRt} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
