@@ -374,7 +374,7 @@ function SSGame(props) {
 
   function createPseudorandomStimuli() {
     let allSpanSizeRange = [2, 3, 4];
-    let trialsPerSpanSize = 1; 
+    let trialsPerSpanSize = 10; 
     let sequenceDirection = 2; // forward and backward
     let trialsPerDirection = trialsPerSpanSize / sequenceDirection; 
 
