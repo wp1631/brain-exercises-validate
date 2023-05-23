@@ -14,6 +14,7 @@ import moment from 'moment';
 import RotateAlert from '../../../components/rotateAlert/RotateAlert';
 import { Shuffle } from '../../../scripts/shuffle';
 import { saveDataToClientDevice, saveDataToIndexedDB, saveJSONDataToClientDevice } from '../../../uitls/offline';
+import { samplingFromList } from '../../../uitls/main';
 import axios from 'axios';
 
 let progressBarElement: HTMLProgressElement;
@@ -28,10 +29,10 @@ const probeAngularPosition: number[] = [45, 90, 135, 225, 270, 315];
 const probeShape: string = 'circle';
 const probeParams: string = 'radius'; 
 const radius: string = (getComputedStyle(document.documentElement).getPropertyValue('--cir-base-unit') + " / 2 " );
-const cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
-const cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
-const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color').trim();
-const restBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('-rest-border-color').trim();
+let cueColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
+let cueBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
+const restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--ss-rest-color').trim();
+const restBorderColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-border-color').trim();
 const rampingCorrectCount: number = 3;
 const maxFailStreakCount: number = 2;
 const maxFailCount: number = 1; 
@@ -95,13 +96,14 @@ function SSGame(props) {
       gameLogicSchemeResult = gameLogicScheme(trialNumber, flashDuration, flashInterval, initialSpan, probeNumber, probeAngularPosition, rampingCorrectCount, maxFailStreakCount, maxFailCount);
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
       seqGenerator();
-      
+    
       return () => {
         timeoutList.forEach(tm => {
             clearTimeout(tm);
         })
       };
   }, [])
+  
 
   useEffect(() => {
       if (inputRef.current != null) {
@@ -120,61 +122,80 @@ function SSGame(props) {
       if (event.currentTarget.classList.contains('1')) {
           currAns.push(1);
           ($('#cirButton1').addClass('clicked'));
+          ($('#border1').addClass('clicked'));
+          ($('#cirButton1').addClass('hoverDisabled'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton1').removeClass('clicked') 
+                  $('#cirButton1').removeClass('clicked');
+                  $('#border1').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('2')) {
           currAns.push(2);
           ($('#cirButton2').addClass('clicked'));
+          ($('#border2').addClass('clicked'));
+          ($('#cirButton2').addClass('hoverDisabled'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton2').removeClass('clicked') 
+                  $('#cirButton2').removeClass('clicked');
+                  $('#border2').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('3')) {
           currAns.push(3);
           ($('#cirButton3').addClass('clicked'));
+          ($('#border3').addClass('clicked'));
+          ($('#cirButton3').addClass('hoverDisabled'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton3').removeClass('clicked') 
+                  $('#cirButton3').removeClass('clicked')
+                  $('#border3').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('4')) { 
           currAns.push(4);
           ($('#cirButton4').addClass('clicked'));
+          ($('#border4').addClass('clicked'));
+          ($('#cirButton4').addClass('hoverDisabled'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton4').removeClass('clicked') 
+                  $('#cirButton4').removeClass('clicked');
+                  $('#border4').removeClass('clicked');
               }, 150)
           )
       } else if (event.currentTarget.classList.contains('5')) {
           currAns.push(5);
           ($('#cirButton5').addClass('clicked'));
+          ($('#border5').addClass('clicked'));
+          ($('#cirButton5').addClass('hoverDisabled'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton5').removeClass('clicked') 
+                  $('#cirButton5').removeClass('clicked');
+                  $('#border5').removeClass('clicked');
               }, 150)
           )
       } else {
           currAns.push(6);
           ($('#cirButton6').addClass('clicked'));
+          ($('#border6').addClass('clicked'));
+          ($('#cirButton6').addClass('hoverDisabled'));
           timeoutList.push(
               setTimeout(function() {
-                  $('#cirButton6').removeClass('clicked') 
+                  $('#cirButton6').removeClass('clicked');
+                  $('#border6').removeClass('clicked');
               }, 150)
           )
       }
 
       if (currAns.length === spanSizeAndDirection[currTrial][0]) {
+          $('.cirButton').removeClass('hoverDisabled'); 
+          $('.cirButton').addClass('hoverDisabled'); 
           cueData(currSeq, cueColor, cueBorderColor, cueStartTime, cueEndTime);
           probeData(probeNumber, allProbe, restColor, restBorderColor, probeShape, probeParams, radius, probeAngularPosition);
           answerData(currAns, answerTimePerTrial);
           timeoutList.push(
               setTimeout(function() {
                   $('.cirButton').removeClass('clicked');
-                  $('.cirButton').addClass('hoverDisabled'); 
               }, 150)
           )
 
@@ -349,8 +370,8 @@ function SSGame(props) {
   }
 
   function createPseudorandomStimuli() {
-    let allSpanSizeRange = [2, 3, 4, 5, 6, 7, 8];
-    let trialsPerSpanSize = 8; 
+    let allSpanSizeRange = [2, 3, 4];
+    let trialsPerSpanSize = 10; 
     let sequenceDirection = 2; // forward and backward
     let trialsPerDirection = trialsPerSpanSize / sequenceDirection; 
 
@@ -362,26 +383,52 @@ function SSGame(props) {
         }
     }
     Shuffle(spanSizeAndDirection);
-        trialNumber = trialsPerSpanSize * allSpanSizeRange.length;
+    trialNumber = trialsPerSpanSize * allSpanSizeRange.length;
     }
 
-  function seqGenerator() {
+  function colorGenerator() {
+    if (parseInt(props.userId) % 2 == 0){ // check if userId was even or odd number
+        // even number section
+        if (spanSizeAndDirection[currTrial][1] === 0){
+            // forward : blue
+            document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
+            document.documentElement.style.setProperty('--cue-border-color', '#0072ff'); 
+        } else {
+            // backward : yellow
+            document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
+            document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+        }
+    } else {
+        // odd number section
+        if (spanSizeAndDirection[currTrial][1] === 0){
+            // forward : yellow
+            document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
+            document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+        } else {
+            // backward : blue
+            document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
+            document.documentElement.style.setProperty('--cue-border-color', '#0072ff'); 
+        }
+    }
+    cueColor = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
+    cueBorderColor = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
+    }
+
+function seqGenerator() {
       if (currTrial !== trialNumber) {
           allSpan.push(spanSizeAndDirection[currTrial][0]);
           if (genSeq.length === 0) {
-              for (let i = 0; i < spanSizeAndDirection[currTrial][0]; i++) {
-                  let thisSeq = Math.floor(Math.random() * probeNumber) + 1;
-                  genSeq.push(thisSeq);
-              }
+              let trialSeqGenerator: number[] = samplingFromList(allProbe, spanSizeAndDirection[currTrial][0], false);
+              genSeq = trialSeqGenerator;
+
+              if (spanSizeAndDirection[currTrial][1] === 0){
+                    directionMode.push('forward');
+                } else {
+                    directionMode.push('backward');
+                }
+
+              timeIntervalPerTrial();
           }
-
-          if (spanSizeAndDirection[currTrial][1] === 0){
-            directionMode.push('forward');
-        } else {
-            directionMode.push('backward');
-        }
-
-          timeIntervalPerTrial();
       } 
   }
 
@@ -417,6 +464,7 @@ function SSGame(props) {
             } else {
                 $('#goSignal').html("ย้อนกลับ");
             }
+            colorGenerator();
         }, 3100) 
     )
 
