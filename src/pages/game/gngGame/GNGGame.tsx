@@ -104,6 +104,7 @@ function GNGGame(props) {
     const [losingSound] = useSound(losingSoundSrc);
     const [progressValue, setProgressValue] = useState(0);
     const [isItDone, setIsItDone] = useState(false);
+    const [hardGNGDone, setHardGNGDone] = useState(false);
     let timeoutList: any[] = [];
 
     useEffect(() => {
@@ -314,6 +315,7 @@ function GNGGame(props) {
                 testEnd.push(endTime());
                 if (haveDone === false) {
                     haveDone = true;
+                    checkAllAns();
                     Done();
                 }
             }, waitTheWholeTime)
@@ -554,6 +556,7 @@ function GNGGame(props) {
 
     function Done() {
         setIsItDone(true);
+        setHardGNGDone(true);
         score = Math.max(10000, Math.round(total));
         cueDataResult = cueData(allColorPop, allTimeEvent);
         userInteractionDataResult = userInteractionData(allInteractionEvent, allClickEvent);
@@ -614,7 +617,7 @@ function GNGGame(props) {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay sumScores={total} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay accuracy={(hitCount / allGo) * 100}  falseHit={(falseHitCount / allNoGo) * 100} avgHitRt={avgHitRt} hardGNGDone={hardGNGDone} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
