@@ -136,7 +136,7 @@ function CJSGame(props): any {
         useEffect(() => {
             if (searchTarget) {
                 oris = [];
-                for (let j = 0; j < maxSS; j++) { oris.push(0); oris.push(1)};
+                for (let j = 0; j < maxSS; j++) { oris.push(0); oris.push(0)};
                 cols = [];
                 for (let k = 0; k < maxSS; k++) { cols.push(0); cols.push(1)};
                 if (searchTarget.shape === 1) {
