@@ -20,7 +20,7 @@ let trialNumber = 100;
 let goSignalColor: string = getComputedStyle(document.documentElement).getPropertyValue('--go-color').trim();
 let noGoSignalColor: string = getComputedStyle(document.documentElement).getPropertyValue('--nogo-color').trim();
 let restColor: string = getComputedStyle(document.documentElement).getPropertyValue('--rest-color').trim();
-let flashDuration = 600;
+let flashDuration = 450;
 let baseFlashInterval = 600;
 let timeOffset = 100;
 let haveDone = false;
@@ -617,7 +617,7 @@ function GNGGame(props) {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay accuracy={(hitCount / allGo) * 100}  falseHit={(falseHitCount / allNoGo) * 100} avgHitRt={avgHitRt} hardGNGDone={hardGNGDone} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay accuracy={((hitCount + correctRejectionCount + falseSignalRejectionCount) / trialNumber) * 100}  falseHit={(falseHitCount / allNoGo) * 100} avgHitRt={avgHitRt} hardGNGDone={hardGNGDone} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
