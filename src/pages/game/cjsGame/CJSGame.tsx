@@ -347,7 +347,7 @@ function CJSGame(props): any {
         setSizeRecord.push(ceilingSS);
         timeLimitRecord.push(timeLimit);
         if (!ceilingSS) {
-            ceilingSS = SS + 1
+            ceilingSS = SS + 1;
         };
         vismem.erase(canvasContext);
         vismem.clear();
@@ -542,7 +542,7 @@ function CJSGame(props): any {
                 correctButLateCount++;
             }
         } else {
-            // losingSound()
+            // losingSound();
             thatRight = 'wrong';
             trackRecord = 0;
             checkAns.push(thatRight);

@@ -107,7 +107,6 @@ function SSGame(props) {
       };
   }, [])
   
-
   useEffect(() => {
       if (inputRef.current != null) {
           inputRef.current.focus();
@@ -487,7 +486,7 @@ function seqGenerator() {
       
       timeoutList.push(
           setTimeout(function () {
-                $('#goSignal').html("");
+              $('#goSignal').html("");
               $('#goSignal').html("ตาคุณ");
               startTime = timeStart();
               $('.cirButton').removeClass('hoverDisabled');
@@ -778,7 +777,6 @@ function seqGenerator() {
               "metricData" : metricDataResult
           }
       }
-    //   console.log(JSON.stringify(postEntryResult));
       return postEntryResult;
   }
 

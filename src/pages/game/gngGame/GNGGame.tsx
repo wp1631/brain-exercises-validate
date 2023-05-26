@@ -26,9 +26,9 @@ let timeOffset = 100;
 let haveDone = false;
 let haveToClick = false;
 let falseClicked = false;
-let rtBound = 1000;
+let rtBound: number = 1000;
 let scorePerTrial: number[] = [];
-let total = 0;
+let total: number = 0;
 let score: number;
 let correctCountForCombo = 0;
 let comboCount: number[] = [];
@@ -43,7 +43,7 @@ let hitRt: number[] = [0];
 let latestRtIndex = 0;
 let latestHitRtIndex = 0;
 let sumHitRt;
-let avgHitRt;
+let avgHitRt: number = 0;
 let blockDuration = 1; // sec เข้าใจว่าระยะห่างของเวลาการปิ้งแว้บขึ้นของแต่ละตัว (ยิ่งเยอะตัวปิ้งแว้บยิ่งน้อย)
 let changeRate = 0.8; // % changes 
 let noGoRate = 0.2; // % nogo 
