@@ -243,7 +243,7 @@ function GNGInstruction(props) {
                                 {tutorialStep === 4 ? <p>เรามาลองเล่นกันดูครับ </p> : null}
                                 {tutorialStep === 6 ? <p>สุดยอดไปเลย คุณทำได้ดีมาก! </p> : null}
                                 {tutorialStep === 7 ? <p>เพื่อเพิ่มความท้าทาย เกมนี้จะมีไฟ <br></br><b style={{ color : `#E52D27`}}>สีแดง</b> ที่คุณจะต้องระวัง</p> : null}
-                                {tutorialStep === 8 ? <p>ถ้า <b style={{ color : `#E52D27`}}>สีแดง</b> สว่างขึ้น <b>ไม่ต้องกดอะไร</b> <br></br><b>และรอสัญญาณไฟอันต่อไป</b></p> : null}
+                                {tutorialStep === 8 ? <p>ถ้า <b style={{ color : `#E52D27`}}>สีแดง</b> สว่างขึ้น <b>ห้ามกด</b></p> : null}
                                 {tutorialStep === 9 ? <p>เรามาลองเล่นกันดูครับ <br></br>รอบนี้จะมีไฟ <b style={{ color : `#26A445`}}>สีเขียว</b> และ <b style={{ color : `#E52D27`}}>สีแดง</b></p> : null}
                                 {tutorialStep === 11 && tutorialTest === 'wrong' ? <p>อย่าลืมนะครับ ว่าถ้า <b style={{ color : `#E52D27`}}>สีแดง</b> <br></br>สว่างขึ้น <b>ไม่ต้องกดอะไร</b> <br></br><b>และรอสัญญาณไฟอันต่อไป</b></p> : null}
                                 {tutorialStep === 11 && tutorialTest === 'right' ? <p>เมื่อแถบนี้เต็ม เกมก็จะจบลง</p> : null}
