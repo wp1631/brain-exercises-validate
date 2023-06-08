@@ -284,9 +284,9 @@ function CJSInstruction(props) {
             setTutorialHide(true);
         } else {
             setTutorialStep(tutorialStep + 1);
-            if (tutorialStep !== 5 && tutorialStep !== 8 
-                && tutorialStep !== 9 && tutorialStep !== 10 
-                && tutorialStep !== 11 && tutorialStep !== 12) {
+            if (tutorialStep !== 5 && tutorialStep !== 9 
+                && tutorialStep !== 10 && tutorialStep !== 11 
+                && tutorialStep !== 12 && tutorialStep !== 13) {
                 setTutorialHide(false);
             } else {
                 setTutorialHide(true);
@@ -302,10 +302,10 @@ function CJSInstruction(props) {
         <div className='card' style={{ alignItems: 'center', placeContent: 'center' }}>
             {tutorialHide === false ?
                 <div className="tutorial">
-                        <div className={'progressBarContainerInstruction' + (tutorialStep !== 14 ? ' onHide' : '')}>
+                        <div className={'progressBarContainerInstruction' + (tutorialStep !== 15 ? ' onHide' : '')}>
                             <img src={instructionProgressbar} alt="progressbar" id="instructionProgressbar"></img>       
                         </div>
-                    <div className={'instructionContainer' + (tutorialStep === 15 ? ' centered': '')}>
+                    <div className={'instructionContainer' + (tutorialStep === 16 ? ' centered': '')}>
                         <div className="instructionPic"> 
                             <div className={'canvasContainerInstruction' + (tutorialStep !== 3 ? ' onHide' : '')}>
                                 {searchTarget ?
@@ -323,8 +323,8 @@ function CJSInstruction(props) {
                             <button id='yes-btn' className='btn yes-btn circle lg'> มี </button>
                         </div>
                         <div className="instructionPerson">
-                            <img src={instructionPerson} alt="an instruction guy" className={'personStart' + (tutorialStep < 15 ? '': ' onHide')}></img>
-                            <img src={instructionFinished} alt="an instruction guy" className={'personEnd' + (tutorialStep === 15 ? '': ' onHide')}></img>
+                            <img src={instructionPerson} alt="an instruction guy" className={'personStart' + (tutorialStep < 16 ? '': ' onHide')}></img>
+                            <img src={instructionFinished} alt="an instruction guy" className={'personEnd' + (tutorialStep === 16 ? '': ' onHide')}></img>
                         </div>
                         <div className="instructionBox">
                             <div className= "instructionText">
@@ -333,20 +333,21 @@ function CJSInstruction(props) {
                                 {tutorialStep === 3 && searchTarget ? <p>อย่างเช่นให้คุณหา <b>{searchTargetList[searchTarget.shape][searchTarget.col].description}</b></p> : null}
                                 {tutorialStep === 4 ? <p>หากมีให้กดปุ่ม “<b style={{ color : `#26A445`}}>มี</b>”  <br></br>หากไม่มีกดปุ่ม “<b style={{ color : `#E52D27`}}>ไม่มี</b>”</p> : null}
                                 {tutorialStep === 5 ? <p>เรามาลองเล่นกันดูครับ </p> : null}
-                                {tutorialStep === 7 && tutorialTest === 'right' ? <p>ถูกต้องครับ! <br></br><br></br>คะแนนเกมนี้ จะขึ้นอยู่กับความไว <br></br>ด้วย ดังนั้นพยายามตอบให้<b>เร็วที่สุด</b></p> : null}
+                                {tutorialStep === 7 && tutorialTest === 'right' ? <p>ถูกต้องครับ! <br></br><br></br>คะแนนเกมนี้ จะขึ้นอยู่กับ <br></br><b>ความถูกต้องและความไว</b></p> : null}
                                 {tutorialStep === 7 && tutorialTest === 'wrong' ? <p>อย่าลืมนะครับ ว่าต้องเป็น  <br></br><b>รูปทรงที่มีสีตามที่กำหนด</b></p> : null}
-                                {tutorialStep === 8 ? <p>เรามาเล่นอีกที คราวนี้ลองพยายาม<br></br> ตอบให้<b>เร็วที่สุด</b> นะครับ</p> : null}
-                                {tutorialStep === 14 ? <p>เมื่อแถบนี้เต็ม เกมก็จะจบลง</p> : null}
-                                {tutorialStep === 15 ? <p>ยินดีด้วย! คุณได้ผ่านการฝึกเล่น <br></br>เกม <b>'หากันจนเจอ'</b> แล้ว</p> : null}
+                                {tutorialStep === 8 ? <p>เรามาเล่นอีกที คราวนี้ลองพยายาม<br></br> ตอบให้<b>เร็วและถูกต้องมากที่สุด</b> <br></br>นะครับ</p> : null}
+                                {tutorialStep === 9 ? <p>ให้ระวังในแต่ละครั้ง<br></br> ตัวหลอกอาจจะมี<b>สีหรือรูปทรง</b> <br></br><b>เหมือนกับเป้าหมาย</b> เพราะฉะนั้น <br></br>ตั้งใจดูด้วยนะครับ</p> : null}
+                                {tutorialStep === 15 ? <p>เมื่อแถบนี้เต็ม เกมก็จะจบลง</p> : null}
+                                {tutorialStep === 16 ? <p>ยินดีด้วย! คุณได้ผ่านการฝึกเล่น <br></br>เกม <b>'หากันจนเจอ'</b> แล้ว</p> : null}
                             </div>
                             <div className="instructionControl">
                                 <div className="instructionBtnBack">
-                                {tutorialStep === 1 || tutorialStep === 7 || tutorialStep === 14 ? null : <button className="backInstruction" onMouseDown={() => {setTutorialStep(tutorialStep - 1)}}>{`< ย้อนกลับ`}</button>}
+                                {tutorialStep === 1 || tutorialStep === 7 || tutorialStep === 15 ? null : <button className="backInstruction" onMouseDown={() => {setTutorialStep(tutorialStep - 1)}}>{`< ย้อนกลับ`}</button>}
                                 </div>
                                 <div className="instructionBtnNext">
                                 {tutorialStep === 7 && tutorialTest === 'wrong' ? <button disabled={tryAgain === false} className={'nextInstruction'} onMouseDown={() => {instructionControl()}}>{`ลองอีกครั้ง >`}</button> : null}
-                                {tutorialStep < 15 ?  
-                                    <button disabled={justWait === true} className={'nextInstruction' + (tutorialTest === 'wrong' ? ' onHide' : '')} onMouseDown={() => {instructionControl()}}>{tutorialStep === 5 || tutorialStep === 8 ? `ลองเล่น >` : `ถัดไป >`}</button> :
+                                {tutorialStep < 16 ?  
+                                    <button disabled={justWait === true} className={'nextInstruction' + (tutorialTest === 'wrong' ? ' onHide' : '')} onMouseDown={() => {instructionControl()}}>{tutorialStep === 5 || tutorialStep === 9 ? `ลองเล่น >` : `ถัดไป >`}</button> :
                                     <button className="nextInstruction" onMouseDown={() => {backToCJSLanding()}}>{`กลับเมนูเกม >`}</button> }    
                                 </div>
                             </div>
