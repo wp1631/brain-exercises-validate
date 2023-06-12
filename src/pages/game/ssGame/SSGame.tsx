@@ -373,66 +373,97 @@ function SSGame(props) {
 
   function createPseudorandomStimuli() {
     let allSpanSizeRange = [2, 3, 4, 5];
-    let trialsPerSpanSize = 10; 
+    let trialsPerSpanSize = 10;  
     let sequenceDirection = 2; // forward and backward
     let trialsPerDirection = trialsPerSpanSize / sequenceDirection; 
 
     for (let iSpanSize = 0; iSpanSize < allSpanSizeRange.length; iSpanSize++) {
         for (let iRep = 0; iRep < trialsPerDirection; iRep++) {
             for (let iDirection = 0; iDirection < sequenceDirection; iDirection++) {
-                spanSizeAndDirection.push([allSpanSizeRange[iSpanSize],iDirection])
+                spanSizeAndDirection.push([allSpanSizeRange[iSpanSize],iDirection]);
             }
         }
     }
-    Shuffle(spanSizeAndDirection);
+    shuffleWithCondition();
     trialNumber = trialsPerSpanSize * allSpanSizeRange.length;
+    }
+
+    function shuffleWithCondition() { 
+        // condition: prevent repetition 4 times in the row in every modes
+        let conditionUnsatisfied: boolean = true;
+        
+        // this while loop will be continue till the conditionUnsatisfied turns to false
+        while (conditionUnsatisfied) { 
+            let allDirection: number[] = [];
+            let reShuffle: boolean = false;
+            Shuffle(spanSizeAndDirection); 
+
+            for (let i = 0; i < spanSizeAndDirection.length; i++){
+                // push only direction mode into allDirection array
+                allDirection.push(spanSizeAndDirection[i][1]); 
+                        
+                // check this array for mode value(0 or 1) 4 times repetition in the row 
+                if (allDirection[i] === allDirection[i - 1] && 
+                    allDirection[i] === allDirection[i - 2] && 
+                    allDirection[i] === allDirection[i - 3]){
+                    // when the loop found 4 times repetition, change the reShuffle = true
+                    reShuffle = true;
+                } 
+            }
+            
+            // didn't find any 4 times repetition, reShuffle still 'false' from the beginning of the while loop
+            if (reShuffle === false) {
+                // change conditionUnsatisfied = false to end the while loop
+                conditionUnsatisfied = false;
+            }
+        }
     }
 
   function colorGenerator() {
     if (parseInt(props.userId) % 2 == 0){ // check if userId was even or odd number
-        // even number section
-        if (spanSizeAndDirection[currTrial][1] === 0){
-            // forward : blue
-            document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
-            document.documentElement.style.setProperty('--cue-border-color', '#0072ff'); 
+            // even number section
+            if (spanSizeAndDirection[currTrial][1] === 0){
+                // forward : blue
+                document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
+                document.documentElement.style.setProperty('--cue-border-color', '#0072ff'); 
+            } else {
+                // backward : yellow
+                document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
+                document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+            }
         } else {
-            // backward : yellow
-            document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
-            document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+            // odd number section
+            if (spanSizeAndDirection[currTrial][1] === 0){
+                // forward : yellow
+                document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
+                document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+            } else {
+                // backward : blue
+                document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
+                document.documentElement.style.setProperty('--cue-border-color', '#0072ff');
+            }
+            cueColor = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
+            cueBorderColor = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
         }
-    } else {
-        // odd number section
-        if (spanSizeAndDirection[currTrial][1] === 0){
-            // forward : yellow
-            document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
-            document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
-        } else {
-            // backward : blue
-            document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
-            document.documentElement.style.setProperty('--cue-border-color', '#0072ff'); 
-        }
-    }
-    cueColor = getComputedStyle(document.documentElement).getPropertyValue('--cue-color').trim();
-    cueBorderColor = getComputedStyle(document.documentElement).getPropertyValue('--cue-border-color').trim();
-    }
+    } 
 
-function seqGenerator() {
-      if (currTrial !== trialNumber) {
-          allSpan.push(spanSizeAndDirection[currTrial][0]);
-          if (genSeq.length === 0) {
-              let trialSeqGenerator: number[] = samplingFromList(allProbe, spanSizeAndDirection[currTrial][0], false);
-              genSeq = trialSeqGenerator;
-
-              if (spanSizeAndDirection[currTrial][1] === 0){
+    function seqGenerator() {
+        if (currTrial !== trialNumber) {
+            allSpan.push(spanSizeAndDirection[currTrial][0]);
+            if (genSeq.length === 0) {
+                let trialSeqGenerator: number[] = samplingFromList(allProbe, spanSizeAndDirection[currTrial][0], false);
+                genSeq = trialSeqGenerator;
+                
+                if (spanSizeAndDirection[currTrial][1] === 0){
                     directionMode.push('forward');
                 } else {
                     directionMode.push('backward');
                 }
 
-              timeIntervalPerTrial();
-          }
-      } 
-  }
+                timeIntervalPerTrial();
+            }
+        } 
+    }
 
   function timeIntervalPerTrial() {
     $('.cirButton').addClass('hoverDisabled');
@@ -448,14 +479,14 @@ function seqGenerator() {
         setTimeout(function() {
             $('#goSignal').html("");
             $('#goSignal').html("2");
-        }, 1100)
+        }, 400)
     )
 
     timeoutList.push(
         setTimeout(function() {
             $('#goSignal').html("");
             $('#goSignal').html("1");
-        }, 2100) 
+        }, 700) 
     )
 
     timeoutList.push(
@@ -467,13 +498,13 @@ function seqGenerator() {
                 $('#goSignal').html("ย้อนกลับ");
             }
             colorGenerator();
-        }, 3100) 
+        }, 1000) 
     )
 
     timeoutList.push(
         setTimeout(function() {
             popCircleButton();
-        }, 4100) 
+        }, 2000) 
     )
 }
   
