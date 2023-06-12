@@ -110,6 +110,7 @@ let timeLimitRecord: any[] = [];
 let setSizeRecord: any[] = [];
 let setSizeInCorrectAns: any[] = [];
 let metricDataResult: any[] = [];
+let allSearchMode: string[] = [];
 let postEntryResult;
 
 function CJSGame(props): any {
@@ -124,7 +125,10 @@ function CJSGame(props): any {
 
         useEffect(() => {
             initiateData();
+            // have to set search target before switchSearchMode() & createTargetCanvas() 
             setSearchTarget({ shape: (Math.random() > 0.5 ? 1 : 0), col: (Math.random() > 0.5 ? 1 : 0) });
+            createPseudorandomStimuli();
+            gameLogicSchemeResult = gameLogicScheme(trialNumber, backgroundColor, squareWidth, radius, stimulusColor, positionJitter, XblockNumber, YblockNumber, ceilingTimeLimit, timeLimitDeclineStep, timeLimitInclineStep, canvasHeight, canvasWidth, initialSetSize);
 
             return() => {
                 timeoutList.forEach(tm => {
@@ -134,25 +138,8 @@ function CJSGame(props): any {
         }, [])
 
         useEffect(() => {
-            if (searchTarget) {
-                oris = [];
-                for (let j = 0; j < maxSS; j++) { oris.push(0); oris.push(0)};
-                cols = [];
-                for (let k = 0; k < maxSS; k++) { cols.push(0); cols.push(1)};
-                if (searchTarget.shape === 1) {
-                    shapeRand = [1];
-                } 
-                else {
-                    shapeRand = [0];
-                }
-                if (searchTarget.col === 1) {
-                    for (let k = 0; k < cols.length; k++) { cols[k] = 1 - cols[k] };
-                } 
-                createTargetCanvas();
-                createPseudorandomStimuli();
-                createCanvas();
-                gameLogicSchemeResult = gameLogicScheme(trialNumber, backgroundColor, squareWidth, radius, stimulusColor, positionJitter, XblockNumber, YblockNumber, ceilingTimeLimit, timeLimitDeclineStep, timeLimitInclineStep, canvasHeight, canvasWidth, initialSetSize);
-            }
+            switchSearchMode();
+            createTargetCanvas();
         }, [searchTarget])
 
     function gameLogicScheme(trialNumber, backgroundColor, squareWidth, radius, stimulusColor, positionJitter, XblockNumber, YblockNumber, ceilingTimeLimit, timeLimitDeclineStep, timeLimitInclineStep, canvasHeight, canvasWidth, initialSetSize){
@@ -299,20 +286,98 @@ function CJSGame(props): any {
     }
 
     function createPseudorandomStimuli() {
+        allSetsizeAndTarget = [];
         let allSetsizeRange = [2, 6, 12, 24, 44];
-        let trialsPerSetsize = 16; 
+        let trialsPerSetsize = 8; 
         let targetCondition = 2; // target appear or disappear
+        let searchMode = 2; // feature or conjunction 
         let trialsPerCondition = trialsPerSetsize / targetCondition; 
 
         for (let iSetsize = 0; iSetsize < allSetsizeRange.length; iSetsize++) {
             for (let iRep = 0; iRep < trialsPerCondition; iRep++) {
                 for (let iTarget = 0; iTarget < targetCondition; iTarget++) {
-                    allSetsizeAndTarget.push([allSetsizeRange[iSetsize],iTarget])
+                    for (let iMode = 0; iMode < searchMode; iMode++) {
+                        allSetsizeAndTarget.push([allSetsizeRange[iSetsize],iTarget,iMode]);
+                    }
                 }
             }
         }
-        Shuffle(allSetsizeAndTarget);
-        trialNumber = trialsPerSetsize * allSetsizeRange.length;
+        Shuffle(allSetsizeAndTarget); 
+        // shuffleWithCondition();
+        trialNumber = trialsPerSetsize * allSetsizeRange.length * searchMode;
+    }
+
+    function shuffleWithCondition() { 
+        // condition: prevent repetition 4 times in the row in every modes
+        let conditionUnsatisfied: boolean = true;
+        
+        // this while loop will be continue till the conditionUnsatisfied turns to false
+        while (conditionUnsatisfied) { 
+            let allMode: number[] = [];
+            let reShuffle: boolean = false;
+            Shuffle(allSetsizeAndTarget); 
+
+            for (let i = 0; i < allSetsizeAndTarget.length; i++){
+                // push only search mode into allMode array
+                allMode.push(allSetsizeAndTarget[i][2]); 
+                        
+                // check this array for mode value(0 or 1) 4 times repetition in the row 
+                if (allMode[i] === allMode[i - 1] && 
+                    allMode[i] === allMode[i - 2] && 
+                    allMode[i] === allMode[i - 3]){
+                    // when the loop found 4 times repetition, change the reShuffle = true
+                    reShuffle = true;
+                } 
+            }
+            
+            // didn't find any 4 times repetition, reShuffle still 'false' from the beginning of the while loop
+            if (reShuffle === false) {
+                // change conditionUnsatisfied = false to end the while loop
+                conditionUnsatisfied = false;
+            }
+        }
+    }
+
+    function switchSearchMode() {
+        if (searchTarget) {
+            oris = [];
+            cols = [];
+            if (allSetsizeAndTarget[currTrial][2] === 0) {
+                // feature search
+                allSearchMode.push('feature search');
+                for (let j = 0; j < maxSS; j++) { oris.push(0); oris.push(0)};
+                if (searchTarget.shape === 1) {
+                    shapeRand = [1];
+                } else {
+                    shapeRand = [0];
+                }
+                if (searchTarget.col === 1) {
+                    for (let k = 0; k < maxSS; k++) { cols.push(0); cols.push(0)};
+                } else {
+                    for (let k = 0; k < maxSS; k++) { cols.push(1); cols.push(1)};
+                }
+            } else {
+                // conjunction search
+                allSearchMode.push('conjunction search');
+                for (let j = 0; j < maxSS; j++) { oris.push(0); oris.push(1)};
+                for (let k = 0; k < maxSS; k++) { cols.push(0); cols.push(1)};
+                if (searchTarget.shape === 1) {
+                    shapeRand = [1];
+                } 
+                else {
+                    shapeRand = [0];
+                }
+                if (searchTarget.col === 1) {
+                    for (let k = 0; k < cols.length; k++) { cols[k] = 1 - cols[k] };
+                } 
+            }
+            // if createCanvas() runs before switchSearchMode() the target and distractors position might be overlapped
+            if (currTrial === 0){ 
+                // create only one time when the game started
+                createCanvas();
+            }
+            initialT(0, allSetsizeAndTarget[currTrial][0]);
+        }
     }
     
     function createCanvas() {
@@ -337,9 +402,7 @@ function CJSGame(props): any {
                 count++;
             }
         }
-
         myCanvas.hidden = false;
-        initialT(0, allSetsizeAndTarget[currTrial][0]);
     }
 
     function initialT(_waittime, SS) {
@@ -369,13 +432,32 @@ function CJSGame(props): any {
         Y = []; for (let iy = 0; iy < setSize + 1; iy++) { Y.push(Ys[posId[iy]]) };
         ori = []; for (let j = 0; j < setSize; j++) { ori.push(oris[j]) };
         col = []; for (let j = 0; j < setSize; j++) { col.push(stimulusColor[cols[j]]) };
-        // add the target or not
-        if (allSetsizeAndTarget[currTrial][1] === 0) {
-            ori.push(oris[setSize]);
-            col.push(stimulusColor[cols[setSize]]);
+
+        // check if this trial is feature or conjunction search
+        if (allSetsizeAndTarget[currTrial][2] === 0) {
+            // feature search
+            // check if the target appears or disappears
+            if (allSetsizeAndTarget[currTrial][1] === 0) {
+                // disappears
+                ori.push(oris[setSize]);
+                col.push(stimulusColor[cols[setSize]]);
+            } else {
+                // appears
+                ori.push(1 - oris[setSize]);
+                col.push(stimulusColor[1 - cols[setSize]]);
+            }
         } else {
-            ori.push(1 - oris[setSize]);
-            col.push(stimulusColor[cols[setSize]]);
+            // conjunction search
+            // check if the target appears or disappears
+            if (allSetsizeAndTarget[currTrial][1] === 0) {
+                // disappears
+                ori.push(oris[setSize]);
+                col.push(stimulusColor[cols[setSize]]);
+            } else {
+                // appears
+                ori.push(1 - oris[setSize]);
+                col.push(stimulusColor[cols[setSize]]);
+            }
         }
     }
 
@@ -482,7 +564,7 @@ function CJSGame(props): any {
         return stimulusDataResult;
     }
 
-    function trialData(targetMatch, allStartTime, allCurrSS, allClickTime, checkAns, stimulusDataResult){
+    function trialData(targetMatch, allStartTime, allCurrSS, allClickTime, checkAns, stimulusDataResult, allSearchMode){
         let thisAns;
         let obj_in_trial: any[] = [];
         for (let i = 0; i < targetMatch.length; i++){
@@ -498,7 +580,8 @@ function CJSGame(props): any {
                 "setSize" : allCurrSS[i],
                 "answerTime" : allClickTime[i],
                 "hasTargetAnswerBool" : thisAns,
-                "stimulusData" : stimulusDataResult[i]
+                "stimulusData" : stimulusDataResult[i],
+                "mode" : allSearchMode[i]
             }
             obj_in_trial.push(obj_to_append);
         }
@@ -548,7 +631,7 @@ function CJSGame(props): any {
             checkAns.push(thatRight);
             incorrectCount++;
         }
-        trialDataResult = trialData(targetMatch, allStartTime, allCurrSS, allClickTime, checkAns, stimulusDataResult);
+        trialDataResult = trialData(targetMatch, allStartTime, allCurrSS, allClickTime, checkAns, stimulusDataResult, allSearchMode);
         trialIsOver();
     }
 
@@ -620,7 +703,7 @@ function CJSGame(props): any {
             }, 600),
 
             setTimeout(function() {
-                initialT(0, allSetsizeAndTarget[currTrial][0]);
+                switchSearchMode();
             }, 900)
         )
     }
