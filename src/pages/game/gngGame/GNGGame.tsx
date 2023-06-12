@@ -122,7 +122,7 @@ function GNGGame(props) {
 
     function initiateData() {
         rt = [];
-        hitRt = [];
+        hitRt = [0];
         allTimePop = [];
         allColorPop = [];
         testEnd = [];
