@@ -53,6 +53,7 @@ function SSInstruction(props) {
   useEffect(() => {
       gray?.classList.add('show');
       progressBarElement = document.getElementById("progressBar") as HTMLProgressElement;
+
       return () => {
         timeoutList.forEach(tm => {
             clearTimeout(tm);
@@ -630,7 +631,7 @@ function SSInstruction(props) {
                         {tutorialStep === 4 ? <p>ในรอบนี้ คุณต้อง<br></br><b>1. จำลำดับของสัญญาณไฟ</b> <br></br>ที่กระพริบบนหน้าจอ <br></br><b>2. กดปุ่มตามคำสั่งให้ถูกต้อง</b> <br></br>โดยในรอบนี้คำสั่งคือ<b> ย้อนกลับ</b></p> : null}
                         {tutorialStep === 5 ? <p>สังเกตเห็นไหมครับว่า<br></br>แบบตามลำดับ และแบบย้อนกลับ <br></br><b>จะมีสีที่ปรากฏแตกต่างกัน</b> <br></br><br></br>ทั้งนี้ปุ่มจะ<b>ไม่สามารถกดซ้ำได้</b> <br></br>หลังถูกกดไปแล้ว</p> : null}
                         {tutorialStep === 6 ? <p>พยายามกดปุ่มตอบ<b>ให้เร็ว</b> <br></br>และ<b> ให้ถูกต้องมากที่สุด</b>นะครับ</p> : null}
-                        {tutorialStep === 7 ? <p>เดี๋ยวมาลองเล่นกันดูครับ</p> : null}
+                        {tutorialStep === 7 ? <p>เรามาลองเล่นกันดูครับ</p> : null}
                         {tutorialStep === 8 && tutorialTest === 'wrong' ? <p>ยังไม่ถูกต้อง ลองดูอีกทีนะครับ</p> : null}
                         {tutorialStep === 8 && tutorialTest === 'right' ? <p>ถูกต้องครับ! <br></br><br></br> คราวนี้จะลองเพิ่มสัญญาณไฟ<br></br>เป็น 3 ครั้ง และมีคำสั่ง <br></br>แบบ<b>ย้อนกลับ</b>นะครับ</p> : null}
                         {tutorialStep === 9 ? <p>อย่าลืมนะครับว่าแบบย้อนกลับ <br></br>ให้กดตามสัญญาณไฟที่ปรากฏขึ้น<b>หลังสุด</b> ไปจนสัญญาณไฟที่ปรากฏ <b>แรกสุด</b></p> : null}
