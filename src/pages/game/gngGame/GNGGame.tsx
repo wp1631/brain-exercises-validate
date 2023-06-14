@@ -39,7 +39,7 @@ let allInteractionEvent: string[] = [];
 let allClickEvent: string[] = [];
 let testEnd: Date[] = [];
 let rt: number[] = [];
-let hitRt: number[] = [0];
+let hitRt: number[] = [];
 let latestRtIndex = 0;
 let latestHitRtIndex = 0;
 let sumHitRt;
@@ -122,7 +122,7 @@ function GNGGame(props) {
 
     function initiateData() {
         rt = [];
-        hitRt = [0];
+        hitRt = [];
         allTimePop = [];
         allColorPop = [];
         testEnd = [];
@@ -488,9 +488,13 @@ function GNGGame(props) {
             scorePerTrial.push(rtScore);
         }
 
-        sumHitRt = hitRt.reduce((sum, score) => {
-            return sum + score;
-        });
+        if (hitRt.length !== 0){
+            sumHitRt = hitRt.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hitRt.push(0);
+        }
 
         avgHitRt = sumHitRt / 1000 / hitRt.length;
         
