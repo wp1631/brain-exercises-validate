@@ -407,7 +407,7 @@ function CJSGame(props): any {
 
     function initialT(_waittime, SS) {
         setDisabledButton(false);
-        setSizeRecord.push(ceilingSS);
+        setSizeRecord.push(SS);
         timeLimitRecord.push(timeLimit);
         if (!ceilingSS) {
             ceilingSS = SS + 1;
@@ -655,7 +655,7 @@ function CJSGame(props): any {
             }
         }
 
-        if (trackRecord === 0 && currSS > 4) {
+        if (trackRecord === 0 && allSetsizeAndTarget[currTrial][0] > 4) {
             // currSS = currSS - 2;
             timeLimit = timeLimit + timeLimitInclineStep;
             if (timeLimit > ceilingTimeLimit) {
