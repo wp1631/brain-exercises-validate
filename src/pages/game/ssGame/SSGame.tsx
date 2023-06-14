@@ -824,10 +824,11 @@ function SSGame(props) {
       }
 
       if (hitRt.length !== 0){
-
           sumHitRt = hitRt.reduce((sum, time) => {
             return sum + time;
             });
+      } else {
+        hitRt.push(0);
       }
 
         avgHitRt = sumHitRt / 1000 / hitRt.length;
