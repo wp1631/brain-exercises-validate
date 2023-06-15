@@ -427,16 +427,16 @@ function SSGame(props) {
                 document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
                 document.documentElement.style.setProperty('--cue-border-color', '#0072ff'); 
             } else {
-                // backward : yellow
-                document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
-                document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+                // backward : orange
+                document.documentElement.style.setProperty('--cue-color', '#fc9036'); 
+                document.documentElement.style.setProperty('--cue-border-color', '#fc9036'); 
             }
         } else {
             // odd number section
             if (spanSizeAndDirection[currTrial][1] === 0){
-                // forward : yellow
-                document.documentElement.style.setProperty('--cue-color', '#ffc837'); 
-                document.documentElement.style.setProperty('--cue-border-color', '#ffc837'); 
+                // forward : orange
+                document.documentElement.style.setProperty('--cue-color', '#fc9036'); 
+                document.documentElement.style.setProperty('--cue-border-color', '#fc9036'); 
             } else {
                 // backward : blue
                 document.documentElement.style.setProperty('--cue-color', '#0072ff'); 
