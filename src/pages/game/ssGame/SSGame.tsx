@@ -60,9 +60,34 @@ let allReactionTime: string[]  = [];
 let reactionTime: number[] = [];
 let allReactionTrial: number[] = [];
 let answerTimePerTrial: any[] = [];
+let latestRtIndex = 0;
 let hitRt: number[] = [];
 let sumHitRt;
 let avgHitRt;
+let hit2SpanSizeRtForward: number[] = [];
+let hit3SpanSizeRtForward: number[] = [];
+let hit4SpanSizeRtForward: number[] = [];
+let hit5SpanSizeRtForward: number[] = [];
+let hit2SpanSizeRtBackward: number[] = [];
+let hit3SpanSizeRtBackward: number[] = [];
+let hit4SpanSizeRtBackward: number[] = [];
+let hit5SpanSizeRtBackward: number[] = [];
+let avgHit2SpanSizeRtForward;
+let avgHit3SpanSizeRtForward;
+let avgHit4SpanSizeRtForward;
+let avgHit5SpanSizeRtForward;
+let avgHit2SpanSizeRtBackward;
+let avgHit3SpanSizeRtBackward;
+let avgHit4SpanSizeRtBackward;
+let avgHit5SpanSizeRtBackward;
+let hitAccuracy2SpanSizeForward;
+let hitAccuracy3SpanSizeForward;
+let hitAccuracy4SpanSizeForward;
+let hitAccuracy5SpanSizeForward;
+let hitAccuracy2SpanSizeBackward;
+let hitAccuracy3SpanSizeBackward;
+let hitAccuracy4SpanSizeBackward;
+let hitAccuracy5SpanSizeBackward;
 let latestIndex: number = 0;
 let scorePerTrial: number[] = [];
 let spanMultiplier: number = 1000;
@@ -207,13 +232,14 @@ function SSGame(props) {
           
           const equalCheck = (currAns: any[], currSeq: string | any[]) => 
               currAns.length === currSeq.length && currAns.every((value, index) => value === currSeq[index]);
-              
+
           if (spanSizeAndDirection[currTrial][1] === 1){
               currAns.reverse();
           } 
 
           if (equalCheck(currAns, currSeq)) {
               $('#goSignal').html("ถูก");
+              checkHitSpanSize();
               setProgressValue(progressValue + 1);
             //   combo2Sound();
               currSeq = [];
@@ -281,16 +307,65 @@ function SSGame(props) {
           }
           
           allReactionTime.push(reactionTime.toString());
-          let lastReaction = reactionTime[reactionTime.length-1];
+          let lastReaction = reactionTime[reactionTime.length - 1];
           allReactionTrial.push(lastReaction);
           reactionTime = [];
       }
 
       if (currTrial === trialNumber){
+          summarySpanSize();
           summaryScore();
           runIsOver();
       }
   };
+
+  function checkHitSpanSize() {
+    let reactionTimePerClick: number[] = [];
+    // push in 1st index to the reactionTimePerClick array
+    reactionTimePerClick.push(reactionTime[0]);
+    for (let clickIndex = 0; clickIndex < reactionTime.length; clickIndex++){
+        // currClick = the present time in present index (where we started)
+        let currClick = reactionTime[clickIndex];
+        // nextClick = the next time in next index (the 2nd 3rd and so on clicked)
+        let nextClick;
+        if (clickIndex < reactionTime.length - 1){
+            nextClick = reactionTime[clickIndex + 1];
+        }
+
+        // this condition prevent NaN because there is nothing beyond the last index so it 'undefined'
+        if (nextClick !== undefined){ // push every time that nextClick !== undefined
+            reactionTimePerClick.push(nextClick - currClick);
+        }
+    }
+    let avgTrialReactionTime = reactionTimePerClick.reduce((sum, time) => {return sum + time}) / reactionTimePerClick.length;
+    hitRt.push(avgTrialReactionTime);
+    // check if forward or backward mode 
+    if (spanSizeAndDirection[currTrial][1] === 0){
+        // forward
+        // check span size 
+        if (spanSizeAndDirection[currTrial][0] === 2){
+            hit2SpanSizeRtForward.push(avgTrialReactionTime);
+        } else if (spanSizeAndDirection[currTrial][0] === 3){
+            hit3SpanSizeRtForward.push(avgTrialReactionTime);
+        } else if (spanSizeAndDirection[currTrial][0] === 4){
+            hit4SpanSizeRtForward.push(avgTrialReactionTime);
+        } else if (spanSizeAndDirection[currTrial][0] === 5){
+            hit5SpanSizeRtForward.push(avgTrialReactionTime);
+        }
+    } else {
+        // backward
+        // check span size 
+        if (spanSizeAndDirection[currTrial][0] === 2){
+            hit2SpanSizeRtBackward.push(avgTrialReactionTime);
+        } else if (spanSizeAndDirection[currTrial][0] === 3){
+            hit3SpanSizeRtBackward.push(avgTrialReactionTime);
+        } else if (spanSizeAndDirection[currTrial][0] === 4){
+            hit4SpanSizeRtBackward.push(avgTrialReactionTime);
+        } else if (spanSizeAndDirection[currTrial][0] === 5){
+            hit5SpanSizeRtBackward.push(avgTrialReactionTime);
+        }
+    }
+  }
 
   function initiateData() {
       allSpan = []; 
@@ -663,7 +738,7 @@ function SSGame(props) {
             .catch(function (error) {
                 console.log('error')
             });
-      saveJSONDataToClientDevice(postEntryResult, `SS_${props.userPhone}_${thisTime().toString()}`);
+      saveJSONDataToClientDevice(postEntryResult, `Subject${props.userId}_spatialspan_hard_session${props.userSession}_${thisTime().toString()}`);
   }
 
   function cueData(currSeq: string | any[], cueColor: string, cueBorderColor: string, cueStartTime: any[], cueEndTime: any[]){
@@ -769,18 +844,69 @@ function SSGame(props) {
           = ['correctCount', 
               'incorrectCount', 
               'struggleTimeCount', 
-              'highestSpan'];
+              'highestSpan',
+              'averageHitReactionTime',
+              'hitAccuracyForward2SS',
+              'avgHitReactionTimeForward2SS',
+              'hitAccuracyForward3SS',
+              'avgHitReactionTimeForward3SS',
+              'hitAccuracyForward4SS',
+              'avgHitReactionTimeForward4SS',
+              'hitAccuracyForward5SS',
+              'avgHitReactionTimeForward5SS',
+              'hitAccuracyBackward2SS',
+              'avgHitReactionTimeBackward2SS',
+              'hitAccuracyBackward3SS',
+              'avgHitReactionTimeBackward3SS',
+              'hitAccuracyBackward4SS',
+              'avgHitReactionTimeBackward4SS',
+              'hitAccuracyBackward5SS',
+              'avgHitReactionTimeBackward5SS',];
       let metricValue 
           = [summaryCorrect, 
               trialNumber - summaryCorrect, 
               null, 
-              spanInCorrectAns[spanInCorrectAns.length - 1]];
-      let metricUnit = [null, null, null, null, null];
+              spanInCorrectAns[spanInCorrectAns.length - 1],
+              avgHitRt,
+              hitAccuracy2SpanSizeForward,
+              avgHit2SpanSizeRtForward,
+              hitAccuracy3SpanSizeForward,
+              avgHit3SpanSizeRtForward,
+              hitAccuracy4SpanSizeForward,
+              avgHit4SpanSizeRtForward,
+              hitAccuracy5SpanSizeForward,
+              avgHit5SpanSizeRtForward,
+              hitAccuracy2SpanSizeBackward,
+              avgHit2SpanSizeRtBackward,
+              hitAccuracy3SpanSizeBackward,
+              avgHit3SpanSizeRtBackward,
+              hitAccuracy4SpanSizeBackward,
+              avgHit4SpanSizeRtBackward,
+              hitAccuracy5SpanSizeBackward,
+              avgHit5SpanSizeRtBackward,];
+      let metricUnit = [null, null, null, null, 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's'];
       let metricDescription 
           = ['Total number of correct trials', 
               'Total number of incorrect trials', 
               'Total number of entered struggle loop', 
-              'The highest span that user reached'];
+              'The highest span that user reached',
+              'The average of all hit reaction time',
+              'The accuracy of 2 span size hit in forward mode',
+              'The average reaction time of all 2 span size hit in forward mode',
+              'The accuracy of 3 span size hit in forward mode',
+              'The average reaction time of all 3 span size hit in forward mode',
+              'The accuracy of 4 span size hit in forward mode',
+              'The average reaction time of all 4 span size hit in forward mode',
+              'The accuracy of 5 span size hit in forward mode',
+              'The average reaction time of all 5 span size hit in forward mode',
+              'The accuracy of 2 span size hit in backward mode',
+              'The average reaction time of all 2 span size hit in backward mode',
+              'The accuracy of 3 span size hit in backward mode',
+              'The average reaction time of all 3 span size hit in backward mode',
+              'The accuracy of 4 span size hit in backward mode',
+              'The average reaction time of all 4 span size hit in backward mode',
+              'The accuracy of 5 span size hit in backward mode',
+              'The average reaction time of all 5 span size hit in backward mode',];
       for (let i = 0; i < metricName.length; i++){
           let obj_to_append
           obj_to_append = {
@@ -796,8 +922,10 @@ function SSGame(props) {
 
   function postEntry(trialDataResult: any[], gameLogicSchemeResult: { game: string; schemeName: string; version: number; variant: string; parameters: { trialNumber: { value: any; unit: null; description: string }; flashDuration: { value: any; unit: string; description: string }; flashInterval: { value: any; unit: string; description: string }; initialSpan: { value: any; unit: null; description: string }; probeNumber: { value: any; unit: null; description: string }; probeAngularPosition: { value: any; unit: string; description: string }; rampingCorrectCount: { value: any; unit: null; description: string }; maxFailStreakCount: { value: any; unit: null; description: string }; maxFailCount: { value: any; unit: null; description: string } }; description: string }, scoringDataResult: any[], metricDataResult: any[]){
       postEntryResult = {
+          "date" : `${thisTime().toString()}`,
           "userId" : props.userId,
           "userPhone" : props.userPhone,
+          "userSession" : props.userSession,
           "data" : {
               "rawData" : {
                   "trialData" : trialDataResult,
@@ -811,6 +939,126 @@ function SSGame(props) {
       return postEntryResult;
   }
 
+  function summarySpanSize() {
+    let sumHit2SpanSizeRtForward;
+    let sumHit3SpanSizeRtForward;
+    let sumHit4SpanSizeRtForward;
+    let sumHit5SpanSizeRtForward;
+    let sumHit2SpanSizeRtBackward;
+    let sumHit3SpanSizeRtBackward;
+    let sumHit4SpanSizeRtBackward;
+    let sumHit5SpanSizeRtBackward;
+    let forwardOrBackwardCondition = 2; // forward or backward
+    let spanSizeCondition = 4; // [2, 3, 4, 5] span size
+    let trialNumberPerCondition = spanSizeAndDirection.length / (forwardOrBackwardCondition * spanSizeCondition);
+
+    // forward section
+    // 2 span size section
+    hitAccuracy2SpanSizeForward = hit2SpanSizeRtForward.length / trialNumberPerCondition * 100;
+    if (hit2SpanSizeRtForward.length !== 0){
+        sumHit2SpanSizeRtForward = hit2SpanSizeRtForward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit2SpanSizeRtForward.push(0);
+        sumHit2SpanSizeRtForward = hit2SpanSizeRtForward;
+    }
+
+    avgHit2SpanSizeRtForward = sumHit2SpanSizeRtForward / 1000 / hit2SpanSizeRtForward.length;
+
+    // 3 span size section
+    hitAccuracy3SpanSizeForward = hit3SpanSizeRtForward.length / trialNumberPerCondition * 100;
+    if (hit3SpanSizeRtForward.length !== 0){
+        sumHit3SpanSizeRtForward = hit3SpanSizeRtForward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit3SpanSizeRtForward.push(0);
+        sumHit3SpanSizeRtForward = hit3SpanSizeRtForward;
+    }
+
+    avgHit3SpanSizeRtForward = sumHit3SpanSizeRtForward / 1000 / hit3SpanSizeRtForward.length;
+
+    // 4 span size section
+    hitAccuracy4SpanSizeForward = hit4SpanSizeRtForward.length / trialNumberPerCondition * 100;
+    if (hit4SpanSizeRtForward.length !== 0){
+        sumHit4SpanSizeRtForward = hit4SpanSizeRtForward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit4SpanSizeRtForward.push(0);
+        sumHit4SpanSizeRtForward = hit4SpanSizeRtForward;
+    }
+
+    avgHit4SpanSizeRtForward = sumHit4SpanSizeRtForward / 1000 / hit4SpanSizeRtForward.length;
+
+    // 5 span size section
+    hitAccuracy5SpanSizeForward = hit5SpanSizeRtForward.length / trialNumberPerCondition * 100;
+    if (hit5SpanSizeRtForward.length !== 0){
+        sumHit5SpanSizeRtForward = hit5SpanSizeRtForward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit5SpanSizeRtForward.push(0);
+        sumHit5SpanSizeRtForward = hit5SpanSizeRtForward;
+    }
+
+    avgHit5SpanSizeRtForward = sumHit5SpanSizeRtForward / 1000 / hit5SpanSizeRtForward.length;
+
+    // backward section
+    // 2 span size section
+    hitAccuracy2SpanSizeBackward = hit2SpanSizeRtBackward.length / trialNumberPerCondition * 100;
+    if (hit2SpanSizeRtBackward.length !== 0){
+        sumHit2SpanSizeRtBackward = hit2SpanSizeRtBackward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit2SpanSizeRtBackward.push(0);
+        sumHit2SpanSizeRtBackward = hit2SpanSizeRtBackward;
+    }
+
+    avgHit2SpanSizeRtBackward = sumHit2SpanSizeRtBackward / 1000 / hit2SpanSizeRtBackward.length;
+
+    // 3 span size section
+    hitAccuracy3SpanSizeBackward = hit3SpanSizeRtBackward.length / trialNumberPerCondition * 100;
+    if (hit3SpanSizeRtBackward.length !== 0){
+        sumHit3SpanSizeRtBackward = hit3SpanSizeRtBackward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit3SpanSizeRtBackward.push(0);
+        sumHit3SpanSizeRtBackward = hit3SpanSizeRtBackward;
+    }
+
+    avgHit3SpanSizeRtBackward = sumHit3SpanSizeRtBackward / 1000 / hit3SpanSizeRtBackward.length;
+
+    // 4 span size section
+    hitAccuracy4SpanSizeBackward = hit4SpanSizeRtBackward.length / trialNumberPerCondition * 100;
+    if (hit4SpanSizeRtBackward.length !== 0){
+        sumHit4SpanSizeRtBackward = hit4SpanSizeRtBackward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit4SpanSizeRtBackward.push(0);
+        sumHit4SpanSizeRtBackward = hit4SpanSizeRtBackward;
+    }
+
+    avgHit4SpanSizeRtBackward = sumHit4SpanSizeRtBackward / 1000 / hit4SpanSizeRtBackward.length;
+
+    // 5 span size section
+    hitAccuracy5SpanSizeBackward = hit5SpanSizeRtBackward.length / trialNumberPerCondition * 100;
+    if (hit5SpanSizeRtBackward.length !== 0){
+        sumHit5SpanSizeRtBackward = hit5SpanSizeRtBackward.reduce((sum, time) => {
+          return sum + time;
+        });
+    } else {
+        hit5SpanSizeRtBackward.push(0);
+        sumHit5SpanSizeRtBackward = hit5SpanSizeRtBackward;
+    }
+
+    avgHit5SpanSizeRtBackward = sumHit5SpanSizeRtBackward / 1000 / hit5SpanSizeRtBackward.length;
+  }
+
   function summaryScore() {
       for (let correctIndex = latestIndex; correctIndex < checkAns.length; correctIndex++) {
           latestIndex = correctIndex;
@@ -819,7 +1067,6 @@ function SSGame(props) {
               scorePerTrial.push(allSpan[correctIndex] * spanMultiplier);
               summaryCorrect++;
               spanInCorrectAns.push(allSpan[correctIndex]);
-              hitRt.push(allReactionTrial[correctIndex]);
           } 
       }
 
@@ -829,6 +1076,7 @@ function SSGame(props) {
             });
       } else {
         hitRt.push(0);
+        sumHitRt = hitRt;
       }
 
         avgHitRt = sumHitRt / 1000 / hitRt.length;
