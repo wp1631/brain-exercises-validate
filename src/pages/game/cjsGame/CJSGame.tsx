@@ -83,6 +83,26 @@ let sumRt = 0;
 let allRt: number[] = [];
 let sumHitRt;
 let hitRt: number[] = [];
+let hit2SetSizeRtF: number[] = [];
+let hit6SetSizeRtF: number[] = [];
+let hit12SetSizeRtF: number[] = [];
+let hit24SetSizeRtF: number[] = [];
+let hit44SetSizeRtF: number[] = [];
+let correctRejection2SetSizeRtF: number[] = [];
+let correctRejection6SetSizeRtF: number[] = [];
+let correctRejection12SetSizeRtF: number[] = [];
+let correctRejection24SetSizeRtF: number[] = [];
+let correctRejection44SetSizeRtF: number[] = [];
+let hit2SetSizeRtC: number[] = [];
+let hit6SetSizeRtC: number[] = [];
+let hit12SetSizeRtC: number[] = [];
+let hit24SetSizeRtC: number[] = [];
+let hit44SetSizeRtC: number[] = [];
+let correctRejection2SetSizeRtC: number[] = [];
+let correctRejection6SetSizeRtC: number[] = [];
+let correctRejection12SetSizeRtC: number[] = [];
+let correctRejection24SetSizeRtC: number[] = [];
+let correctRejection44SetSizeRtC: number[] = [];
 let latestHitRtIndex = 0;
 let correctButLateCount = 0;
 let lateMultiplier = 10000;
@@ -94,6 +114,46 @@ let scoresMultiplier = 10;
 let comboCount: number[] = [];
 let rtBound = 10000;
 let avgHitRt;
+let avgHit2SetSizeRtF;
+let avgHit6SetSizeRtF;
+let avgHit12SetSizeRtF;
+let avgHit24SetSizeRtF;
+let avgHit44SetSizeRtF;
+let avgCorrectRejection2SetSizeRtF;
+let avgCorrectRejection6SetSizeRtF;
+let avgCorrectRejection12SetSizeRtF;
+let avgCorrectRejection24SetSizeRtF;
+let avgCorrectRejection44SetSizeRtF;
+let hitAccuracy2SetSizeF;
+let hitAccuracy6SetSizeF;
+let hitAccuracy12SetSizeF;
+let hitAccuracy24SetSizeF;
+let hitAccuracy44SetSizeF;
+let correctRejectionAccuracy2SetSizeF;
+let correctRejectionAccuracy6SetSizeF;
+let correctRejectionAccuracy12SetSizeF;
+let correctRejectionAccuracy24SetSizeF;
+let correctRejectionAccuracy44SetSizeF;
+let avgHit2SetSizeRtC;
+let avgHit6SetSizeRtC;
+let avgHit12SetSizeRtC;
+let avgHit24SetSizeRtC;
+let avgHit44SetSizeRtC;
+let avgCorrectRejection2SetSizeRtC;
+let avgCorrectRejection6SetSizeRtC;
+let avgCorrectRejection12SetSizeRtC;
+let avgCorrectRejection24SetSizeRtC;
+let avgCorrectRejection44SetSizeRtC;
+let hitAccuracy2SetSizeC;
+let hitAccuracy6SetSizeC;
+let hitAccuracy12SetSizeC;
+let hitAccuracy24SetSizeC;
+let hitAccuracy44SetSizeC;
+let correctRejectionAccuracy2SetSizeC;
+let correctRejectionAccuracy6SetSizeC;
+let correctRejectionAccuracy12SetSizeC;
+let correctRejectionAccuracy24SetSizeC;
+let correctRejectionAccuracy44SetSizeC;
 let swiftness: string = '';
 let total: number = 0;
 let score: number;
@@ -624,6 +684,73 @@ function CJSGame(props): any {
                 checkAns.push(thatRight);
                 correctButLateCount++;
             }
+
+            // check if feature or conjunction mode
+            if (allSetsizeAndTarget[currTrial][2] === 0){
+                // feature
+                // check if target appear or disappear
+                if (allSetsizeAndTarget[currTrial][1] === 0){
+                    // disappear
+                    // check setsize that correct rejection
+                    if (allSetsizeAndTarget[currTrial][0] === 2){
+                        correctRejection2SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 6) {
+                        correctRejection6SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 12) {
+                        correctRejection12SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 24) {
+                        correctRejection24SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 44) {
+                        correctRejection44SetSizeRtF.push(rt);
+                    }
+                } else {
+                    // appear
+                    // check setsize that hit
+                    if (allSetsizeAndTarget[currTrial][0] === 2){
+                        hit2SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 6) {
+                        hit6SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 12) {
+                        hit12SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 24) {
+                        hit24SetSizeRtF.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 44) {
+                        hit44SetSizeRtF.push(rt);
+                    }
+                }
+            } else {
+                // conjunction
+                // check if target appear or disappear
+                if (allSetsizeAndTarget[currTrial][1] === 0){
+                    // disappear
+                    // check setsize that correct rejection
+                    if (allSetsizeAndTarget[currTrial][0] === 2){
+                        correctRejection2SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 6) {
+                        correctRejection6SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 12) {
+                        correctRejection12SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 24) {
+                        correctRejection24SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 44) {
+                        correctRejection44SetSizeRtC.push(rt);
+                    }
+                } else {
+                    // appear
+                    // check setsize that hit
+                    if (allSetsizeAndTarget[currTrial][0] === 2){
+                        hit2SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 6) {
+                        hit6SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 12) {
+                        hit12SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 24) {
+                        hit24SetSizeRtC.push(rt);
+                    } else if (allSetsizeAndTarget[currTrial][0] === 44) {
+                        hit44SetSizeRtC.push(rt);
+                    }
+                }
+            }
         } else {
             // losingSound();
             thatRight = 'wrong';
@@ -664,6 +791,7 @@ function CJSGame(props): any {
         }
         currTrial = currTrial + 1;
         if (currTrial >= trialNumber) {
+            summarySetSize();
             summaryScore();
             Done();
         } else {
@@ -708,6 +836,285 @@ function CJSGame(props): any {
         )
     }
 
+    function summarySetSize() {
+        let sumHit2SetSizeRtF;
+        let sumHit6SetSizeRtF;
+        let sumHit12SetSizeRtF;
+        let sumHit24SetSizeRtF;
+        let sumHit44SetSizeRtF;
+        let sumCorrectRejection2SetSizeRtF;
+        let sumCorrectRejection6SetSizeRtF;
+        let sumCorrectRejection12SetSizeRtF;
+        let sumCorrectRejection24SetSizeRtF;
+        let sumCorrectRejection44SetSizeRtF;
+        let sumHit2SetSizeRtC;
+        let sumHit6SetSizeRtC;
+        let sumHit12SetSizeRtC;
+        let sumHit24SetSizeRtC;
+        let sumHit44SetSizeRtC;
+        let sumCorrectRejection2SetSizeRtC;
+        let sumCorrectRejection6SetSizeRtC;
+        let sumCorrectRejection12SetSizeRtC;
+        let sumCorrectRejection24SetSizeRtC;
+        let sumCorrectRejection44SetSizeRtC;
+        let featureOrConjunctionCondition = 2; // feature or conjunction
+        let appearOrDisappearCondition = 2; // appear or disappear
+        let setSizeCondition = 5; // [2, 6, 12, 24, 44] setsize
+        let trialNumberPerCondition = allSetsizeAndTarget.length / (featureOrConjunctionCondition * appearOrDisappearCondition * setSizeCondition);
+
+        // feature section
+        // 2 setsize section
+        hitAccuracy2SetSizeF = hit2SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (hit2SetSizeRtF.length !== 0){
+            sumHit2SetSizeRtF = hit2SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit2SetSizeRtF.push(0);
+            sumHit2SetSizeRtF = hit2SetSizeRtF;
+        }
+
+        avgHit2SetSizeRtF = sumHit2SetSizeRtF / 1000 / hit2SetSizeRtF.length;
+
+        correctRejectionAccuracy2SetSizeF = correctRejection2SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (correctRejection2SetSizeRtF.length !== 0){
+            sumCorrectRejection2SetSizeRtF = correctRejection2SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection2SetSizeRtF.push(0);
+            sumCorrectRejection2SetSizeRtF = correctRejection2SetSizeRtF;
+        }
+
+        avgCorrectRejection2SetSizeRtF = sumCorrectRejection2SetSizeRtF / 1000 / correctRejection2SetSizeRtF.length;
+
+        // 6 setsize section
+        hitAccuracy6SetSizeF = hit6SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (hit6SetSizeRtF.length !== 0){
+            sumHit6SetSizeRtF = hit6SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit6SetSizeRtF.push(0);
+            sumHit6SetSizeRtF = hit6SetSizeRtF;
+        }
+
+        avgHit6SetSizeRtF = sumHit6SetSizeRtF / 1000 / hit6SetSizeRtF.length;
+
+        correctRejectionAccuracy6SetSizeF = correctRejection6SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (correctRejection6SetSizeRtF.length !== 0){
+            sumCorrectRejection6SetSizeRtF = correctRejection6SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection6SetSizeRtF.push(0);
+            sumCorrectRejection6SetSizeRtF = correctRejection6SetSizeRtF;
+        }
+
+        avgCorrectRejection6SetSizeRtF = sumCorrectRejection6SetSizeRtF / 1000 / correctRejection6SetSizeRtF.length;
+
+        // 12 setsize section
+        hitAccuracy12SetSizeF = hit12SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (hit12SetSizeRtF.length !== 0){
+            sumHit12SetSizeRtF = hit12SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit12SetSizeRtF.push(0);
+            sumHit12SetSizeRtF = hit2SetSizeRtF;
+        }
+
+        avgHit12SetSizeRtF = sumHit12SetSizeRtF / 1000 / hit12SetSizeRtF.length;
+
+        correctRejectionAccuracy12SetSizeF = correctRejection12SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (correctRejection12SetSizeRtF.length !== 0){
+            sumCorrectRejection12SetSizeRtF = correctRejection12SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection12SetSizeRtF.push(0);
+            sumCorrectRejection12SetSizeRtF = correctRejection12SetSizeRtF;
+        }
+
+        avgCorrectRejection12SetSizeRtF = sumCorrectRejection12SetSizeRtF / 1000 / correctRejection12SetSizeRtF.length;
+
+        // 24 setsize section
+        hitAccuracy24SetSizeF = hit24SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (hit24SetSizeRtF.length !== 0){
+            sumHit24SetSizeRtF = hit24SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit24SetSizeRtF.push(0);
+            sumHit24SetSizeRtF = hit24SetSizeRtF;
+        }
+
+        avgHit24SetSizeRtF = sumHit24SetSizeRtF / 1000 / hit24SetSizeRtF.length;
+
+        correctRejectionAccuracy24SetSizeF = correctRejection24SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (correctRejection24SetSizeRtF.length !== 0){
+            sumCorrectRejection24SetSizeRtF = correctRejection24SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection24SetSizeRtF.push(0);
+            sumCorrectRejection24SetSizeRtF = correctRejection24SetSizeRtF;
+        }
+
+        avgCorrectRejection24SetSizeRtF = sumCorrectRejection24SetSizeRtF / 1000 / correctRejection24SetSizeRtF.length;
+
+        // 44 setsize section
+        hitAccuracy44SetSizeF = hit44SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (hit44SetSizeRtF.length !== 0){
+            sumHit44SetSizeRtF = hit44SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit44SetSizeRtF.push(0);
+            sumHit44SetSizeRtF = hit44SetSizeRtF;
+        }
+
+        avgHit44SetSizeRtF = sumHit44SetSizeRtF / 1000 / hit44SetSizeRtF.length;
+
+        correctRejectionAccuracy44SetSizeF = correctRejection44SetSizeRtF.length / trialNumberPerCondition * 100;
+        if (correctRejection44SetSizeRtF.length !== 0){
+            sumCorrectRejection44SetSizeRtF = correctRejection44SetSizeRtF.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection44SetSizeRtF.push(0);
+            sumCorrectRejection44SetSizeRtF = correctRejection44SetSizeRtF;
+        }
+
+        avgCorrectRejection44SetSizeRtF = sumCorrectRejection44SetSizeRtF / 1000 / correctRejection44SetSizeRtF.length;
+
+        // conjunction section
+        // 2 setsize section
+        hitAccuracy2SetSizeC = hit2SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (hit2SetSizeRtC.length !== 0){
+            sumHit2SetSizeRtC = hit2SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit2SetSizeRtC.push(0);
+            sumHit2SetSizeRtC = hit2SetSizeRtC;
+        }
+
+        avgHit2SetSizeRtC = sumHit2SetSizeRtC / 1000 / hit2SetSizeRtC.length;
+
+        correctRejectionAccuracy2SetSizeC = correctRejection2SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (correctRejection2SetSizeRtC.length !== 0){
+            sumCorrectRejection2SetSizeRtC = correctRejection2SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection2SetSizeRtC.push(0);
+            sumCorrectRejection2SetSizeRtC = correctRejection2SetSizeRtC;
+        }
+
+        avgCorrectRejection2SetSizeRtC = sumCorrectRejection2SetSizeRtC / 1000 / correctRejection2SetSizeRtC.length;
+
+        // 6 setsize section
+        hitAccuracy6SetSizeC = hit6SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (hit6SetSizeRtC.length !== 0){
+            sumHit6SetSizeRtC = hit6SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit6SetSizeRtC.push(0);
+            sumHit6SetSizeRtC = hit6SetSizeRtC;
+        }
+
+        avgHit6SetSizeRtC = sumHit6SetSizeRtC / 1000 / hit6SetSizeRtC.length;
+
+        correctRejectionAccuracy6SetSizeC = correctRejection6SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (correctRejection6SetSizeRtC.length !== 0){
+            sumCorrectRejection6SetSizeRtC = correctRejection6SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection6SetSizeRtC.push(0);
+            sumCorrectRejection6SetSizeRtC = correctRejection6SetSizeRtC;
+        }
+
+        avgCorrectRejection6SetSizeRtC = sumCorrectRejection6SetSizeRtC / 1000 / correctRejection6SetSizeRtC.length;
+
+        // 12 setsize section
+        hitAccuracy12SetSizeC = hit12SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (hit12SetSizeRtC.length !== 0){
+            sumHit12SetSizeRtC = hit12SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit12SetSizeRtC.push(0);
+            sumHit12SetSizeRtC = hit2SetSizeRtC;
+        }
+
+        avgHit12SetSizeRtC = sumHit12SetSizeRtC / 1000 / hit12SetSizeRtC.length;
+
+        correctRejectionAccuracy12SetSizeC = correctRejection12SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (correctRejection12SetSizeRtC.length !== 0){
+            sumCorrectRejection12SetSizeRtC = correctRejection12SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection12SetSizeRtC.push(0);
+            sumCorrectRejection12SetSizeRtC = correctRejection12SetSizeRtC;
+        }
+
+        avgCorrectRejection12SetSizeRtC = sumCorrectRejection12SetSizeRtC / 1000 / correctRejection12SetSizeRtC.length;
+
+        // 24 setsize section
+        hitAccuracy24SetSizeC = hit24SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (hit24SetSizeRtC.length !== 0){
+            sumHit24SetSizeRtC = hit24SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit24SetSizeRtC.push(0);
+            sumHit24SetSizeRtC = hit24SetSizeRtC;
+        }
+
+        avgHit24SetSizeRtC = sumHit24SetSizeRtC / 1000 / hit24SetSizeRtC.length;
+
+        correctRejectionAccuracy24SetSizeC = correctRejection24SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (correctRejection24SetSizeRtC.length !== 0){
+            sumCorrectRejection24SetSizeRtC = correctRejection24SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection24SetSizeRtC.push(0);
+            sumCorrectRejection24SetSizeRtC = correctRejection24SetSizeRtC;
+        }
+
+        avgCorrectRejection24SetSizeRtC = sumCorrectRejection24SetSizeRtC / 1000 / correctRejection24SetSizeRtC.length;
+
+        // 44 setsize section
+        hitAccuracy44SetSizeC = hit44SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (hit44SetSizeRtC.length !== 0){
+            sumHit44SetSizeRtC = hit44SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hit44SetSizeRtC.push(0);
+            sumHit44SetSizeRtC = hit44SetSizeRtC;
+        }
+
+        avgHit44SetSizeRtC = sumHit44SetSizeRtC / 1000 / hit44SetSizeRtC.length;
+
+        correctRejectionAccuracy44SetSizeC = correctRejection44SetSizeRtC.length / trialNumberPerCondition * 100;
+        if (correctRejection44SetSizeRtC.length !== 0){
+            sumCorrectRejection44SetSizeRtC = correctRejection44SetSizeRtC.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            correctRejection44SetSizeRtC.push(0);
+            sumCorrectRejection44SetSizeRtC = correctRejection44SetSizeRtC;
+        }
+
+        avgCorrectRejection44SetSizeRtC = sumCorrectRejection44SetSizeRtC / 1000 / correctRejection44SetSizeRtC.length;
+    }
+
     function summaryScore() {
         for (let correctIndex = latestHitRtIndex; correctIndex < comboCount.length; correctIndex++) {
             latestHitRtIndex = correctIndex;
@@ -737,9 +1144,14 @@ function CJSGame(props): any {
             return sum + scores;
         });
 
-        sumHitRt = hitRt.reduce((sum, score) => {
-            return sum + score;
-        });
+        if (hitRt.length !== 0){
+            sumHitRt = hitRt.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            hitRt.push(0);
+            sumHitRt = hitRt;
+        }
 
         avgHitRt = sumHitRt / 1000 / hitRt.length;
         if (avgHitRt < 1) {
@@ -771,7 +1183,7 @@ function CJSGame(props): any {
             .catch(function (error) {
                 console.log('error')
             });
-        saveJSONDataToClientDevice(postEntryResult, `CJS_${props.userPhone}_${thisTime().toString()}`);
+        saveJSONDataToClientDevice(postEntryResult, `Subject${props.userId}_visualsearch_hard_session${props.userSession}_${thisTime().toString()}`);
     }
 
     function scoringData(rtBound, incorrectMultiplier, lateMultiplier, scoresMultiplier, trialNumber, total){
@@ -833,7 +1245,47 @@ function CJSGame(props): any {
                'lowestTimeLimit', 
                'fastestHitReactionTime', 
                'averageHitReactionTime', 
-               'swiftness'];
+               'swiftness',
+               'hitAccuracyFeature2SS',
+               'avgHitReactionTimeFeature2SS',
+               'hitAccuracyFeature6SS',
+               'avgHitReactionTimeFeature6SS',
+               'hitAccuracyFeature12SS',
+               'avgHitReactionTimeFeature12SS',
+               'hitAccuracyFeature24SS',
+               'avgHitReactionTimeFeature24SS',
+               'hitAccuracyFeature44SS',
+               'avgHitReactionTimeFeature44SS',
+               'correctRejectionAccuracyFeature2SS',
+               'avgCorrectRejectionTimeFeature2SS',
+               'correctRejectionAccuracyFeature6SS',
+               'avgCorrectRejectionTimeFeature6SS',
+               'correctRejectionAccuracyFeature12SS',
+               'avgCorrectRejectionTimeFeature12SS',
+               'correctRejectionAccuracyFeature24SS',
+               'avgCorrectRejectionTimeFeature24SS',
+               'correctRejectionAccuracyFeature44SS',
+               'avgCorrectRejectionTimeFeature44SS',
+               'hitAccuracyConjunction2SS',
+               'avgHitReactionTimeConjunction2SS',
+               'hitAccuracyConjunction6SS',
+               'avgHitReactionTimeConjunction6SS',
+               'hitAccuracyConjunction12SS',
+               'avgHitReactionTimeConjunction12SS',
+               'hitAccuracyConjunction24SS',
+               'avgHitReactionTimeConjunction24SS',
+               'hitAccuracyConjunction44SS',
+               'avgHitReactionTimeConjunction44SS',
+               'correctRejectionAccuracyConjunction2SS',
+               'avgCorrectRejectionTimeConjunction2SS',
+               'correctRejectionAccuracyConjunction6SS',
+               'avgCorrectRejectionTimeConjunction6SS',
+               'correctRejectionAccuracyConjunction12SS',
+               'avgCorrectRejectionTimeConjunction12SS',
+               'correctRejectionAccuracyConjunction24SS',
+               'avgCorrectRejectionTimeConjunction24SS',
+               'correctRejectionAccuracyConjunction44SS',
+               'avgCorrectRejectionTimeConjunction44SS',];
         let metricValue 
             = [trialNumber - incorrectCount, 
                incorrectCount, 
@@ -842,8 +1294,48 @@ function CJSGame(props): any {
                timeLimitRecord[1], 
                hitRt[0], 
                avgHitRt, 
-               swiftness];
-        let metricUnit = [null, null, null, null, 'ms', 'ms', 's', null];
+               swiftness,
+               hitAccuracy2SetSizeF,
+               avgHit2SetSizeRtF,
+               hitAccuracy6SetSizeF,
+               avgHit6SetSizeRtF,
+               hitAccuracy12SetSizeF,
+               avgHit12SetSizeRtF,
+               hitAccuracy24SetSizeF,
+               avgHit24SetSizeRtF,
+               hitAccuracy44SetSizeF,
+               avgHit44SetSizeRtF,
+               correctRejectionAccuracy2SetSizeF,
+               avgCorrectRejection2SetSizeRtF,
+               correctRejectionAccuracy6SetSizeF,
+               avgCorrectRejection6SetSizeRtF,
+               correctRejectionAccuracy12SetSizeF,
+               avgCorrectRejection12SetSizeRtF,
+               correctRejectionAccuracy24SetSizeF,
+               avgCorrectRejection24SetSizeRtF,
+               correctRejectionAccuracy44SetSizeF,
+               avgCorrectRejection44SetSizeRtF,
+               hitAccuracy2SetSizeC,
+               avgHit2SetSizeRtC,
+               hitAccuracy6SetSizeC,
+               avgHit6SetSizeRtC,
+               hitAccuracy12SetSizeC,
+               avgHit12SetSizeRtC,
+               hitAccuracy24SetSizeC,
+               avgHit24SetSizeRtC,
+               hitAccuracy44SetSizeC,
+               avgHit44SetSizeRtC,
+               correctRejectionAccuracy2SetSizeC,
+               avgCorrectRejection2SetSizeRtC,
+               correctRejectionAccuracy6SetSizeC,
+               avgCorrectRejection6SetSizeRtC,
+               correctRejectionAccuracy12SetSizeC,
+               avgCorrectRejection12SetSizeRtC,
+               correctRejectionAccuracy24SetSizeC,
+               avgCorrectRejection24SetSizeRtC,
+               correctRejectionAccuracy44SetSizeC,
+               avgCorrectRejection44SetSizeRtC,];
+        let metricUnit = [null, null, null, null, 'ms', 'ms', 's', null, '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's', '%', 's'];
         let metricDescription 
             = ['Total number of correct trials', 
                'Total number of incorrect trials', 
@@ -852,7 +1344,47 @@ function CJSGame(props): any {
                'The lowest time limit for trials that user reached', 
                'The fastest hit reaction time that user reached', 
                'The average of all hit reaction time', 
-               'The quality of all hit reaction time'];
+               'The quality of all hit reaction time',
+               'The accuracy of 2 setsize hit in feature mode',
+               'The average reaction time of all 2 setsize hit in feature mode',
+               'The accuracy of 6 setsize hit in feature mode',
+               'The average reaction time of all 6 setsize hit in feature mode',
+               'The accuracy of 12 setsize hit in feature mode',
+               'The average reaction time of all 12 setsize hit in feature mode',
+               'The accuracy of 24 setsize hit in feature mode',
+               'The average reaction time of all 24 setsize hit in feature mode',
+               'The accuracy of 44 setsize hit in feature mode',
+               'The average reaction time of all 44 setsize hit in feature mode',
+               'The accuracy of 2 setsize correct rejection in feature mode',
+               'The average reaction time of all 2 setsize correct rejection in feature mode',
+               'The accuracy of 6 setsize correct rejection in feature mode',
+               'The average reaction time of all 6 setsize correct rejection in feature mode',
+               'The accuracy of 12 setsize correct rejection in feature mode',
+               'The average reaction time of all 12 setsize correct rejection in feature mode',
+               'The accuracy of 24 setsize correct rejection in feature mode',
+               'The average reaction time of all 24 setsize correct rejection in feature mode',
+               'The accuracy of 44 setsize correct rejection in feature mode',
+               'The average reaction time of all 44 setsize correct rejection in feature mode',
+               'The accuracy of 2 setsize hit in conjunction mode',
+               'The average reaction time of all 2 setsize hit in conjunction mode',
+               'The accuracy of 6 setsize hit in conjunction mode',
+               'The average reaction time of all 6 setsize hit in conjunction mode',
+               'The accuracy of 12 setsize hit in conjunction mode',
+               'The average reaction time of all 12 setsize hit in conjunction mode',
+               'The accuracy of 24 setsize hit in conjunction mode',
+               'The average reaction time of all 24 setsize hit in conjunction mode',
+               'The accuracy of 44 setsize hit in conjunction mode',
+               'The average reaction time of all 44 setsize hit in conjunction mode',
+               'The accuracy of 2 setsize correct rejection in conjunction mode',
+               'The average reaction time of all 2 setsize correct rejection in conjunction mode',
+               'The accuracy of 6 setsize correct rejection in conjunction mode',
+               'The average reaction time of all 6 setsize correct rejection in conjunction mode',
+               'The accuracy of 12 setsize correct rejection in conjunction mode',
+               'The average reaction time of all 12 setsize correct rejection in conjunction mode',
+               'The accuracy of 24 setsize correct rejection in conjunction mode',
+               'The average reaction time of all 24 setsize correct rejection in conjunction mode',
+               'The accuracy of 44 setsize correct rejection in conjunction mode',
+               'The average reaction time of all 44 setsize correct rejection in conjunction mode',];
         for (let i = 0; i < metricName.length; i++){
             let obj_to_append
             obj_to_append = {
@@ -868,8 +1400,10 @@ function CJSGame(props): any {
 
     function postEntry(targetDataResult, trialDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult){
         postEntryResult = {
+            "date" : `${thisTime().toString()}`,
             "userId" : props.userId,
             "userPhone" : props.userPhone,
+            "userSession" : props.userSession,
             "data" : {
                 "rawData" : {
                     "target" : targetDataResult,
