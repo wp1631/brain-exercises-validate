@@ -40,10 +40,13 @@ let allClickEvent: string[] = [];
 let testEnd: Date[] = [];
 let rt: number[] = [];
 let hitRt: number[] = [];
+let falseHitRt: number[] = [];
 let latestRtIndex = 0;
 let latestHitRtIndex = 0;
 let sumHitRt;
+let sumFalseHitRt;
 let avgHitRt: number = 0;
+let avgFalseHitRt: number = 0;
 let blockDuration = 1; // sec เข้าใจว่าระยะห่างของเวลาการปิ้งแว้บขึ้นของแต่ละตัว (ยิ่งเยอะตัวปิ้งแว้บยิ่งน้อย)
 let changeRate = 0.8; // % changes 
 let noGoRate = 0.2; // % nogo 
@@ -123,6 +126,7 @@ function GNGGame(props) {
     function initiateData() {
         rt = [];
         hitRt = [];
+        falseHitRt = [];
         allTimePop = [];
         allColorPop = [];
         testEnd = [];
@@ -346,7 +350,7 @@ function GNGGame(props) {
         return scoringDataResult;
     }
 
-    function metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt){
+    function metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt, avgFalseHitRt){
         hitRt.sort((a,b) => a-b);
         let metricName 
             = ['correctCount', 
@@ -360,7 +364,8 @@ function GNGGame(props) {
                'hitAccuracy',
                'falseSignalRejectionAccuracy', 
                'fastestHitReactionTime', 
-               'averageHitReactionTime'];
+               'averageHitReactionTime',
+               'averageFalseHitReactionTime'];
         let metricValue 
             = [hitCount + correctRejectionCount + falseSignalRejectionCount, 
                missCount + falseAlarmCount + falseHitCount, 
@@ -373,8 +378,9 @@ function GNGGame(props) {
                (hitCount / allGo) * 100,
                (falseSignalRejectionCount / allNoGo) * 100, 
                hitRt[0], 
-               avgHitRt];
-        let metricUnit = [null, null, null, null, null, null, null, null, '%', '%', 'ms', 's'];
+               avgHitRt,
+               avgFalseHitRt];
+        let metricUnit = [null, null, null, null, null, null, null, null, '%', '%', 'ms', 's', 's'];
         let metricDescription 
             = ['Total number of correct trials', 
                'Total number of incorrect trials', 
@@ -387,7 +393,8 @@ function GNGGame(props) {
                'The accuracy of hit',
                'The accuracy of false signal rejection', 
                'The fastest hit reaction time that user reached', 
-               'The average of all hit reaction time',];
+               'The average of all hit reaction time',
+               'The average of all hit on incorrect signal reaction time'];
         for (let i = 0; i < metricName.length; i++){
             let obj_to_append
             obj_to_append = {
@@ -427,8 +434,10 @@ function GNGGame(props) {
 
     function postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult) {
         postEntryResult = {
+            "date" : `${thisTime().toString()}`,
             "userId" : props.userId,
             "userPhone" : props.userPhone,
+            "userSession" : props.userSession,
             "data" : {
                 "rawData" : {
                     "cueData" : cueDataResult,
@@ -461,6 +470,8 @@ function GNGGame(props) {
                     if (satisfied === false) {
                         if (currColorPop === goSignalColor) {
                             hitRt.push(currRt - currTimePop.getTime());
+                        } else if (currColorPop === noGoSignalColor) {
+                            falseHitRt.push(currRt - currTimePop.getTime());
                         }
                         satisfied = true;
                     }
@@ -498,6 +509,17 @@ function GNGGame(props) {
         }
 
         avgHitRt = sumHitRt / 1000 / hitRt.length;
+
+        if (falseHitRt.length !== 0){
+            sumFalseHitRt = falseHitRt.reduce((sum, score) => {
+                return sum + score;
+            });
+        } else {
+            falseHitRt.push(0);
+            sumFalseHitRt = falseHitRt;
+        }
+
+        avgFalseHitRt = sumFalseHitRt / 1000 / falseHitRt.length;
         
         if (scorePerTrial.length !== 0){
             total = scorePerTrial.reduce((sum, score) => {
@@ -566,7 +588,7 @@ function GNGGame(props) {
         cueDataResult = cueData(allColorPop, allTimeEvent);
         userInteractionDataResult = userInteractionData(allInteractionEvent, allClickEvent);
         scoringDataResult = scoringData(rtBound, trialNumber, score);
-        metricDataResult = metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt);
+        metricDataResult = metricData(hitCount, missCount, correctRejectionCount, falseAlarmCount, falseSignalRejectionCount, falseHitCount, hitRt, avgHitRt, avgFalseHitRt);
         postEntryResult = postEntry(cueDataResult, userInteractionDataResult, gameLogicSchemeResult, scoringDataResult, metricDataResult);
         axios.post('https://hwsrv-1063269.hostwindsdns.com/exercise-api-hard/go-nogo', postEntryResult)
             .then(function (postEntryResult) {
@@ -575,7 +597,7 @@ function GNGGame(props) {
             .catch(function (error) {
                 console.log('error')
             });
-        saveJSONDataToClientDevice(postEntryResult, `GNG_${props.userPhone}_${thisTime().toString()}`);
+        saveJSONDataToClientDevice(postEntryResult, `Subject${props.userId}_gonogo_hard_session${props.userSession}_${thisTime().toString()}`);
     }
 
     function touchStart() {
