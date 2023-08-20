@@ -644,7 +644,7 @@ function GNGGame(props) {
         </div>
         {isItDone ? 
         <div>
-            {<ScoreSummaryOverlay accuracy={((hitCount + correctRejectionCount + falseSignalRejectionCount) / trialNumber) * 100}  falseHit={(falseHitCount / allNoGo) * 100} avgHitRt={avgHitRt} hardGNGDone={hardGNGDone} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
+            {<ScoreSummaryOverlay accuracy={(hitCount / allGo) * 100}  falseHit={(falseHitCount / allNoGo) * 100} avgHitRt={avgHitRt} hardGNGDone={hardGNGDone} refreshPage={refreshPage} backToLandingPage={backToLandingPage}/>}
         </div>
         : null}
         {<RotateAlert />}
