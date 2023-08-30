@@ -1431,6 +1431,7 @@ function CJSGame(props): any {
 
     function backToLandingPage(){
         navigate('/landing');
+        refreshPage();
     }
 
     return (

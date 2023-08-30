@@ -1103,6 +1103,7 @@ function SSGame(props) {
 
   function backToLandingPage() {
     navigate('/landing');
+    refreshPage();
   }
 
   return (
