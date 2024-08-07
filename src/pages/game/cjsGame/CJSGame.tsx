@@ -82,28 +82,36 @@ let ET;
 let sumRt = 0;
 let allRt: number[] = [];
 let sumHitRt;
-let hitRt: number[] = [];
+let hitRt: number[] = []; // hit reaction time
+//#region  derived measure
+// hit reaction time for setsize (fail)
 let hit2SetSizeRtF: number[] = [];
 let hit6SetSizeRtF: number[] = [];
 let hit12SetSizeRtF: number[] = [];
 let hit24SetSizeRtF: number[] = [];
 let hit44SetSizeRtF: number[] = [];
+// correct reaction time for setsize (correct)
 let correctRejection2SetSizeRtF: number[] = [];
 let correctRejection6SetSizeRtF: number[] = [];
 let correctRejection12SetSizeRtF: number[] = [];
 let correctRejection24SetSizeRtF: number[] = [];
 let correctRejection44SetSizeRtF: number[] = [];
+// hit reaction time for each setsize (correct)
 let hit2SetSizeRtC: number[] = [];
 let hit6SetSizeRtC: number[] = [];
 let hit12SetSizeRtC: number[] = [];
 let hit24SetSizeRtC: number[] = [];
 let hit44SetSizeRtC: number[] = [];
+// correct rejection time for each set size (correct)
 let correctRejection2SetSizeRtC: number[] = [];
 let correctRejection6SetSizeRtC: number[] = [];
 let correctRejection12SetSizeRtC: number[] = [];
 let correctRejection24SetSizeRtC: number[] = [];
 let correctRejection44SetSizeRtC: number[] = [];
-let latestHitRtIndex = 0;
+//#endregion
+//#region tracker
+// latest hit reaction time index?
+let latestHitRtIndex = 0; // latest hit reaction time index?
 let correctButLateCount = 0;
 let lateMultiplier = 10000;
 let incorrectCount = 0;
@@ -113,6 +121,9 @@ let sumScores = 0;
 let scoresMultiplier = 10;
 let comboCount: number[] = [];
 let rtBound = 10000;
+let total: number = 0;
+//#endregion
+//#region Dervied metrics
 let avgHitRt;
 let avgHit2SetSizeRtF;
 let avgHit6SetSizeRtF;
@@ -154,10 +165,11 @@ let correctRejectionAccuracy6SetSizeC;
 let correctRejectionAccuracy12SetSizeC;
 let correctRejectionAccuracy24SetSizeC;
 let correctRejectionAccuracy44SetSizeC;
-let swiftness: string = '';
-let total: number = 0;
+//#endregion
+let swiftness: string = ''; // type of task completion time
 let score: number;
-let targetMatch: boolean[] = [];
+//#region All trial data
+let targetMatch: boolean[] = []; // all target as array
 let allStartTime: string[] = [];
 let allClickTime: string[] = [];
 let allCurrSS: number[] = [];
@@ -172,6 +184,7 @@ let setSizeInCorrectAns: any[] = [];
 let metricDataResult: any[] = [];
 let allSearchMode: string[] = [];
 let postEntryResult;
+//#endregion
 
 function CJSGame(props): any {
     const navigate = useNavigate();
