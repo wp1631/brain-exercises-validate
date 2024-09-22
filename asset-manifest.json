@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/brain-exercises-validate/static/css/main.049d0b7b.css",
-    "main.js": "/brain-exercises-validate/static/js/main.64ac86df.js",
+    "main.js": "/brain-exercises-validate/static/js/main.bb825512.js",
     "static/js/885.fae1b850.chunk.js": "/brain-exercises-validate/static/js/885.fae1b850.chunk.js",
     "static/js/453.05827cca.chunk.js": "/brain-exercises-validate/static/js/453.05827cca.chunk.js",
     "static/media/combo1.mp3": "/brain-exercises-validate/static/media/combo1.1bc6ea7eed39c4f2c3b8.mp3",
@@ -18,12 +18,12 @@
     "static/media/rotate-phone.svg": "/brain-exercises-validate/static/media/rotate-phone.6172f756fbd62559e2be4c10385ec685.svg",
     "index.html": "/brain-exercises-validate/index.html",
     "main.049d0b7b.css.map": "/brain-exercises-validate/static/css/main.049d0b7b.css.map",
-    "main.64ac86df.js.map": "/brain-exercises-validate/static/js/main.64ac86df.js.map",
+    "main.bb825512.js.map": "/brain-exercises-validate/static/js/main.bb825512.js.map",
     "885.fae1b850.chunk.js.map": "/brain-exercises-validate/static/js/885.fae1b850.chunk.js.map",
     "453.05827cca.chunk.js.map": "/brain-exercises-validate/static/js/453.05827cca.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.049d0b7b.css",
-    "static/js/main.64ac86df.js"
+    "static/js/main.bb825512.js"
   ]
 }
