@@ -1,6 +1,6 @@
 {
-  "homepage": "https://cccnlab.co/brain-exercises-hard/",
-  "name": "brain-exercises-hard",
+  "homepage": "https://cccnlab.co/brain-exercises-validate/",
+  "name": "brain-exercises-validate",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
